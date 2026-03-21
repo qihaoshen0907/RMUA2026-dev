@@ -11,6 +11,7 @@ project(basic_dev)
 # set(pcl_conversions_DIR /usr/local/share/pcl_conversions/cmake)
 # set(pcl_ros_DIR /usr/local/share/pcl_ros/cmake)
 
+# Independent OpenCV package finder
 find_package(OpenCV REQUIRED)
 
 find_package(catkin REQUIRED COMPONENTS
@@ -30,7 +31,7 @@ tf2_ros
 tf2_sensor_msgs
 tf2_geometry_msgs
 image_transport
-# OpenCV # independent find_package above
+# OpenCV # independent find_package on line 14
 cv_bridge
 pcl_ros
 pcl_conversions
