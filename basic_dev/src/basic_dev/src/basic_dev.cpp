@@ -13,12 +13,12 @@ int main(int argc, char** argv)
 }
 
 BasicDev::BasicDev(ros::NodeHandle *nh)
-{
+{  
     //创建图像传输控制句柄
-    it = std::make_unique<image_transport::ImageTransport>(*nh);
+    it = std::make_unique<image_transport::ImageTransport>(*nh); 
     front_left_img = cv::Mat(480, 640, CV_8UC3, cv::Scalar(0));
     front_right_img = cv::Mat(480, 640, CV_8UC3, cv::Scalar(0));
-
+    current_x_ = 0.0f;
     current_z_ = 0.0f;
     pose_received_ = false;
 
@@ -26,10 +26,12 @@ BasicDev::BasicDev(ros::NodeHandle *nh)
     land.request.waitOnLastTask = 1;
 
     // 使用publisher发布速度指令需要定义 Velcmd , 并赋予相应的值后，将他publish（）出去
-    velcmd.twist.angular.z = 0;//z方向角速度(yaw, deg)
-    velcmd.twist.linear.x = 0; //x方向线速度(m/s)
-    velcmd.twist.linear.y = 0;//y方向线速度(m/s)
-    velcmd.twist.linear.z = 0; //z方向线速度(m/s)
+    velcmd.yawRate = 0; // z方向角速度(yaw, rad/s)
+    velcmd.vx = 0;      // x方向线速度(m/s)
+    velcmd.vy = 0;      // y方向线速度(m/s)
+    velcmd.vz = 0;      // z方向线速度(m/s)
+    velcmd.va = 4;      // 加速度档位(0~8)
+    velcmd.stop = 0;    // 0:正常飞行 1:急停
 
     //无人机信息通过如下命令订阅，当收到消息时自动回调对应的函数
     odom_suber = nh->subscribe<geometry_msgs::PoseStamped>("/airsim_node/drone_1/debug/pose_gt", 1, std::bind(&BasicDev::pose_cb, this, std::placeholders::_1));//状态真值，用于赛道一
@@ -40,56 +42,48 @@ BasicDev::BasicDev(ros::NodeHandle *nh)
     // front_right_view_suber = it->subscribe("airsim_node/drone_1/front_right/Scene", 1, std::bind(&BasicDev::front_right_view_cb, this,  std::placeholders::_1));
     //通过这两个服务可以调用模拟器中的无人机起飞和降落命令
     takeoff_client = nh->serviceClient<airsim_ros::Takeoff>("/airsim_node/drone_1/takeoff");
-    land_client = nh->serviceClient<airsim_ros::Takeoff>("/airsim_node/drone_1/land");
+    land_client = nh->serviceClient<airsim_ros::Land>("/airsim_node/drone_1/land");
     reset_client = nh->serviceClient<airsim_ros::Reset>("/airsim_node/reset");
     //通过publisher实现对无人机的速度控制和姿态控制和角速度控制
-    vel_publisher = nh->advertise<airsim_ros::VelCmd>("airsim_node/drone_1/vel_cmd_body_frame", 1);
+    vel_publisher = nh->advertise<airsim_ros::VelCmd>("/airsim_node/drone_1/vel_cmd_body_frame", 10);
+    // Compatibility channel used by some bridge versions.
+    vel_body_publisher = nh->advertise<airsim_ros::VelCmd>("/airsim_node/drone_1/vel_body_cmd", 10);
 
-    // Start async spinner so pose/GPS callbacks keep updating current_z_ in background
     ros::AsyncSpinner spinner(2);
     spinner.start();
 
-    // Wait until the first pose message is received
-    ros::Rate wait_rate(10);
-    ROS_INFO("Waiting for initial pose data...");
+    ros::Rate wait_rate(20);
+    ROS_INFO("Waiting for pose_gt...");
     while (ros::ok() && !pose_received_) {
         wait_rate.sleep();
     }
 
-    // --- TAKEOFF ---
-    ROS_INFO("Calling takeoff service...");
-    takeoff_client.call(takeoff);
-    ROS_INFO("Takeoff complete. Stabilizing...");
-    ros::Duration(2.0).sleep();
-
-    // --- CLIMB 1 METER ---
-    // Convention: AirSim ROS bridge publishes in ENU (positive Z = up).
-    // If your setup uses NED (positive Z = down), flip the sign of climb_speed
-    // and change target_z to (current_z_ - 1.0f).
-    const float climb_speed = 0.5f;  // m/s upward
-    const float target_z = current_z_ + 1.0f;
-    ROS_INFO("Climbing from Z=%.2f to Z=%.2f at %.1f m/s...", current_z_, target_z, climb_speed);
-
-    ros::Rate climb_rate(20);
-    while (ros::ok() && current_z_ < target_z) {
-        velcmd.twist.linear.x = 0;
-        velcmd.twist.linear.y = 0;
-        velcmd.twist.linear.z = climb_speed;
-        velcmd.twist.angular.z = 0;
-        vel_publisher.publish(velcmd);
-        climb_rate.sleep();
+    ROS_INFO("Takeoff...");
+    if (!takeoff_client.call(takeoff)) {
+        ROS_ERROR("Takeoff service call failed.");
+        ros::waitForShutdown();
+        return;
     }
+    ros::Duration(1.5).sleep();
 
-    // Stop
-    velcmd.twist.linear.z = 0;
-    vel_publisher.publish(velcmd);
-    ROS_INFO("Target altitude reached (Z=%.2f). Holding...", current_z_);
-    ros::Duration(1.0).sleep();
+    // 起飞后持续向前飞（body x 方向）
+    const float forward_speed = 3.0f;
+    ROS_INFO("Forward mission: fly forward continuously at %.1f m/s", forward_speed);
 
-    // --- LAND ---
-    ROS_INFO("Calling land service...");
-    land_client.call(land);
-    ROS_INFO("Landing complete.");
+    ros::Rate loop_rate(30);
+    while (ros::ok()) {
+        velcmd.header.stamp = ros::Time::now();
+        velcmd.vx = forward_speed;
+        velcmd.vy = 0.0f;
+        velcmd.vz = 0.0f;
+        velcmd.yawRate = 0.0f;
+        velcmd.stop = 0;
+        vel_publisher.publish(velcmd);
+        vel_body_publisher.publish(velcmd);
+        ROS_INFO_THROTTLE(1.0, "Publishing VelCmd: vx=%.2f vy=%.2f vz=%.2f yawRate=%.2f stop=%u",
+                          velcmd.vx, velcmd.vy, velcmd.vz, velcmd.yawRate, velcmd.stop);
+        loop_rate.sleep();
+    }
 
     ros::waitForShutdown();
 }
@@ -100,9 +94,9 @@ BasicDev::~BasicDev()
 
 void BasicDev::pose_cb(const geometry_msgs::PoseStamped::ConstPtr& msg)
 {
+    current_x_ = msg->pose.position.x;
     current_z_ = msg->pose.position.z;
     pose_received_ = true;
-
     Eigen::Quaterniond q(msg->pose.orientation.w, msg->pose.orientation.x, msg->pose.orientation.y, msg->pose.orientation.z);
     Eigen::Vector3d eulerAngle = q.matrix().eulerAngles(2,1,0);
     ROS_INFO("Get pose data. time: %f, eulerangle: %f, %f, %f, posi: %f, %f, %f\n", msg->header.stamp.sec + msg->header.stamp.nsec*1e-9,

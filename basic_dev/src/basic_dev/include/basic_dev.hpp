@@ -57,8 +57,10 @@ private:
 
     //通过publisher实现对无人机的速度控制
     ros::Publisher vel_publisher;
+    ros::Publisher vel_body_publisher;
 
-    // Mission state: current Z position and whether first pose has been received
+    // Mission state (from pose_gt)
+    float current_x_;
     float current_z_;
     bool pose_received_;
 

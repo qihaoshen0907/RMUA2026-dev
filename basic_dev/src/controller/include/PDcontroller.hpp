@@ -24,16 +24,19 @@ private:
     float m_Kpy = 1.0;
     float m_last_e_y = 0;
     float m_Kdz = 25.0;
-    float m_Kpz = 2.0;
+    float m_Kpz = 4.0;
+    float m_Kvz_damp = 3.0;
     float m_last_e_z = 0;
-    float m_Kdphi = 940; 
-    float m_Kpphi = 17;
+    // 原参数在部分机器/帧率/延迟条件下容易导致姿态“跳舞”（高频振荡）
+    // 先把 D 项降下来，稳定后再逐步调高响应
+    float m_Kdphi = 8;
+    float m_Kpphi = 3;
     float m_last_e_phi = 0;
-    float m_Kdtheta = 750;
-    float m_Kptheta = 20;
+    float m_Kdtheta = 8;
+    float m_Kptheta = 3;
     float m_last_e_theta = 0;
-    float m_Kdpsi = 250;
-    float m_Kppsi = 5;
+    float m_Kdpsi = 4;
+    float m_Kppsi = 0.8;
     float m_last_e_psi = 0;
     float m_Kdvx = 1.0;
     float m_Kpvx = 0.5;
@@ -41,8 +44,8 @@ private:
     float m_Kdvy = 1.0;
     float m_Kpvy = 0.5;
     float m_last_e_vy = 0;
-    float m_max_acc = 20;
-    float m_max_v = 20;
-    float m_max_ang = 0.5;
+    float m_max_acc = 3;
+    float m_max_v = 2.5;
+    float m_max_ang = 0.35;
     float m_last_thetad = 0;
 };

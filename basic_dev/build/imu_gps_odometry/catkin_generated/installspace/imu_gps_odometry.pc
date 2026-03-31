@@ -1,0 +1,8 @@
+prefix=/home/bai/rmua2026/IntelligentUAVChampionshipBase/basic_dev/install
+
+Name: imu_gps_odometry
+Description: Description of imu_gps_odometry
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: message_runtime roscpp std_msgs

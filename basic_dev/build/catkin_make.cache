@@ -1,0 +1,2 @@
+controller
+-DCATKIN_DEVEL_PREFIX=/home/bai/rmua2026/IntelligentUAVChampionshipBase/basic_dev/devel -DCMAKE_INSTALL_PREFIX=/home/bai/rmua2026/IntelligentUAVChampionshipBase/basic_dev/install -DCATKIN_WHITELIST_PACKAGES=controller_test -G Unix Makefiles

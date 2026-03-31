@@ -1,0 +1,8 @@
+prefix=/home/bai/rmua2026/IntelligentUAVChampionshipBase/basic_dev/devel
+
+Name: controller_test
+Description: Description of controller_test
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: message_runtime roscpp std_msgs

@@ -7,11 +7,10 @@ project(basic_dev)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-# set(OpenCV_DIR /usr/local/lib/cmake/opencv4)
-# set(pcl_conversions_DIR /usr/local/share/pcl_conversions/cmake)
-# set(pcl_ros_DIR /usr/local/share/pcl_ros/cmake)
+set(OpenCV_DIR /usr/local/lib/cmake/opencv4)
+set(pcl_conversions_DIR /usr/local/share/pcl_conversions/cmake)
+set(pcl_ros_DIR /usr/local/share/pcl_ros/cmake)
 
-# Independent OpenCV package finder
 find_package(OpenCV REQUIRED)
 
 find_package(catkin REQUIRED COMPONENTS
@@ -31,7 +30,6 @@ tf2_ros
 tf2_sensor_msgs
 tf2_geometry_msgs
 image_transport
-# OpenCV # independent find_package on line 14
 cv_bridge
 pcl_ros
 pcl_conversions
@@ -53,3 +51,5 @@ install(DIRECTORY
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
   # PATTERN ".git" EXCLUDE
 )
+
+
