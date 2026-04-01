@@ -1,19 +1,101 @@
 #include "controllerTest.hpp"
+#include <fstream>
+#include <vector>
+#include <string>
+
+std::vector<Eigen::Vector3d> spline_path;
+int current_wp_idx = 0;
+bool spline_loaded = false;
+
+
+std::vector<Eigen::Vector3d> densifyPath(const std::vector<Eigen::Vector3d>& path, double max_seg_len)
+{
+    std::vector<Eigen::Vector3d> refined_path;
+
+    if (path.empty()) return refined_path;
+    if (path.size() == 1)
+    {
+        refined_path.push_back(path[0]);
+        return refined_path;
+    }
+
+    for (int i = 0; i < (int)path.size() - 1; i++)
+    {
+        Eigen::Vector3d p0 = path[i];
+        Eigen::Vector3d p1 = path[i + 1];
+
+        refined_path.push_back(p0);
+
+        Eigen::Vector3d diff = p1 - p0;
+        double dist = diff.norm();
+
+        if (dist > max_seg_len)
+        {
+            int num_segments = static_cast<int>(std::ceil(dist / max_seg_len));
+
+            for (int k = 1; k < num_segments; k++)
+            {
+                double alpha = static_cast<double>(k) / num_segments;
+                Eigen::Vector3d mid = p0 + alpha * diff;
+                refined_path.push_back(mid);
+            }
+        }
+    }
+
+    refined_path.push_back(path.back());
+    return refined_path;
+}
+
+
+void loadSpline(const std::string& file_path)
+{
+    spline_path.clear();
+
+    std::ifstream file(file_path);
+    if (!file.is_open())
+    {
+        std::cout << "Failed to open spline file: " << file_path << std::endl;
+        return;
+    }
+
+    double x, y, z;
+    while (file >> x >> y >> z)
+    {
+        spline_path.emplace_back(x, y, z);
+    }
+
+    file.close();
+
+    std::cout << "Loaded spline points: " << spline_path.size() << std::endl;
+
+    for (size_t i = 0; i < spline_path.size() && i < 10; ++i)
+    {
+        std::cout << "Spline[" << i << "]: "
+                  << spline_path[i].transpose() << std::endl;
+    }
+
+    spline_loaded = !spline_path.empty();
+    if (spline_loaded && !spline_path.empty()){
+        spline_path = densifyPath(spline_path, 5.0);
+    }
+
+}
 
 int main(int argc, char** argv)
 {
-    ros::init(argc, argv, "controller_test"); // 初始化ros 节点，命名为 basic
-    ros::NodeHandle n; // 创建node控制句柄
-    //无人机信息通过如下命令订阅，当收到消息时自动回调对应的函数
+    ros::init(argc, argv, "controller_test");
+    ros::NodeHandle n;
+
     g_takeoff_client = n.serviceClient<airsim_ros::Takeoff>("/airsim_node/drone_1/takeoff");
     g_pwm_publisher = n.advertise<airsim_ros::RotorPWM>("/airsim_node/drone_1/rotor_pwm_cmd", 1);
     ros::Subscriber odom_suber = n.subscribe<nav_msgs::Odometry>("/eskf_odom", 1, odom_cb);
-    // ros::Subscriber gt_suber = n.subscribe<geometry_msgs::PoseStamped>("/airsim_node/drone_1/debug/pose_gt", 1, gt_cb);
     ros::Subscriber init_pose_suber = n.subscribe<geometry_msgs::PoseStamped>("/airsim_node/initial_pose", 1, init_pose_cb);
     ros::Subscriber end_pose_suber = n.subscribe<geometry_msgs::PoseStamped>("/airsim_node/end_goal", 1, end_position_cb);
-    airsim_ros::Takeoff  tf_cmd;
+
+    loadSpline("src/controller/src/Splines.txt");
+    airsim_ros::Takeoff tf_cmd;
     tf_cmd.request.waitOnLastTask = 1;
-    // g_takeoff_client.call(tf_cmd);
+
     ros::Rate loop_rate(200);
     while(ros::ok()){
         ros::spinOnce();
@@ -21,6 +103,31 @@ int main(int argc, char** argv)
     }
     return 0;
 }
+
+
+// int main(int argc, char** argv)
+// {
+//     ros::init(argc, argv, "controller_test"); // 初始化ros 节点，命名为 basic
+//     ros::NodeHandle n; // 创建node控制句柄
+//     //无人机信息通过如下命令订阅，当收到消息时自动回调对应的函数
+//     g_takeoff_client = n.serviceClient<airsim_ros::Takeoff>("/airsim_node/drone_1/takeoff");
+//     g_pwm_publisher = n.advertise<airsim_ros::RotorPWM>("/airsim_node/drone_1/rotor_pwm_cmd", 1);
+//     ros::Subscriber odom_suber = n.subscribe<nav_msgs::Odometry>("/eskf_odom", 1, odom_cb);
+//     // ros::Subscriber gt_suber = n.subscribe<geometry_msgs::PoseStamped>("/airsim_node/drone_1/debug/pose_gt", 1, gt_cb);
+//     ros::Subscriber init_pose_suber = n.subscribe<geometry_msgs::PoseStamped>("/airsim_node/initial_pose", 1, init_pose_cb);
+//     ros::Subscriber end_pose_suber = n.subscribe<geometry_msgs::PoseStamped>("/airsim_node/end_goal", 1, end_position_cb);
+//     airsim_ros::Takeoff  tf_cmd;
+//     tf_cmd.request.waitOnLastTask = 1;
+//     g_takeoff_client.call(tf_cmd);
+    
+    
+//     ros::Rate loop_rate(200);
+//     while(ros::ok()){
+//         ros::spinOnce();
+//         loop_rate.sleep();
+//     }
+//     return 0;
+// }
 
 void init_pose_cb(const geometry_msgs::PoseStamped::ConstPtr& msg)
 {
@@ -105,13 +212,45 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
     X_real<<T0flub(0, 3), T0flub(1, 3), T0flub(2, 3), 
         VBflu.x(), VBflu.y(), VBflu.z(), 
         phi, theta, psi, Wflu.x(), Wflu.y(), Wflu.z();
-    X_des << 1.0, 1.0, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+    
+    if (spline_loaded && !spline_path.empty())
+    {
+        Eigen::Vector3d cur_pos(X_real[0], X_real[1], X_real[2]);
+        Eigen::Vector3d target = spline_path[current_wp_idx];
+        target.y() = -target.y();
+
+        double dist = (cur_pos - target).norm();
+
+        // 到达当前航点后切换到下一个
+        if (dist < 1.0 && current_wp_idx < (int)spline_path.size() - 1)
+        {
+            current_wp_idx++;
+            target = spline_path[current_wp_idx];
+            std::cout << "Switch to waypoint " << current_wp_idx
+                    << ": " << target.transpose() << std::endl;
+        }
+
+        X_des << target.x(), target.y(), target.z(),
+                0.0, 0.0, 0.0,
+                0.0, 0.0, 0.0,
+                0.0, 0.0, 0.0;
+
+        std::cout << "Tracking waypoint " << current_wp_idx
+                << ", target = " << target.transpose()
+                << ", dist = " << dist << std::endl;
+    }
+    else
+    {
+        X_des << X_real;
+    }
     Eigen::Vector4f output = g_PDcontroller.execute( X_des, X_real);
     airsim_ros::RotorPWM pwm_cmd;
     pwm_cmd.rotorPWM0 = output[0];
     pwm_cmd.rotorPWM1 = output[1];
     pwm_cmd.rotorPWM2 = output[2];
     pwm_cmd.rotorPWM3 = output[3];
+
+    g_pwm_publisher.publish(pwm_cmd);
     // // std::cout<<pwm_cmd.rotorPWM0<<" "<<pwm_cmd.rotorPWM1<<" "<<pwm_cmd.rotorPWM2<<" "<<pwm_cmd.rotorPWM3<<" "<<std::endl;
 
 }

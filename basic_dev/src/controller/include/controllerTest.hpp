@@ -17,6 +17,7 @@
 #include <fstream>
 
 
+
 ros::ServiceClient g_takeoff_client;
 std::vector<std::vector<Eigen::Vector3d>> globalPaths;
 std::vector<Eigen::Vector3d> globalPath;
@@ -27,6 +28,7 @@ std::normal_distribution<double> gauss_dist{0.0, 1.0};
 ros::Publisher g_pwm_publisher;
 Eigen::Matrix4d Tw0, Twb_last;
 Eigen::Vector3d Pwend;
+
 int next_goal_index;
 bool get_init_pose, get_end_goal;
 int trigger_port = 1;
