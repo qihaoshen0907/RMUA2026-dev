@@ -5,7 +5,7 @@ Basically, we do everything the [Dockerfile](./basic_dev/Dockerfile) does one by
 ## 1. Install necessary packages
 
 ```bash
-apt update && apt install -y python3-catkin-tools ros-noetic-geographic-msgs \
+sudo apt update && sudo apt install -y python3-catkin-tools ros-noetic-geographic-msgs \
 ros-noetic-tf2-sensor-msgs ros-noetic-tf2-geometry-msgs ros-noetic-image-transport \
 net-tools
 ```
