@@ -26,16 +26,17 @@ source /opt/ros/noetic/setup.zsh
 
 **Note: Everything below this line only works with the `keyboard` branch. Adjust the code accordingly.**
 
+Go to the work directory first and delete old compiled files
+```bash
+cd ~/RMUA2026-dev/basic_dev/
+rm -rf source devel
+```
+
 ```bash
 catkin_make -DCATKIN_WHITELIST_PACKAGES="airsim_ros;basic_dev"
 ```
 
 ## 4. Source the compiled file
-
-Go to the work directory first
-```bash
-cd ~/RMUA2026-dev/basic_dev/
-```
 
 Bash
 ```bash
