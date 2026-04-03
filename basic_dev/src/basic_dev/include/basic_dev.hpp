@@ -58,10 +58,6 @@ private:
     //通过publisher实现对无人机的速度控制
     ros::Publisher vel_publisher;
 
-    // Mission state: current Z position and whether first pose has been received
-    float current_z_;
-    bool pose_received_;
-
     void pose_cb(const geometry_msgs::PoseStamped::ConstPtr& msg);
     void gps_cb(const geometry_msgs::PoseStamped::ConstPtr& msg);
     void imu_cb(const sensor_msgs::Imu::ConstPtr& msg);

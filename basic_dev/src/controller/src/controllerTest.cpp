@@ -76,7 +76,7 @@ void loadSpline(const std::string& file_path)
 
     spline_loaded = !spline_path.empty();
     if (spline_loaded && !spline_path.empty()){
-        spline_path = densifyPath(spline_path, 5.0);
+        spline_path = densifyPath(spline_path, 4.0);
     }
 
 }
@@ -222,7 +222,7 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         double dist = (cur_pos - target).norm();
 
         // 到达当前航点后切换到下一个
-        if (dist < 1.0 && current_wp_idx < (int)spline_path.size() - 1)
+        if (dist < 1.5 && current_wp_idx < (int)spline_path.size() - 1)
         {
             current_wp_idx++;
             target = spline_path[current_wp_idx];
@@ -230,7 +230,7 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
                     << ": " << target.transpose() << std::endl;
         }
 
-        X_des << target.x(), target.y(), target.z(),
+        X_des << target.x(), target.y(), target.z()+1.0,
                 0.0, 0.0, 0.0,
                 0.0, 0.0, 0.0,
                 0.0, 0.0, 0.0;
@@ -251,6 +251,6 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
     pwm_cmd.rotorPWM3 = output[3];
 
     g_pwm_publisher.publish(pwm_cmd);
-    // // std::cout<<pwm_cmd.rotorPWM0<<" "<<pwm_cmd.rotorPWM1<<" "<<pwm_cmd.rotorPWM2<<" "<<pwm_cmd.rotorPWM3<<" "<<std::endl;
+    std::cout<<pwm_cmd.rotorPWM0<<" "<<pwm_cmd.rotorPWM1<<" "<<pwm_cmd.rotorPWM2<<" "<<pwm_cmd.rotorPWM3<<" "<<std::endl;
 
 }

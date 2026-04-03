@@ -47,7 +47,7 @@ bool ErrorStateKalmanFilter::Predict(Eigen::Vector3d imu_acc, Eigen::Vector3d im
         return false;
     }
     m_mtx.lock();
-    std::cout<<"delta sec: "<<delta_t<<std::endl;
+    //std::cout<<"delta sec: "<<delta_t<<std::endl;
     Eigen::Vector3d unbias_gyr = imu_gyr - m_gyro_bias;
     Eigen::Vector3d phi = (unbias_gyr +m_last_unbias_gyr) / 2.0 * delta_t;
     double phi_norm = phi.norm();
@@ -67,10 +67,10 @@ bool ErrorStateKalmanFilter::Predict(Eigen::Vector3d imu_acc, Eigen::Vector3d im
         0.25 * (last_pose * m_last_unbias_acc + m_pose.block<3, 3>(0, 0) * unbias_acc) * delta_t * delta_t;
     Eigen::Matrix3d tmpr = m_pose.block<3, 3>(0, 0);
     Eigen::Quaterniond tmpq(tmpr);
-    std::cout<<"Q: "<<tmpq.coeffs().transpose()<<std::endl;
-    std::cout<<"posi: "<<m_pose.block<3, 1>(0, 3).transpose()<<std::endl;
-    std::cout<<"vel: " << m_velocity.transpose()<<std::endl;
-    std::cout<<"gyr: "<<m_last_unbias_gyr.transpose()<<std::endl;
+    // std::cout<<"Q: "<<tmpq.coeffs().transpose()<<std::endl;
+    // std::cout<<"posi: "<<m_pose.block<3, 1>(0, 3).transpose()<<std::endl;
+    // std::cout<<"vel: " << m_velocity.transpose()<<std::endl;
+    // std::cout<<"gyr: "<<m_last_unbias_gyr.transpose()<<std::endl;
     Eigen::Vector3d cur_acc_NED = m_pose.block<3, 3>(0, 0) * (imu_acc - m_accel_bias);
     Eigen::Matrix3d F_23;
     F_23 << 0, -cur_acc_NED[2], cur_acc_NED[1], 

@@ -24,7 +24,7 @@ BasicDev::BasicDev(ros::NodeHandle *nh)
 
     // 使用publisher发布速度指令需要定义 Velcmd , 并赋予相应的值后，将他publish（）出去
     velcmd.twist.angular.z = 0;//z方向角速度(yaw, deg)
-    velcmd.twist.linear.x = 0; //x方向线速度(m/s)
+    velcmd.twist.linear.x = 10; //x方向线速度(m/s)
     velcmd.twist.linear.y = 0;//y方向线速度(m/s)
     velcmd.twist.linear.z = 0; //z方向线速度(m/s)
 
@@ -35,12 +35,13 @@ BasicDev::BasicDev(ros::NodeHandle *nh)
     // lidar_suber = nh->subscribe<sensor_msgs::PointCloud2>("airsim_node/drone_1/lidar", 1, std::bind(&BasicDev::lidar_cb, this, std::placeholders::_1));//imu数据
     // front_left_view_suber = it->subscribe("airsim_node/drone_1/front_left/Scene", 1, std::bind(&BasicDev::front_left_view_cb, this,  std::placeholders::_1));
     // front_right_view_suber = it->subscribe("airsim_node/drone_1/front_right/Scene", 1, std::bind(&BasicDev::front_right_view_cb, this,  std::placeholders::_1));
+    
     //通过这两个服务可以调用模拟器中的无人机起飞和降落命令
     takeoff_client = nh->serviceClient<airsim_ros::Takeoff>("/airsim_node/drone_1/takeoff");
     land_client = nh->serviceClient<airsim_ros::Takeoff>("/airsim_node/drone_1/land");
     reset_client = nh->serviceClient<airsim_ros::Reset>("/airsim_node/reset");
     //通过publisher实现对无人机的速度控制和姿态控制和角速度控制
-    vel_publisher = nh->advertise<airsim_ros::VelCmd>("airsim_node/drone_1/vel_cmd_body_frame", 1);
+    //vel_publisher = nh->advertise<airsim_ros::VelCmd>("airsim_node/drone_1/vel_cmd_body_frame", 1);
 
     // takeoff_client.call(takeoff); //起飞
     // land_client.call(land); //降落
@@ -57,16 +58,16 @@ void BasicDev::pose_cb(const geometry_msgs::PoseStamped::ConstPtr& msg)
 {
     Eigen::Quaterniond q(msg->pose.orientation.w, msg->pose.orientation.x, msg->pose.orientation.y, msg->pose.orientation.z);
     Eigen::Vector3d eulerAngle = q.matrix().eulerAngles(2,1,0);
-    ROS_INFO("Get pose data. time: %f, eulerangle: %f, %f, %f, posi: %f, %f, %f\n", msg->header.stamp.sec + msg->header.stamp.nsec*1e-9,
-        eulerAngle[0], eulerAngle[1], eulerAngle[2], msg->pose.position.x, msg->pose.position.y, msg->pose.position.z);
+    // ROS_INFO("Get pose data. time: %f, eulerangle: %f, %f, %f, posi: %f, %f, %f\n", msg->header.stamp.sec + msg->header.stamp.nsec*1e-9,
+    //     eulerAngle[0], eulerAngle[1], eulerAngle[2], msg->pose.position.x, msg->pose.position.y, msg->pose.position.z);
 }
 
 void BasicDev::gps_cb(const geometry_msgs::PoseStamped::ConstPtr& msg)
 {
     Eigen::Quaterniond q(msg->pose.orientation.w, msg->pose.orientation.x, msg->pose.orientation.y, msg->pose.orientation.z);
     Eigen::Vector3d eulerAngle = q.matrix().eulerAngles(2,1,0);
-    ROS_INFO("Get gps data. time: %f, eulerangle: %f, %f, %f, posi: %f, %f, %f\n", msg->header.stamp.sec + msg->header.stamp.nsec*1e-9,
-        eulerAngle[0], eulerAngle[1], eulerAngle[2], msg->pose.position.x, msg->pose.position.y, msg->pose.position.z);
+    // ROS_INFO("Get gps data. time: %f, eulerangle: %f, %f, %f, posi: %f, %f, %f\n", msg->header.stamp.sec + msg->header.stamp.nsec*1e-9,
+    //     eulerAngle[0], eulerAngle[1], eulerAngle[2], msg->pose.position.x, msg->pose.position.y, msg->pose.position.z);
 }
 
 void BasicDev::imu_cb(const sensor_msgs::Imu::ConstPtr& msg)

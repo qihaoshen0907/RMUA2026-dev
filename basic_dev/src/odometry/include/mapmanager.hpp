@@ -5,7 +5,7 @@
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 #include <pcl/common/transforms.h>
-#include <opencv2/cudastereo.hpp>
+//#include <opencv2/cudastereo.hpp>
 #include <g2o/core/sparse_optimizer.h>
 #include <g2o/core/block_solver.h>
 #include <g2o/core/robust_kernel.h>

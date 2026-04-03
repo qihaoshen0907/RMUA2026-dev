@@ -70,5 +70,15 @@ void imu_cb(const sensor_msgs::Imu::ConstPtr& msg)
         msg2.twist.twist.angular.y = angle_vel.y();
         msg2.twist.twist.angular.z = angle_vel.z();
         g_eskf_odom_puber.publish(msg2);
+
+        // ROS_WARN("ODOM: pos(%.2f %.2f %.2f) vel(%.2f %.2f %.2f)",
+        //  msg2.pose.pose.position.x,
+        //  msg2.pose.pose.position.y,
+        //  msg2.pose.pose.position.z,
+        //  msg2.twist.twist.linear.x,
+        //  msg2.twist.twist.linear.y,
+        //  msg2.twist.twist.linear.z);
+
+        
     }
 }
