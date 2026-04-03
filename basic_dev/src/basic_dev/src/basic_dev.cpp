@@ -22,11 +22,12 @@ BasicDev::BasicDev(ros::NodeHandle *nh)
     takeoff.request.waitOnLastTask = 1;
     land.request.waitOnLastTask = 1;
 
-    // 使用publisher发布速度指令需要定义 Velcmd , 并赋予相应的值后，将他publish（）出去
-    velcmd.twist.angular.z = 0;//z方向角速度(yaw, deg)
-    velcmd.twist.linear.x = 0; //x方向线速度(m/s)
-    velcmd.twist.linear.y = 0;//y方向线速度(m/s)
-    velcmd.twist.linear.z = 0; //z方向线速度(m/s)
+    // VelCmd 与模拟器一致: vx,vy,vz(m/s), yawRate, va(加速度上限0~8), stop(1=急停)
+    velcmd.vx = velcmd.vy = velcmd.vz = 0;
+    velcmd.yawRate = 0;
+    velcmd.va = 8;
+    velcmd.stop = 0;
+    velcmd.header.stamp = ros::Time::now();
 
     //无人机信息通过如下命令订阅，当收到消息时自动回调对应的函数
     odom_suber = nh->subscribe<geometry_msgs::PoseStamped>("/airsim_node/drone_1/debug/pose_gt", 1, std::bind(&BasicDev::pose_cb, this, std::placeholders::_1));//状态真值，用于赛道一
@@ -40,7 +41,8 @@ BasicDev::BasicDev(ros::NodeHandle *nh)
     land_client = nh->serviceClient<airsim_ros::Takeoff>("/airsim_node/drone_1/land");
     reset_client = nh->serviceClient<airsim_ros::Reset>("/airsim_node/reset");
     //通过publisher实现对无人机的速度控制和姿态控制和角速度控制
-    vel_publisher = nh->advertise<airsim_ros::VelCmd>("airsim_node/drone_1/vel_cmd_body_frame", 1);
+    // 与当前 RMUA 模拟器一致为 vel_body_cmd（旧文档或旧版或为 vel_cmd_body_frame）
+    vel_publisher = nh->advertise<airsim_ros::VelCmd>("airsim_node/drone_1/vel_body_cmd", 1);
 
     // takeoff_client.call(takeoff); //起飞
     // land_client.call(land); //降落
