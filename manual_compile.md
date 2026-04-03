@@ -51,3 +51,16 @@ source devel/setup.zsh
 ```bash
 rosrun basic_dev keyboard_teleop.py
 ```
+# Record Position
+## 1. enter directory basic_dev like before
+## 2. Source ROS environment
+```bash
+source /opt/ros/noetic/setup.bash
+source devel/setup.bash
+```
+
+
+# 3. Subsribe Topic
+```bash
+rostopic echo /airsim_node/drone_1/debug/pose_gt
+```
