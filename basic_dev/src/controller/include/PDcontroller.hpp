@@ -60,8 +60,8 @@ private:
     float m_last_e_vy = 0.0f;
 
     // limits
-    float m_max_acc = 1.5f;
-    float m_max_v   = 1.3f;
+    float m_max_acc = 5.5f;
+    float m_max_v   = 10.5f;
     float m_max_ang = 0.12f;
 
     float m_last_thetad = 0.0f;

@@ -10,6 +10,7 @@ bool spline_loaded = false;
 
 std::vector<Eigen::Vector3d> densifyPath(const std::vector<Eigen::Vector3d>& path, double max_seg_len)
 {
+    return path;
     std::vector<Eigen::Vector3d> refined_path;
 
     if (path.empty()) return refined_path;
@@ -76,7 +77,7 @@ void loadSpline(const std::string& file_path)
 
     spline_loaded = !spline_path.empty();
     if (spline_loaded && !spline_path.empty()){
-        spline_path = densifyPath(spline_path, 4.0);
+        spline_path = densifyPath(spline_path, 8.0);
     }
 
 }
@@ -92,7 +93,7 @@ int main(int argc, char** argv)
     ros::Subscriber init_pose_suber = n.subscribe<geometry_msgs::PoseStamped>("/airsim_node/initial_pose", 1, init_pose_cb);
     ros::Subscriber end_pose_suber = n.subscribe<geometry_msgs::PoseStamped>("/airsim_node/end_goal", 1, end_position_cb);
 
-    loadSpline("src/controller/src/Splines.txt");
+    loadSpline("src/controller/src/Splines_new.txt");
     airsim_ros::Takeoff tf_cmd;
     tf_cmd.request.waitOnLastTask = 1;
 
@@ -206,7 +207,7 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
     Eigen::Vector3d VBflu = TWfluWned.block<3, 3>(0, 0) * VBned;
     Eigen::Vector3d Wned(msg->twist.twist.angular.x, msg->twist.twist.angular.y, msg->twist.twist.angular.z);
     Eigen::Vector3d Wflu = TWfluWned.block<3, 3>(0, 0) * Wned;
-    const float phi = std::asin(T0flub(2, 1));
+    const float phi = std::asin(T0flub(2, 1)); 
     const float theta = std::atan2(-T0flub(2, 0)/std::cos(phi), T0flub(2, 2)/std::cos(phi));
     const float psi = std::atan2(-T0flub(0, 1)/std::cos(phi), T0flub(1, 1)/std::cos(phi));
     X_real<<T0flub(0, 3), T0flub(1, 3), T0flub(2, 3), 
@@ -218,11 +219,13 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         Eigen::Vector3d cur_pos(X_real[0], X_real[1], X_real[2]);
         Eigen::Vector3d target = spline_path[current_wp_idx];
         target.y() = -target.y();
+        target.z() = -target.z();
+
 
         double dist = (cur_pos - target).norm();
 
         // 到达当前航点后切换到下一个
-        if (dist < 1.5 && current_wp_idx < (int)spline_path.size() - 1)
+        if (dist < 2 && current_wp_idx < (int)spline_path.size() - 1)
         {
             current_wp_idx++;
             target = spline_path[current_wp_idx];
@@ -230,7 +233,7 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
                     << ": " << target.transpose() << std::endl;
         }
 
-        X_des << target.x(), target.y(), target.z()+1.0,
+        X_des << target.x(), target.y(), target.z(),
                 0.0, 0.0, 0.0,
                 0.0, 0.0, 0.0,
                 0.0, 0.0, 0.0;
