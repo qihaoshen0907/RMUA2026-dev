@@ -17,8 +17,6 @@ source /opt/ros/noetic/setup.bash
 
 ## 3. Compilation
 
-**Note: Everything below this line only works with the `keyboard` branch. Adjust the code accordingly.**
-
 Go to the work directory first and delete old compiled files 
 (You must do it if they're **not** compiled on your PC). 
 ```bash
@@ -53,6 +51,8 @@ cd ~/path_to_your_simulator_files/simulator_12.0.0.4
 
 # Run the simulator
 ./run_simulator.sh 123
+
+# After you see the simulator opens up, leave it there and return to the work dir terminal window. 
 
 # Example 1: run the manual keyboard control node
 rosrun basic_dev keyboard_teleop.py
