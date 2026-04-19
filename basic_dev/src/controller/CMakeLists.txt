@@ -40,6 +40,6 @@ catkin_package(
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
 
-add_executable(controller_test src/controllerTest.cpp src/PDcontroller.cpp)
+add_executable(controller_test src/controllerTest.cpp)
 target_link_libraries(controller_test
   ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})

@@ -1,8 +1,8 @@
-# Install script for directory: /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/controller
+# Install script for directory: /home/bai/rmua2026/RMUA2026-dev/basic_dev/src/controller
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install")
+  set(CMAKE_INSTALL_PREFIX "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/controller/catkin_generated/installspace/controller_test.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/controller/catkin_generated/installspace/controller_test.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/controller_test/cmake" TYPE FILE FILES
-    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/controller/catkin_generated/installspace/controller_testConfig.cmake"
-    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/controller/catkin_generated/installspace/controller_testConfig-version.cmake"
+    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/controller/catkin_generated/installspace/controller_testConfig.cmake"
+    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/controller/catkin_generated/installspace/controller_testConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/controller_test" TYPE FILE FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/controller/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/controller_test" TYPE FILE FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/controller/package.xml")
 endif()
 

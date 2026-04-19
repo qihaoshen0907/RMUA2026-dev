@@ -7,4 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export PWD='/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build'
+export PWD='/home/bai/rmua2026/RMUA2026-dev/basic_dev/build'

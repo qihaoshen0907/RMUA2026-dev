@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src
+CMAKE_SOURCE_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build
+CMAKE_BINARY_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/build
 
 # Utility rule file for tf_generate_messages_cpp.
 
@@ -63,10 +63,10 @@ controller/CMakeFiles/tf_generate_messages_cpp.dir/build: tf_generate_messages_c
 .PHONY : controller/CMakeFiles/tf_generate_messages_cpp.dir/build
 
 controller/CMakeFiles/tf_generate_messages_cpp.dir/clean:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/controller && $(CMAKE_COMMAND) -P CMakeFiles/tf_generate_messages_cpp.dir/cmake_clean.cmake
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/controller && $(CMAKE_COMMAND) -P CMakeFiles/tf_generate_messages_cpp.dir/cmake_clean.cmake
 .PHONY : controller/CMakeFiles/tf_generate_messages_cpp.dir/clean
 
 controller/CMakeFiles/tf_generate_messages_cpp.dir/depend:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/controller /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/controller /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/controller/CMakeFiles/tf_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/bai/rmua2026/RMUA2026-dev/basic_dev/src /home/bai/rmua2026/RMUA2026-dev/basic_dev/src/controller /home/bai/rmua2026/RMUA2026-dev/basic_dev/build /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/controller /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/controller/CMakeFiles/tf_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : controller/CMakeFiles/tf_generate_messages_cpp.dir/depend
 

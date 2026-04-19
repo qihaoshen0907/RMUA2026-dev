@@ -1,8 +1,8 @@
-# Install script for directory: /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src
+# Install script for directory: /home/bai/rmua2026/RMUA2026-dev/basic_dev/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install")
+  set(CMAKE_INSTALL_PREFIX "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -49,106 +49,104 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install/_setup_util.py")
+   "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install/_setup_util.py")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install" TYPE PROGRAM FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/catkin_generated/installspace/_setup_util.py")
+file(INSTALL DESTINATION "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install" TYPE PROGRAM FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/catkin_generated/installspace/_setup_util.py")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install/env.sh")
+   "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install/env.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install" TYPE PROGRAM FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/catkin_generated/installspace/env.sh")
+file(INSTALL DESTINATION "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install" TYPE PROGRAM FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/catkin_generated/installspace/env.sh")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install/setup.bash;/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install/local_setup.bash")
+   "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install/setup.bash;/home/bai/rmua2026/RMUA2026-dev/basic_dev/install/local_setup.bash")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install" TYPE FILE FILES
-    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/catkin_generated/installspace/setup.bash"
-    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/catkin_generated/installspace/local_setup.bash"
+file(INSTALL DESTINATION "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install" TYPE FILE FILES
+    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/catkin_generated/installspace/setup.bash"
+    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/catkin_generated/installspace/local_setup.bash"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install/setup.sh;/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install/local_setup.sh")
+   "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install/setup.sh;/home/bai/rmua2026/RMUA2026-dev/basic_dev/install/local_setup.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install" TYPE FILE FILES
-    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/catkin_generated/installspace/setup.sh"
-    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/catkin_generated/installspace/local_setup.sh"
+file(INSTALL DESTINATION "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install" TYPE FILE FILES
+    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/catkin_generated/installspace/setup.sh"
+    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/catkin_generated/installspace/local_setup.sh"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install/setup.zsh;/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install/local_setup.zsh")
+   "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install/setup.zsh;/home/bai/rmua2026/RMUA2026-dev/basic_dev/install/local_setup.zsh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install" TYPE FILE FILES
-    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/catkin_generated/installspace/setup.zsh"
-    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/catkin_generated/installspace/local_setup.zsh"
+file(INSTALL DESTINATION "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install" TYPE FILE FILES
+    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/catkin_generated/installspace/setup.zsh"
+    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/catkin_generated/installspace/local_setup.zsh"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install/setup.fish;/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install/local_setup.fish")
+   "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install/setup.fish;/home/bai/rmua2026/RMUA2026-dev/basic_dev/install/local_setup.fish")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install" TYPE FILE FILES
-    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/catkin_generated/installspace/setup.fish"
-    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/catkin_generated/installspace/local_setup.fish"
+file(INSTALL DESTINATION "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install" TYPE FILE FILES
+    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/catkin_generated/installspace/setup.fish"
+    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/catkin_generated/installspace/local_setup.fish"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install/.rosinstall")
+   "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install/.rosinstall")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install" TYPE FILE FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/catkin_generated/installspace/.rosinstall")
+file(INSTALL DESTINATION "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install" TYPE FILE FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/catkin_generated/installspace/.rosinstall")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/gtest/cmake_install.cmake")
-  include("/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/airsim_ros/cmake_install.cmake")
-  include("/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/controller/cmake_install.cmake")
-  include("/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/imu_gps_odometry/cmake_install.cmake")
+  include("/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/gtest/cmake_install.cmake")
+  include("/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/controller/cmake_install.cmake")
 
 endif()
 
@@ -160,5 +158,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

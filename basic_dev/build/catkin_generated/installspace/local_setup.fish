@@ -5,7 +5,7 @@
 # or fall back to the destination set at configure time
 
 if test -z $_CATKIN_SETUP_DIR
-    set _CATKIN_SETUP_DIR /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install
+    set _CATKIN_SETUP_DIR /home/bai/rmua2026/RMUA2026-dev/basic_dev/install
 end
 
 set CATKIN_SETUP_UTIL_ARGS "--extend --local"
