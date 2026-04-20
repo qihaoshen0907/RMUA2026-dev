@@ -5,6 +5,8 @@ class UAVLinearController
 public:
     //X=[x, y, z, vx, vy, vz, phi, theta, psi, wphi, wtheta, wpsi];
     Eigen::Vector4f execute(Eigen::VectorXf& X_des, Eigen::VectorXf& X_real);
+    void resetErrorTerms(const Eigen::VectorXf& X_des, const Eigen::VectorXf& X_real);
+
 private:
     int m_cnt = 0;
 
