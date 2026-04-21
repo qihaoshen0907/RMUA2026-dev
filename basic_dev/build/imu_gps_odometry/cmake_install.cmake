@@ -1,8 +1,8 @@
-# Install script for directory: /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/imu_gps_odometry
+# Install script for directory: /home/bai/rmua2026/RMUA2026-dev/basic_dev/src/imu_gps_odometry
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install")
+  set(CMAKE_INSTALL_PREFIX "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/imu_gps_odometry/catkin_generated/installspace/imu_gps_odometry.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/imu_gps_odometry/catkin_generated/installspace/imu_gps_odometry.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/imu_gps_odometry/cmake" TYPE FILE FILES
-    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/imu_gps_odometry/catkin_generated/installspace/imu_gps_odometryConfig.cmake"
-    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/imu_gps_odometry/catkin_generated/installspace/imu_gps_odometryConfig-version.cmake"
+    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/imu_gps_odometry/catkin_generated/installspace/imu_gps_odometryConfig.cmake"
+    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/imu_gps_odometry/catkin_generated/installspace/imu_gps_odometryConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/imu_gps_odometry" TYPE FILE FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/imu_gps_odometry/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/imu_gps_odometry" TYPE FILE FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/imu_gps_odometry/package.xml")
 endif()
 

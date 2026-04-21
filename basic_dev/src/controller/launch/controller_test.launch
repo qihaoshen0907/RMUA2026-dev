@@ -1,4 +1,15 @@
 <launch>
     <node pkg="imu_gps_odometry" type="imu_gps_odometry" name="imu_gps_odometry"/>
-    <node pkg="controller_test" type="controller_test" name="controller_test" output="screen"/>
+    <node pkg="controller_test" type="controller_test" name="controller_test" output="screen">
+        <param name="vel_cmd_va" value="1"/>
+        <param name="waypoint_reach_dist" value="0.8"/>
+        <param name="cruise_speed" value="3.0"/>
+        <param name="min_speed" value="0.6"/>
+        <param name="vel_gain" value="1.0"/>
+        <param name="max_cmd_vx" value="3.5"/>
+        <param name="max_cmd_vy" value="2.0"/>
+        <param name="max_cmd_vz" value="2.5"/>
+        <param name="yaw_rate_p" value="1.8"/>
+        <param name="yaw_rate_max" value="1.2"/>
+    </node>
 </launch>

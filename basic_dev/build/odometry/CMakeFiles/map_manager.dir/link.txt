@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC   -shared -Wl,-soname,libmap_manager.so -o /home/bai/rmua2026/RMUA2026-dev/basic_dev/devel/lib/libmap_manager.so CMakeFiles/map_manager.dir/src/mapmanager.cpp.o CMakeFiles/map_manager.dir/src/keyframe.cpp.o 
