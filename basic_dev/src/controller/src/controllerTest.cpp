@@ -30,7 +30,7 @@ constexpr double kMinSpeed             = 0.30;
 constexpr double kVelGain              = 0.8;
 constexpr double kDensifySegLen        = 2.0;
 constexpr double kMaxCmdVx             = 2.0;
-constexpr double kMaxCmdVy             = 0.0;   // 仍然禁用横向速度
+constexpr double kMaxCmdVy             = 0.35;  // 开启小幅横向速度，配合平滑控制减小过冲
 constexpr double kMaxCmdVz             = 1.0;
 constexpr double kYawRateP             = 1.5;
 constexpr double kYawRateMax           = 1.0;
@@ -54,6 +54,10 @@ double s_max_cmd_vy = kMaxCmdVy;
 double s_max_cmd_vz = kMaxCmdVz;
 double s_yaw_rate_p = kYawRateP;
 double s_yaw_rate_max = kYawRateMax;
+
+// y 向控制平滑参数：降低扰动与过冲
+double s_prev_vy_cmd = 0.0;
+ros::Time s_prev_ctrl_stamp;
 
 template <typename T>
 T clampValue(T v, T lo, T hi)
@@ -399,6 +403,14 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         }
     }
 
+    double dt = 0.005;  // 200Hz 名义周期
+    if (!s_prev_ctrl_stamp.isZero())
+    {
+        dt = (msg->header.stamp - s_prev_ctrl_stamp).toSec();
+        dt = clampValue(dt, 0.001, 0.05);
+    }
+    s_prev_ctrl_stamp = msg->header.stamp;
+
     airsim_ros::VelCmd vel_cmd;
     vel_cmd.header.stamp = msg->header.stamp;
     vel_cmd.vx = 0.0;
@@ -410,6 +422,7 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
 
     if (!spline_loaded || spline_path.empty() || g_path_complete)
     {
+        s_prev_vy_cmd = 0.0;
         g_vel_publisher.publish(vel_cmd);
         return;
     }
@@ -499,13 +512,33 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         if (std::abs(yaw_err) > 1.0)
             heading_scale *= 0.5;
 
-        const double forward_speed = std::max(0.18, base_speed * heading_scale);
+        const double y_abs = std::abs(dy);
+        const double y_slow_scale = clampValue(1.0 - 0.30 * (y_abs / 2.0), 0.65, 1.0);
+        const double forward_speed = std::max(0.18, base_speed * heading_scale * y_slow_scale);
 
-        // 以前完全禁用 vy 会卡在点旁边；这里给一点点小的横向修正，但限制很小
-        const double small_vy = clampValue(-0.20 * dy, -0.25, 0.25);
+        // y 向平滑控制：死区 + 渐进饱和 + 变化率限制，减少横向过冲
+        const double vy_deadzone = 0.08;
+        const double vy_gain = 0.45;
+        const double vy_limit = std::max(0.0, s_max_cmd_vy);
+
+        double target_vy = 0.0;
+        if (vy_limit > 1e-3 && y_abs > vy_deadzone)
+        {
+            const double dy_eff = dy - std::copysign(vy_deadzone, dy);
+            target_vy = clampValue(-vy_gain * dy_eff, -vy_limit, vy_limit);
+        }
+
+        // 偏航误差大时进一步抑制横向速度，优先把机头转顺
+        const double vy_heading_scale = clampValue(std::exp(-1.2 * std::abs(yaw_err)), 0.35, 1.0);
+        target_vy *= vy_heading_scale;
+
+        const double vy_slew_rate = 0.7;  // m/s^2
+        const double max_vy_step = vy_slew_rate * dt;
+        const double delta_vy = clampValue(target_vy - s_prev_vy_cmd, -max_vy_step, max_vy_step);
+        s_prev_vy_cmd = clampValue(s_prev_vy_cmd + delta_vy, -vy_limit, vy_limit);
 
         vel_cmd.vx = clampValue(forward_speed, 0.0, s_max_cmd_vx);
-        vel_cmd.vy = (std::abs(dy) > s_waypoint_reach_xy * 0.6) ? small_vy : 0.0;
+        vel_cmd.vy = s_prev_vy_cmd;
         vel_cmd.vz = clampValue(dz * 0.6, -s_max_cmd_vz, s_max_cmd_vz);
     }
 
