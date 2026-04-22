@@ -30,11 +30,16 @@ constexpr double kMinSpeed             = 0.30;
 constexpr double kVelGain              = 0.8;
 constexpr double kDensifySegLen        = 2.0;
 constexpr double kMaxCmdVx             = 2.0;
-constexpr double kMaxCmdVy             = 0.0;   // 仍然禁用横向速度
+constexpr double kMaxCmdVy             = 0.35;  // 开启小幅横向速度，配合平滑控制减小过冲
 constexpr double kMaxCmdVz             = 1.0;
 constexpr double kYawRateP             = 1.5;
 constexpr double kYawRateMax           = 1.0;
 constexpr double kHeadingSlowCosFloor  = 0.15;
+constexpr double kXSpeedBoost          = 3.0;   // x 方向默认提速倍率
+constexpr double kAntiStallSpeed       = 0.55;  // 防停住最小前进速度
+constexpr double kSharpTurnMinSpeed    = 0.25;  // 大角度转弯时允许更慢
+constexpr double kLateralBrakeAcc      = 3.2;   // y 方向制动加速度，用于抑制超调
+constexpr double kLateralReturnGain    = 1.8;   // y 方向快速回正增益
 
 int s_vel_cmd_va = 1;
 double s_waypoint_reach_dist = kWaypointReachDist;
@@ -54,6 +59,11 @@ double s_max_cmd_vy = kMaxCmdVy;
 double s_max_cmd_vz = kMaxCmdVz;
 double s_yaw_rate_p = kYawRateP;
 double s_yaw_rate_max = kYawRateMax;
+double s_x_speed_boost = kXSpeedBoost;
+
+// y 向控制平滑参数：降低扰动与过冲
+double s_prev_vy_cmd = 0.0;
+ros::Time s_prev_ctrl_stamp;
 
 template <typename T>
 T clampValue(T v, T lo, T hi)
@@ -235,6 +245,7 @@ int main(int argc, char** argv)
     pn.param("max_cmd_vz", s_max_cmd_vz, kMaxCmdVz);
     pn.param("yaw_rate_p", s_yaw_rate_p, kYawRateP);
     pn.param("yaw_rate_max", s_yaw_rate_max, kYawRateMax);
+    pn.param("x_speed_boost", s_x_speed_boost, kXSpeedBoost);
 
     g_takeoff_client = n.serviceClient<airsim_ros::Takeoff>("/airsim_node/drone_1/takeoff");
     g_vel_publisher  = n.advertise<airsim_ros::VelCmd>("/airsim_node/drone_1/vel_body_cmd", 1);
@@ -253,6 +264,8 @@ int main(int argc, char** argv)
     ROS_INFO("waypoint tolerance: xy=%.2f z=%.2f | skip: behind_x=%.2f xy=%.2f z=%.2f",
              s_waypoint_reach_xy, s_waypoint_reach_z,
              s_waypoint_skip_behind_x, s_waypoint_skip_xy, s_waypoint_skip_z);
+    ROS_INFO("speed params: cruise=%.2f max_vx=%.2f vel_gain=%.2f x_speed_boost=%.2f",
+             s_cruise_speed, s_max_cmd_vx, s_vel_gain, s_x_speed_boost);
 
     ros::Rate loop_rate(200);
     while (ros::ok())
@@ -399,6 +412,14 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         }
     }
 
+    double dt = 0.005;  // 200Hz 名义周期
+    if (!s_prev_ctrl_stamp.isZero())
+    {
+        dt = (msg->header.stamp - s_prev_ctrl_stamp).toSec();
+        dt = clampValue(dt, 0.001, 0.05);
+    }
+    s_prev_ctrl_stamp = msg->header.stamp;
+
     airsim_ros::VelCmd vel_cmd;
     vel_cmd.header.stamp = msg->header.stamp;
     vel_cmd.vx = 0.0;
@@ -410,6 +431,7 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
 
     if (!spline_loaded || spline_path.empty() || g_path_complete)
     {
+        s_prev_vy_cmd = 0.0;
         g_vel_publisher.publish(vel_cmd);
         return;
     }
@@ -455,12 +477,11 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
     Eigen::Vector3d target = spline_path[current_wp_idx];
     Eigen::Vector3d err = target - cur_pos;
 
-    const double dx = err.x();
-    const double dy = err.y();
-    const double dz = err.z();
-
-    const double xy_err = std::sqrt(dx * dx + dy * dy);
-    const double dist = err.norm();
+    double dx = err.x();
+    double dy = err.y();
+    double dz = err.z();
+    double xy_err = std::sqrt(dx * dx + dy * dy);
+    double dist = err.norm();
 
     // 最后一层保险：到范围内就停/切
     if (isWaypointReached(cur_pos, target, s_waypoint_reach_xy, s_waypoint_reach_z))
@@ -480,6 +501,13 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         }
     }
 
+    // 切换 waypoint 后立即刷新误差，避免偶发一拍零速导致“停住”
+    dx = err.x();
+    dy = err.y();
+    dz = err.z();
+    xy_err = std::sqrt(dx * dx + dy * dy);
+    dist = err.norm();
+
     if (dist > 1e-6)
     {
         const double desired_yaw = std::atan2(err.y(), err.x());
@@ -490,22 +518,66 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
                                      -s_yaw_rate_max,
                                      s_yaw_rate_max);
 
-        // 偏航误差大时降速，但不让它完全停死
-        const double base_speed = clampValue(s_vel_gain * dist, s_min_speed, s_cruise_speed);
-        double heading_scale = std::max(kHeadingSlowCosFloor, std::cos(std::abs(yaw_err)));
+        const double speed_boost_x = std::max(1.0, s_x_speed_boost);
+        const double cruise_speed_x = std::max(0.6, s_cruise_speed * speed_boost_x);
+        const double max_cmd_vx_x = std::max(0.6, s_max_cmd_vx * speed_boost_x);
+        const double vel_gain_x = std::max(0.1, s_vel_gain * speed_boost_x);
 
-        if (std::abs(yaw_err) > 0.6)
-            heading_scale *= 0.5;
-        if (std::abs(yaw_err) > 1.0)
-            heading_scale *= 0.5;
+        // x 方向提速约 3 倍，同时尽量保持过弯速度
+        const double base_speed = clampValue(vel_gain_x * dist, s_min_speed, cruise_speed_x);
+        const double heading_scale = clampValue(std::exp(-0.35 * std::abs(yaw_err)),
+                                                0.72,
+                                                1.0);
+        const double raw_forward_speed = base_speed * heading_scale;
 
-        const double forward_speed = std::max(0.18, base_speed * heading_scale);
+        // 防停住：远离目标点时保证最小前进速度；急转弯时允许更慢
+        const bool far_from_wp = xy_err > (s_waypoint_reach_xy * 1.5);
+        const double anti_stall_speed =
+            far_from_wp ? ((std::abs(yaw_err) > 1.2) ? kSharpTurnMinSpeed : kAntiStallSpeed) : 0.15;
+        const double forward_speed = std::max(anti_stall_speed, raw_forward_speed);
 
-        // 以前完全禁用 vy 会卡在点旁边；这里给一点点小的横向修正，但限制很小
-        const double small_vy = clampValue(-0.20 * dy, -0.25, 0.25);
+        // y 向逻辑重构：远离中心线时快速回正，靠近时按“可刹停速度”自动刹车，抑制超调
+        const double vy_deadzone = 0.06;
+        const double vy_limit = std::max(0.0, s_max_cmd_vy);
+        const double y_abs = std::abs(dy);
+        const double vy_meas = X_real[4];
 
-        vel_cmd.vx = clampValue(forward_speed, 0.0, s_max_cmd_vx);
-        vel_cmd.vy = (std::abs(dy) > s_waypoint_reach_xy * 0.6) ? small_vy : 0.0;
+        double target_vy = 0.0;
+        if (vy_limit > 1e-3 && y_abs > vy_deadzone)
+        {
+            const double dy_eff = y_abs - vy_deadzone;
+            const double toward_sign = (dy > 0.0) ? -1.0 : 1.0;   // 指向 y=0 误差减小方向
+
+            // 远处快速拉回：误差越大，期望横向速度越快（饱和到 vy_limit）
+            const double v_return =
+                vy_limit * std::tanh((kLateralReturnGain * dy_eff) / std::max(1e-3, vy_limit));
+
+            // 刹车约束：靠近目标时自动降低允许速度，保证有足够“刹车距离”
+            const double v_stop_cap = std::sqrt(2.0 * kLateralBrakeAcc * std::max(0.0, dy_eff));
+            const double v_toward_cmd = std::min(v_return, v_stop_cap);
+
+            // 若当前朝目标移动过快，优先按刹车上限减速，防止冲过头
+            const double v_toward_now = toward_sign * vy_meas;
+            const double v_toward_safe = std::max(0.0, v_toward_cmd);
+            const double v_toward_target = std::min(v_toward_safe, std::max(0.0, v_toward_now));
+            const double v_toward_des = (v_toward_now > v_toward_safe) ? v_toward_target : v_toward_cmd;
+
+            target_vy = clampValue(toward_sign * v_toward_des, -vy_limit, vy_limit);
+        }
+
+        // 偏航误差大时保留部分抑制，但放宽，避免过弯明显掉速
+        const double vy_heading_scale = clampValue(std::exp(-0.55 * std::abs(yaw_err)), 0.55, 1.0);
+        target_vy *= vy_heading_scale;
+
+        // 非对称变化率：制动比加速更猛，提升“刹车感”
+        const bool braking = (target_vy * s_prev_vy_cmd < 0.0) || (std::abs(target_vy) < std::abs(s_prev_vy_cmd));
+        const double vy_rate = braking ? 4.8 : 2.2;  // m/s^2
+        const double max_vy_step = vy_rate * dt;
+        const double delta_vy = clampValue(target_vy - s_prev_vy_cmd, -max_vy_step, max_vy_step);
+        s_prev_vy_cmd = clampValue(s_prev_vy_cmd + delta_vy, -vy_limit, vy_limit);
+
+        vel_cmd.vx = clampValue(forward_speed, 0.0, max_cmd_vx_x);
+        vel_cmd.vy = s_prev_vy_cmd;
         vel_cmd.vz = clampValue(dz * 0.6, -s_max_cmd_vz, s_max_cmd_vz);
     }
 
