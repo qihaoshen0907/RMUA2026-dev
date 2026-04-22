@@ -38,6 +38,8 @@ constexpr double kHeadingSlowCosFloor  = 0.15;
 constexpr double kXSpeedBoost          = 3.0;   // x 方向默认提速倍率
 constexpr double kAntiStallSpeed       = 0.55;  // 防停住最小前进速度
 constexpr double kSharpTurnMinSpeed    = 0.25;  // 大角度转弯时允许更慢
+constexpr double kLateralBrakeAcc      = 3.2;   // y 方向制动加速度，用于抑制超调
+constexpr double kLateralReturnGain    = 1.8;   // y 方向快速回正增益
 
 int s_vel_cmd_va = 1;
 double s_waypoint_reach_dist = kWaypointReachDist;
@@ -521,15 +523,12 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         const double max_cmd_vx_x = std::max(0.6, s_max_cmd_vx * speed_boost_x);
         const double vel_gain_x = std::max(0.1, s_vel_gain * speed_boost_x);
 
-        // x 方向提速约 3 倍，同时保留转弯时自动降速
+        // x 方向提速约 3 倍，同时尽量保持过弯速度
         const double base_speed = clampValue(vel_gain_x * dist, s_min_speed, cruise_speed_x);
-        const double heading_scale = clampValue(std::exp(-0.95 * std::abs(yaw_err)),
-                                                kHeadingSlowCosFloor,
+        const double heading_scale = clampValue(std::exp(-0.35 * std::abs(yaw_err)),
+                                                0.72,
                                                 1.0);
-
-        const double y_abs = std::abs(dy);
-        const double y_slow_scale = clampValue(1.0 - 0.20 * (y_abs / 2.0), 0.70, 1.0);
-        const double raw_forward_speed = base_speed * heading_scale * y_slow_scale;
+        const double raw_forward_speed = base_speed * heading_scale;
 
         // 防停住：远离目标点时保证最小前进速度；急转弯时允许更慢
         const bool far_from_wp = xy_err > (s_waypoint_reach_xy * 1.5);
@@ -537,24 +536,43 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
             far_from_wp ? ((std::abs(yaw_err) > 1.2) ? kSharpTurnMinSpeed : kAntiStallSpeed) : 0.15;
         const double forward_speed = std::max(anti_stall_speed, raw_forward_speed);
 
-        // y 向平滑控制：死区 + 渐进饱和 + 变化率限制，减少横向过冲
-        const double vy_deadzone = 0.08;
-        const double vy_gain = 0.45;
+        // y 向逻辑重构：远离中心线时快速回正，靠近时按“可刹停速度”自动刹车，抑制超调
+        const double vy_deadzone = 0.06;
         const double vy_limit = std::max(0.0, s_max_cmd_vy);
+        const double y_abs = std::abs(dy);
+        const double vy_meas = X_real[4];
 
         double target_vy = 0.0;
         if (vy_limit > 1e-3 && y_abs > vy_deadzone)
         {
-            const double dy_eff = dy - std::copysign(vy_deadzone, dy);
-            target_vy = clampValue(-vy_gain * dy_eff, -vy_limit, vy_limit);
+            const double dy_eff = y_abs - vy_deadzone;
+            const double toward_sign = (dy > 0.0) ? -1.0 : 1.0;   // 指向 y=0 误差减小方向
+
+            // 远处快速拉回：误差越大，期望横向速度越快（饱和到 vy_limit）
+            const double v_return =
+                vy_limit * std::tanh((kLateralReturnGain * dy_eff) / std::max(1e-3, vy_limit));
+
+            // 刹车约束：靠近目标时自动降低允许速度，保证有足够“刹车距离”
+            const double v_stop_cap = std::sqrt(2.0 * kLateralBrakeAcc * std::max(0.0, dy_eff));
+            const double v_toward_cmd = std::min(v_return, v_stop_cap);
+
+            // 若当前朝目标移动过快，优先按刹车上限减速，防止冲过头
+            const double v_toward_now = toward_sign * vy_meas;
+            const double v_toward_safe = std::max(0.0, v_toward_cmd);
+            const double v_toward_target = std::min(v_toward_safe, std::max(0.0, v_toward_now));
+            const double v_toward_des = (v_toward_now > v_toward_safe) ? v_toward_target : v_toward_cmd;
+
+            target_vy = clampValue(toward_sign * v_toward_des, -vy_limit, vy_limit);
         }
 
-        // 偏航误差大时进一步抑制横向速度，优先把机头转顺
-        const double vy_heading_scale = clampValue(std::exp(-1.2 * std::abs(yaw_err)), 0.35, 1.0);
+        // 偏航误差大时保留部分抑制，但放宽，避免过弯明显掉速
+        const double vy_heading_scale = clampValue(std::exp(-0.55 * std::abs(yaw_err)), 0.55, 1.0);
         target_vy *= vy_heading_scale;
 
-        const double vy_slew_rate = 0.7;  // m/s^2
-        const double max_vy_step = vy_slew_rate * dt;
+        // 非对称变化率：制动比加速更猛，提升“刹车感”
+        const bool braking = (target_vy * s_prev_vy_cmd < 0.0) || (std::abs(target_vy) < std::abs(s_prev_vy_cmd));
+        const double vy_rate = braking ? 4.8 : 2.2;  // m/s^2
+        const double max_vy_step = vy_rate * dt;
         const double delta_vy = clampValue(target_vy - s_prev_vy_cmd, -max_vy_step, max_vy_step);
         s_prev_vy_cmd = clampValue(s_prev_vy_cmd + delta_vy, -vy_limit, vy_limit);
 
