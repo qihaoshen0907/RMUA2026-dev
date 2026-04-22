@@ -11,5 +11,6 @@
         <param name="max_cmd_vz" value="2.5"/>
         <param name="yaw_rate_p" value="1.8"/>
         <param name="yaw_rate_max" value="1.2"/>
+        <param name="x_speed_boost" value="3.0"/>
     </node>
 </launch>
