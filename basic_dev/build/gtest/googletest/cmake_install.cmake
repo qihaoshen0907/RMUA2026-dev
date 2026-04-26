@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install")
+  set(CMAKE_INSTALL_PREFIX "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

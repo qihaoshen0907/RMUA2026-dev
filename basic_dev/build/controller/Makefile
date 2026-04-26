@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src
+CMAKE_SOURCE_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build
+CMAKE_BINARY_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -67,39 +67,6 @@ install/strip/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
 
 # Special rule for the target install/local
 install/local: preinstall
@@ -124,6 +91,39 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -137,14 +137,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/CMakeFiles /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/controller/CMakeFiles/progress.marks
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/CMakeFiles 0
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/CMakeFiles /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/controller/CMakeFiles/progress.marks
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/clean
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/preinstall
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/preinstall
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 controller/CMakeFiles/controller_test.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/controller_test.dir/rule
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/controller_test.dir/rule
 .PHONY : controller/CMakeFiles/controller_test.dir/rule
 
 # Convenience name for target.
@@ -179,530 +179,8 @@ controller_test: controller/CMakeFiles/controller_test.dir/rule
 
 # fast build rule for target.
 controller_test/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/controller_test.dir/build.make controller/CMakeFiles/controller_test.dir/build
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f controller/CMakeFiles/controller_test.dir/build.make controller/CMakeFiles/controller_test.dir/build
 .PHONY : controller_test/fast
-
-# Convenience name for target.
-controller/CMakeFiles/tf_generate_messages_nodejs.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/tf_generate_messages_nodejs.dir/rule
-.PHONY : controller/CMakeFiles/tf_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_nodejs: controller/CMakeFiles/tf_generate_messages_nodejs.dir/rule
-
-.PHONY : tf_generate_messages_nodejs
-
-# fast build rule for target.
-tf_generate_messages_nodejs/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/tf_generate_messages_nodejs.dir/build.make controller/CMakeFiles/tf_generate_messages_nodejs.dir/build
-.PHONY : tf_generate_messages_nodejs/fast
-
-# Convenience name for target.
-controller/CMakeFiles/tf_generate_messages_eus.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/tf_generate_messages_eus.dir/rule
-.PHONY : controller/CMakeFiles/tf_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_eus: controller/CMakeFiles/tf_generate_messages_eus.dir/rule
-
-.PHONY : tf_generate_messages_eus
-
-# fast build rule for target.
-tf_generate_messages_eus/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/tf_generate_messages_eus.dir/build.make controller/CMakeFiles/tf_generate_messages_eus.dir/build
-.PHONY : tf_generate_messages_eus/fast
-
-# Convenience name for target.
-controller/CMakeFiles/pcl_ros_gencfg.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/pcl_ros_gencfg.dir/rule
-.PHONY : controller/CMakeFiles/pcl_ros_gencfg.dir/rule
-
-# Convenience name for target.
-pcl_ros_gencfg: controller/CMakeFiles/pcl_ros_gencfg.dir/rule
-
-.PHONY : pcl_ros_gencfg
-
-# fast build rule for target.
-pcl_ros_gencfg/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/pcl_ros_gencfg.dir/build.make controller/CMakeFiles/pcl_ros_gencfg.dir/build
-.PHONY : pcl_ros_gencfg/fast
-
-# Convenience name for target.
-controller/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/rule
-.PHONY : controller/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-dynamic_reconfigure_generate_messages_lisp: controller/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/rule
-
-.PHONY : dynamic_reconfigure_generate_messages_lisp
-
-# fast build rule for target.
-dynamic_reconfigure_generate_messages_lisp/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/build.make controller/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/build
-.PHONY : dynamic_reconfigure_generate_messages_lisp/fast
-
-# Convenience name for target.
-controller/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/rule
-.PHONY : controller/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/rule
-
-# Convenience name for target.
-dynamic_reconfigure_generate_messages_py: controller/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/rule
-
-.PHONY : dynamic_reconfigure_generate_messages_py
-
-# fast build rule for target.
-dynamic_reconfigure_generate_messages_py/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/build.make controller/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/build
-.PHONY : dynamic_reconfigure_generate_messages_py/fast
-
-# Convenience name for target.
-controller/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule
-.PHONY : controller/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-pcl_msgs_generate_messages_py: controller/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule
-
-.PHONY : pcl_msgs_generate_messages_py
-
-# fast build rule for target.
-pcl_msgs_generate_messages_py/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/pcl_msgs_generate_messages_py.dir/build.make controller/CMakeFiles/pcl_msgs_generate_messages_py.dir/build
-.PHONY : pcl_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-controller/CMakeFiles/dynamic_reconfigure_gencfg.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/dynamic_reconfigure_gencfg.dir/rule
-.PHONY : controller/CMakeFiles/dynamic_reconfigure_gencfg.dir/rule
-
-# Convenience name for target.
-dynamic_reconfigure_gencfg: controller/CMakeFiles/dynamic_reconfigure_gencfg.dir/rule
-
-.PHONY : dynamic_reconfigure_gencfg
-
-# fast build rule for target.
-dynamic_reconfigure_gencfg/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/dynamic_reconfigure_gencfg.dir/build.make controller/CMakeFiles/dynamic_reconfigure_gencfg.dir/build
-.PHONY : dynamic_reconfigure_gencfg/fast
-
-# Convenience name for target.
-controller/CMakeFiles/nodelet_generate_messages_cpp.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/nodelet_generate_messages_cpp.dir/rule
-.PHONY : controller/CMakeFiles/nodelet_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-nodelet_generate_messages_cpp: controller/CMakeFiles/nodelet_generate_messages_cpp.dir/rule
-
-.PHONY : nodelet_generate_messages_cpp
-
-# fast build rule for target.
-nodelet_generate_messages_cpp/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/nodelet_generate_messages_cpp.dir/build.make controller/CMakeFiles/nodelet_generate_messages_cpp.dir/build
-.PHONY : nodelet_generate_messages_cpp/fast
-
-# Convenience name for target.
-controller/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/rule
-.PHONY : controller/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-dynamic_reconfigure_generate_messages_eus: controller/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/rule
-
-.PHONY : dynamic_reconfigure_generate_messages_eus
-
-# fast build rule for target.
-dynamic_reconfigure_generate_messages_eus/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/build.make controller/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/build
-.PHONY : dynamic_reconfigure_generate_messages_eus/fast
-
-# Convenience name for target.
-controller/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/rule
-.PHONY : controller/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-pcl_msgs_generate_messages_nodejs: controller/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : pcl_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-pcl_msgs_generate_messages_nodejs/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/build.make controller/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/build
-.PHONY : pcl_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-controller/CMakeFiles/nodelet_generate_messages_eus.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/nodelet_generate_messages_eus.dir/rule
-.PHONY : controller/CMakeFiles/nodelet_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-nodelet_generate_messages_eus: controller/CMakeFiles/nodelet_generate_messages_eus.dir/rule
-
-.PHONY : nodelet_generate_messages_eus
-
-# fast build rule for target.
-nodelet_generate_messages_eus/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/nodelet_generate_messages_eus.dir/build.make controller/CMakeFiles/nodelet_generate_messages_eus.dir/build
-.PHONY : nodelet_generate_messages_eus/fast
-
-# Convenience name for target.
-controller/CMakeFiles/pcl_msgs_generate_messages_eus.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/pcl_msgs_generate_messages_eus.dir/rule
-.PHONY : controller/CMakeFiles/pcl_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-pcl_msgs_generate_messages_eus: controller/CMakeFiles/pcl_msgs_generate_messages_eus.dir/rule
-
-.PHONY : pcl_msgs_generate_messages_eus
-
-# fast build rule for target.
-pcl_msgs_generate_messages_eus/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/pcl_msgs_generate_messages_eus.dir/build.make controller/CMakeFiles/pcl_msgs_generate_messages_eus.dir/build
-.PHONY : pcl_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-controller/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule
-.PHONY : controller/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-topic_tools_generate_messages_cpp: controller/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule
-
-.PHONY : topic_tools_generate_messages_cpp
-
-# fast build rule for target.
-topic_tools_generate_messages_cpp/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/topic_tools_generate_messages_cpp.dir/build.make controller/CMakeFiles/topic_tools_generate_messages_cpp.dir/build
-.PHONY : topic_tools_generate_messages_cpp/fast
-
-# Convenience name for target.
-controller/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/rule
-.PHONY : controller/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-pcl_msgs_generate_messages_lisp: controller/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : pcl_msgs_generate_messages_lisp
-
-# fast build rule for target.
-pcl_msgs_generate_messages_lisp/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/build.make controller/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/build
-.PHONY : pcl_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-controller/CMakeFiles/nodelet_generate_messages_py.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/nodelet_generate_messages_py.dir/rule
-.PHONY : controller/CMakeFiles/nodelet_generate_messages_py.dir/rule
-
-# Convenience name for target.
-nodelet_generate_messages_py: controller/CMakeFiles/nodelet_generate_messages_py.dir/rule
-
-.PHONY : nodelet_generate_messages_py
-
-# fast build rule for target.
-nodelet_generate_messages_py/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/nodelet_generate_messages_py.dir/build.make controller/CMakeFiles/nodelet_generate_messages_py.dir/build
-.PHONY : nodelet_generate_messages_py/fast
-
-# Convenience name for target.
-controller/CMakeFiles/bond_generate_messages_lisp.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/bond_generate_messages_lisp.dir/rule
-.PHONY : controller/CMakeFiles/bond_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-bond_generate_messages_lisp: controller/CMakeFiles/bond_generate_messages_lisp.dir/rule
-
-.PHONY : bond_generate_messages_lisp
-
-# fast build rule for target.
-bond_generate_messages_lisp/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/bond_generate_messages_lisp.dir/build.make controller/CMakeFiles/bond_generate_messages_lisp.dir/build
-.PHONY : bond_generate_messages_lisp/fast
-
-# Convenience name for target.
-controller/CMakeFiles/bond_generate_messages_cpp.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/bond_generate_messages_cpp.dir/rule
-.PHONY : controller/CMakeFiles/bond_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-bond_generate_messages_cpp: controller/CMakeFiles/bond_generate_messages_cpp.dir/rule
-
-.PHONY : bond_generate_messages_cpp
-
-# fast build rule for target.
-bond_generate_messages_cpp/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/bond_generate_messages_cpp.dir/build.make controller/CMakeFiles/bond_generate_messages_cpp.dir/build
-.PHONY : bond_generate_messages_cpp/fast
-
-# Convenience name for target.
-controller/CMakeFiles/bond_generate_messages_eus.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/bond_generate_messages_eus.dir/rule
-.PHONY : controller/CMakeFiles/bond_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-bond_generate_messages_eus: controller/CMakeFiles/bond_generate_messages_eus.dir/rule
-
-.PHONY : bond_generate_messages_eus
-
-# fast build rule for target.
-bond_generate_messages_eus/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/bond_generate_messages_eus.dir/build.make controller/CMakeFiles/bond_generate_messages_eus.dir/build
-.PHONY : bond_generate_messages_eus/fast
-
-# Convenience name for target.
-controller/CMakeFiles/nodelet_generate_messages_lisp.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/nodelet_generate_messages_lisp.dir/rule
-.PHONY : controller/CMakeFiles/nodelet_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-nodelet_generate_messages_lisp: controller/CMakeFiles/nodelet_generate_messages_lisp.dir/rule
-
-.PHONY : nodelet_generate_messages_lisp
-
-# fast build rule for target.
-nodelet_generate_messages_lisp/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/nodelet_generate_messages_lisp.dir/build.make controller/CMakeFiles/nodelet_generate_messages_lisp.dir/build
-.PHONY : nodelet_generate_messages_lisp/fast
-
-# Convenience name for target.
-controller/CMakeFiles/tf_generate_messages_py.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/tf_generate_messages_py.dir/rule
-.PHONY : controller/CMakeFiles/tf_generate_messages_py.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_py: controller/CMakeFiles/tf_generate_messages_py.dir/rule
-
-.PHONY : tf_generate_messages_py
-
-# fast build rule for target.
-tf_generate_messages_py/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/tf_generate_messages_py.dir/build.make controller/CMakeFiles/tf_generate_messages_py.dir/build
-.PHONY : tf_generate_messages_py/fast
-
-# Convenience name for target.
-controller/CMakeFiles/topic_tools_generate_messages_py.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/topic_tools_generate_messages_py.dir/rule
-.PHONY : controller/CMakeFiles/topic_tools_generate_messages_py.dir/rule
-
-# Convenience name for target.
-topic_tools_generate_messages_py: controller/CMakeFiles/topic_tools_generate_messages_py.dir/rule
-
-.PHONY : topic_tools_generate_messages_py
-
-# fast build rule for target.
-topic_tools_generate_messages_py/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/topic_tools_generate_messages_py.dir/build.make controller/CMakeFiles/topic_tools_generate_messages_py.dir/build
-.PHONY : topic_tools_generate_messages_py/fast
-
-# Convenience name for target.
-controller/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
-.PHONY : controller/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-nodelet_generate_messages_nodejs: controller/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
-
-.PHONY : nodelet_generate_messages_nodejs
-
-# fast build rule for target.
-nodelet_generate_messages_nodejs/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/nodelet_generate_messages_nodejs.dir/build.make controller/CMakeFiles/nodelet_generate_messages_nodejs.dir/build
-.PHONY : nodelet_generate_messages_nodejs/fast
-
-# Convenience name for target.
-controller/CMakeFiles/bond_generate_messages_nodejs.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/bond_generate_messages_nodejs.dir/rule
-.PHONY : controller/CMakeFiles/bond_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-bond_generate_messages_nodejs: controller/CMakeFiles/bond_generate_messages_nodejs.dir/rule
-
-.PHONY : bond_generate_messages_nodejs
-
-# fast build rule for target.
-bond_generate_messages_nodejs/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/bond_generate_messages_nodejs.dir/build.make controller/CMakeFiles/bond_generate_messages_nodejs.dir/build
-.PHONY : bond_generate_messages_nodejs/fast
-
-# Convenience name for target.
-controller/CMakeFiles/bond_generate_messages_py.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/bond_generate_messages_py.dir/rule
-.PHONY : controller/CMakeFiles/bond_generate_messages_py.dir/rule
-
-# Convenience name for target.
-bond_generate_messages_py: controller/CMakeFiles/bond_generate_messages_py.dir/rule
-
-.PHONY : bond_generate_messages_py
-
-# fast build rule for target.
-bond_generate_messages_py/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/bond_generate_messages_py.dir/build.make controller/CMakeFiles/bond_generate_messages_py.dir/build
-.PHONY : bond_generate_messages_py/fast
-
-# Convenience name for target.
-controller/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
-.PHONY : controller/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-topic_tools_generate_messages_lisp: controller/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
-
-.PHONY : topic_tools_generate_messages_lisp
-
-# fast build rule for target.
-topic_tools_generate_messages_lisp/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/topic_tools_generate_messages_lisp.dir/build.make controller/CMakeFiles/topic_tools_generate_messages_lisp.dir/build
-.PHONY : topic_tools_generate_messages_lisp/fast
-
-# Convenience name for target.
-controller/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule
-.PHONY : controller/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-dynamic_reconfigure_generate_messages_nodejs: controller/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule
-
-.PHONY : dynamic_reconfigure_generate_messages_nodejs
-
-# fast build rule for target.
-dynamic_reconfigure_generate_messages_nodejs/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/build.make controller/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/build
-.PHONY : dynamic_reconfigure_generate_messages_nodejs/fast
-
-# Convenience name for target.
-controller/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/rule
-.PHONY : controller/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-pcl_msgs_generate_messages_cpp: controller/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : pcl_msgs_generate_messages_cpp
-
-# fast build rule for target.
-pcl_msgs_generate_messages_cpp/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/build.make controller/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/build
-.PHONY : pcl_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-controller/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
-.PHONY : controller/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
-
-# Convenience name for target.
-nodelet_topic_tools_gencfg: controller/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
-
-.PHONY : nodelet_topic_tools_gencfg
-
-# fast build rule for target.
-nodelet_topic_tools_gencfg/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/nodelet_topic_tools_gencfg.dir/build.make controller/CMakeFiles/nodelet_topic_tools_gencfg.dir/build
-.PHONY : nodelet_topic_tools_gencfg/fast
-
-# Convenience name for target.
-controller/CMakeFiles/tf_generate_messages_lisp.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/tf_generate_messages_lisp.dir/rule
-.PHONY : controller/CMakeFiles/tf_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_lisp: controller/CMakeFiles/tf_generate_messages_lisp.dir/rule
-
-.PHONY : tf_generate_messages_lisp
-
-# fast build rule for target.
-tf_generate_messages_lisp/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/tf_generate_messages_lisp.dir/build.make controller/CMakeFiles/tf_generate_messages_lisp.dir/build
-.PHONY : tf_generate_messages_lisp/fast
-
-# Convenience name for target.
-controller/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule
-.PHONY : controller/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-dynamic_reconfigure_generate_messages_cpp: controller/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule
-
-.PHONY : dynamic_reconfigure_generate_messages_cpp
-
-# fast build rule for target.
-dynamic_reconfigure_generate_messages_cpp/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build.make controller/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build
-.PHONY : dynamic_reconfigure_generate_messages_cpp/fast
-
-# Convenience name for target.
-controller/CMakeFiles/topic_tools_generate_messages_eus.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/topic_tools_generate_messages_eus.dir/rule
-.PHONY : controller/CMakeFiles/topic_tools_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-topic_tools_generate_messages_eus: controller/CMakeFiles/topic_tools_generate_messages_eus.dir/rule
-
-.PHONY : topic_tools_generate_messages_eus
-
-# fast build rule for target.
-topic_tools_generate_messages_eus/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/topic_tools_generate_messages_eus.dir/build.make controller/CMakeFiles/topic_tools_generate_messages_eus.dir/build
-.PHONY : topic_tools_generate_messages_eus/fast
-
-# Convenience name for target.
-controller/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule
-.PHONY : controller/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-topic_tools_generate_messages_nodejs: controller/CMakeFiles/topic_tools_generate_messages_nodejs.dir/rule
-
-.PHONY : topic_tools_generate_messages_nodejs
-
-# fast build rule for target.
-topic_tools_generate_messages_nodejs/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/topic_tools_generate_messages_nodejs.dir/build.make controller/CMakeFiles/topic_tools_generate_messages_nodejs.dir/build
-.PHONY : topic_tools_generate_messages_nodejs/fast
-
-# Convenience name for target.
-controller/CMakeFiles/tf_generate_messages_cpp.dir/rule:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 controller/CMakeFiles/tf_generate_messages_cpp.dir/rule
-.PHONY : controller/CMakeFiles/tf_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_cpp: controller/CMakeFiles/tf_generate_messages_cpp.dir/rule
-
-.PHONY : tf_generate_messages_cpp
-
-# fast build rule for target.
-tf_generate_messages_cpp/fast:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/tf_generate_messages_cpp.dir/build.make controller/CMakeFiles/tf_generate_messages_cpp.dir/build
-.PHONY : tf_generate_messages_cpp/fast
-
-src/PDcontroller.o: src/PDcontroller.cpp.o
-
-.PHONY : src/PDcontroller.o
-
-# target to build an object file
-src/PDcontroller.cpp.o:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/controller_test.dir/build.make controller/CMakeFiles/controller_test.dir/src/PDcontroller.cpp.o
-.PHONY : src/PDcontroller.cpp.o
-
-src/PDcontroller.i: src/PDcontroller.cpp.i
-
-.PHONY : src/PDcontroller.i
-
-# target to preprocess a source file
-src/PDcontroller.cpp.i:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/controller_test.dir/build.make controller/CMakeFiles/controller_test.dir/src/PDcontroller.cpp.i
-.PHONY : src/PDcontroller.cpp.i
-
-src/PDcontroller.s: src/PDcontroller.cpp.s
-
-.PHONY : src/PDcontroller.s
-
-# target to generate assembly for a file
-src/PDcontroller.cpp.s:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/controller_test.dir/build.make controller/CMakeFiles/controller_test.dir/src/PDcontroller.cpp.s
-.PHONY : src/PDcontroller.cpp.s
 
 src/controllerTest.o: src/controllerTest.cpp.o
 
@@ -710,7 +188,7 @@ src/controllerTest.o: src/controllerTest.cpp.o
 
 # target to build an object file
 src/controllerTest.cpp.o:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/controller_test.dir/build.make controller/CMakeFiles/controller_test.dir/src/controllerTest.cpp.o
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f controller/CMakeFiles/controller_test.dir/build.make controller/CMakeFiles/controller_test.dir/src/controllerTest.cpp.o
 .PHONY : src/controllerTest.cpp.o
 
 src/controllerTest.i: src/controllerTest.cpp.i
@@ -719,7 +197,7 @@ src/controllerTest.i: src/controllerTest.cpp.i
 
 # target to preprocess a source file
 src/controllerTest.cpp.i:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/controller_test.dir/build.make controller/CMakeFiles/controller_test.dir/src/controllerTest.cpp.i
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f controller/CMakeFiles/controller_test.dir/build.make controller/CMakeFiles/controller_test.dir/src/controllerTest.cpp.i
 .PHONY : src/controllerTest.cpp.i
 
 src/controllerTest.s: src/controllerTest.cpp.s
@@ -728,7 +206,7 @@ src/controllerTest.s: src/controllerTest.cpp.s
 
 # target to generate assembly for a file
 src/controllerTest.cpp.s:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f controller/CMakeFiles/controller_test.dir/build.make controller/CMakeFiles/controller_test.dir/src/controllerTest.cpp.s
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f controller/CMakeFiles/controller_test.dir/build.make controller/CMakeFiles/controller_test.dir/src/controllerTest.cpp.s
 .PHONY : src/controllerTest.cpp.s
 
 # Help Target
@@ -738,49 +216,13 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
+	@echo "... install/local"
+	@echo "... edit_cache"
+	@echo "... test"
 	@echo "... install"
 	@echo "... list_install_components"
-	@echo "... test"
-	@echo "... controller_test"
-	@echo "... tf_generate_messages_nodejs"
-	@echo "... tf_generate_messages_eus"
-	@echo "... install/local"
-	@echo "... pcl_ros_gencfg"
-	@echo "... dynamic_reconfigure_generate_messages_lisp"
-	@echo "... dynamic_reconfigure_generate_messages_py"
-	@echo "... pcl_msgs_generate_messages_py"
-	@echo "... dynamic_reconfigure_gencfg"
-	@echo "... nodelet_generate_messages_cpp"
-	@echo "... dynamic_reconfigure_generate_messages_eus"
-	@echo "... pcl_msgs_generate_messages_nodejs"
-	@echo "... nodelet_generate_messages_eus"
-	@echo "... pcl_msgs_generate_messages_eus"
-	@echo "... topic_tools_generate_messages_cpp"
-	@echo "... pcl_msgs_generate_messages_lisp"
-	@echo "... nodelet_generate_messages_py"
-	@echo "... bond_generate_messages_lisp"
-	@echo "... bond_generate_messages_cpp"
-	@echo "... bond_generate_messages_eus"
-	@echo "... nodelet_generate_messages_lisp"
-	@echo "... tf_generate_messages_py"
-	@echo "... topic_tools_generate_messages_py"
-	@echo "... nodelet_generate_messages_nodejs"
-	@echo "... bond_generate_messages_nodejs"
-	@echo "... bond_generate_messages_py"
-	@echo "... topic_tools_generate_messages_lisp"
-	@echo "... dynamic_reconfigure_generate_messages_nodejs"
-	@echo "... pcl_msgs_generate_messages_cpp"
-	@echo "... nodelet_topic_tools_gencfg"
-	@echo "... edit_cache"
-	@echo "... tf_generate_messages_lisp"
-	@echo "... dynamic_reconfigure_generate_messages_cpp"
-	@echo "... topic_tools_generate_messages_eus"
 	@echo "... rebuild_cache"
-	@echo "... topic_tools_generate_messages_nodejs"
-	@echo "... tf_generate_messages_cpp"
-	@echo "... src/PDcontroller.o"
-	@echo "... src/PDcontroller.i"
-	@echo "... src/PDcontroller.s"
+	@echo "... controller_test"
 	@echo "... src/controllerTest.o"
 	@echo "... src/controllerTest.i"
 	@echo "... src/controllerTest.s"
@@ -795,6 +237,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

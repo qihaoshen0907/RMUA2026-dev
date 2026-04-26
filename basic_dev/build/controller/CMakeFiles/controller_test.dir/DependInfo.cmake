@@ -4,8 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/controller/src/PDcontroller.cpp" "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/controller/CMakeFiles/controller_test.dir/src/PDcontroller.cpp.o"
-  "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/controller/src/controllerTest.cpp" "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/controller/CMakeFiles/controller_test.dir/src/controllerTest.cpp.o"
+  "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/controller/src/controllerTest.cpp" "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/controller/CMakeFiles/controller_test.dir/src/controllerTest.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -18,8 +17,8 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/controller/include"
-  "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/devel/include"
+  "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/controller/include"
+  "/home/bai/rmua2026/RMUA2026-dev/basic_dev/devel/include"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/usr/include/eigen3"

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src
+CMAKE_SOURCE_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build
+CMAKE_BINARY_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/build
 
 # Utility rule file for clean_test_results.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/bu
 include CMakeFiles/clean_test_results.dir/progress.make
 
 CMakeFiles/clean_test_results:
-	/usr/bin/python3 /opt/ros/noetic/share/catkin/cmake/test/remove_test_results.py /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/test_results
+	/usr/bin/python3 /opt/ros/noetic/share/catkin/cmake/test/remove_test_results.py /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/test_results
 
 clean_test_results: CMakeFiles/clean_test_results
 clean_test_results: CMakeFiles/clean_test_results.dir/build.make
@@ -71,6 +71,6 @@ CMakeFiles/clean_test_results.dir/clean:
 .PHONY : CMakeFiles/clean_test_results.dir/clean
 
 CMakeFiles/clean_test_results.dir/depend:
-	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/bai/rmua2026/RMUA2026-dev/basic_dev/src /home/bai/rmua2026/RMUA2026-dev/basic_dev/src /home/bai/rmua2026/RMUA2026-dev/basic_dev/build /home/bai/rmua2026/RMUA2026-dev/basic_dev/build /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/clean_test_results.dir/depend
 

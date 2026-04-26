@@ -1,4 +1,4 @@
-prefix=/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install
+prefix=/home/bai/rmua2026/RMUA2026-dev/basic_dev/install
 
 Name: controller_test
 Description: Description of controller_test
