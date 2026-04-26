@@ -59,9 +59,13 @@ rosrun basic_dev keyboard_teleop.py
 ```bash
 source /opt/ros/noetic/setup.bash
 source devel/setup.bash
-```
 
 ## 3. Subscribe Topic
 ```bash
 rostopic echo /airsim_node/drone_1/debug/pose_gt
+
+# Save historical positions into a .log file
+```bash
+rostopic echo /airsim_node/drone_1/debug/pose_gt > drone_pose.log
+```
 ```
