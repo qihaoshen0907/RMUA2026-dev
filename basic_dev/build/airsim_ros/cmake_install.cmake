@@ -1,8 +1,8 @@
-# Install script for directory: /home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros
+# Install script for directory: /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install")
+  set(CMAKE_INSTALL_PREFIX "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -39,78 +39,78 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/airsim_ros/msg" TYPE FILE FILES
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/msg/GimbalAngleEulerCmd.msg"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/msg/GimbalAngleQuatCmd.msg"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/msg/GPSYaw.msg"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/msg/VelCmd.msg"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/msg/VelCmdGroup.msg"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/msg/CarControls.msg"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/msg/CarState.msg"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/msg/Altimeter.msg"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/msg/Environment.msg"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/msg/PoseCmd.msg"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/msg/RotorPWM.msg"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/msg/GimbalAngleEulerCmd.msg"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/msg/GimbalAngleQuatCmd.msg"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/msg/GPSYaw.msg"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/msg/VelCmd.msg"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/msg/VelCmdGroup.msg"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/msg/CarControls.msg"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/msg/CarState.msg"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/msg/Altimeter.msg"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/msg/Environment.msg"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/msg/PoseCmd.msg"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/msg/RotorPWM.msg"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/airsim_ros/srv" TYPE FILE FILES
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/srv/SetGPSPosition.srv"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/srv/Takeoff.srv"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/srv/TakeoffGroup.srv"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/srv/Land.srv"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/srv/LandGroup.srv"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/srv/Reset.srv"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/srv/SetLocalPosition.srv"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/srv/DebugSphere.srv"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/srv/TriggerPort.srv"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/srv/SetGPSPosition.srv"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/srv/Takeoff.srv"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/srv/TakeoffGroup.srv"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/srv/Land.srv"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/srv/LandGroup.srv"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/srv/Reset.srv"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/srv/SetLocalPosition.srv"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/srv/DebugSphere.srv"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/srv/TriggerPort.srv"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/airsim_ros/cmake" TYPE FILE FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/airsim_ros/catkin_generated/installspace/airsim_ros-msg-paths.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/airsim_ros/cmake" TYPE FILE FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/airsim_ros/catkin_generated/installspace/airsim_ros-msg-paths.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/devel/include/airsim_ros")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/devel/include/airsim_ros")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/devel/share/roseus/ros/airsim_ros")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/devel/share/roseus/ros/airsim_ros")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/devel/share/common-lisp/ros/airsim_ros")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/devel/share/common-lisp/ros/airsim_ros")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/devel/share/gennodejs/ros/airsim_ros")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/devel/share/gennodejs/ros/airsim_ros")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/bai/rmua2026/RMUA2026-dev/basic_dev/devel/lib/python3/dist-packages/airsim_ros")
+  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/devel/lib/python3/dist-packages/airsim_ros")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/devel/lib/python3/dist-packages/airsim_ros")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/devel/lib/python3/dist-packages/airsim_ros")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/airsim_ros/catkin_generated/installspace/airsim_ros.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/airsim_ros/catkin_generated/installspace/airsim_ros.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/airsim_ros/cmake" TYPE FILE FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/airsim_ros/catkin_generated/installspace/airsim_ros-msg-extras.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/airsim_ros/cmake" TYPE FILE FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/airsim_ros/catkin_generated/installspace/airsim_ros-msg-extras.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/airsim_ros/cmake" TYPE FILE FILES
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/airsim_ros/catkin_generated/installspace/airsim_rosConfig.cmake"
-    "/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/airsim_ros/catkin_generated/installspace/airsim_rosConfig-version.cmake"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/airsim_ros/catkin_generated/installspace/airsim_rosConfig.cmake"
+    "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/airsim_ros/catkin_generated/installspace/airsim_rosConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/airsim_ros" TYPE FILE FILES "/home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/airsim_ros" TYPE FILE FILES "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/package.xml")
 endif()
 

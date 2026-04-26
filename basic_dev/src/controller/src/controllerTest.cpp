@@ -30,7 +30,6 @@ constexpr double kMinSpeed             = 0.30;
 constexpr double kVelGain              = 0.8;
 constexpr double kDensifySegLen        = 2.0;
 constexpr double kMaxCmdVx             = 2.0;
-<<<<<<< HEAD
 constexpr double kMaxCmdVy             = 0.35;  // 开启小幅横向速度，配合平滑控制减小过冲
 constexpr double kMaxCmdVz             = 1.0;
 constexpr double kYawRateP             = 1.5;
@@ -39,13 +38,6 @@ constexpr double kHeadingSlowCosFloor  = 0.15;
 constexpr double kXSpeedBoost          = 3.0;   // x 方向默认提速倍率
 constexpr double kAntiStallSpeed       = 0.55;  // 防停住最小前进速度
 constexpr double kSharpTurnMinSpeed    = 0.25;  // 大角度转弯时允许更慢
-=======
-constexpr double kMaxCmdVy             = 0.0;   // 仍然禁用横向速度
-constexpr double kMaxCmdVz             = 1.0;
-constexpr double kYawRateP             = 1.5;
-constexpr double kYawRateMax           = 1.0;
-constexpr double kHeadingSlowCosFloor  = 0.15;
->>>>>>> 450398c3926e198130100425feb98308593ed86d
 
 int s_vel_cmd_va = 1;
 double s_waypoint_reach_dist = kWaypointReachDist;
@@ -65,14 +57,11 @@ double s_max_cmd_vy = kMaxCmdVy;
 double s_max_cmd_vz = kMaxCmdVz;
 double s_yaw_rate_p = kYawRateP;
 double s_yaw_rate_max = kYawRateMax;
-<<<<<<< HEAD
 double s_x_speed_boost = kXSpeedBoost;
 
 // y 向控制平滑参数：降低扰动与过冲
 double s_prev_vy_cmd = 0.0;
 ros::Time s_prev_ctrl_stamp;
-=======
->>>>>>> 450398c3926e198130100425feb98308593ed86d
 
 template <typename T>
 T clampValue(T v, T lo, T hi)
@@ -96,29 +85,7 @@ bool isWaypointReached(const Eigen::Vector3d& cur_pos,
     const double xy_err = dxy.norm();
     const double z_err = std::abs(target.z() - cur_pos.z());
     return (xy_err <= xy_tol && z_err <= z_tol);
-<<<<<<< HEAD
-=======
 }
-
-bool shouldSkipWaypoint(const Eigen::Vector3d& cur_pos,
-                        const Eigen::Vector3d& target,
-                        double behind_x_tol,
-                        double xy_tol,
-                        double z_tol)
-{
-    // 适合当前这类“主要沿 x 正方向往前飞”的 spline
-    const double dx = target.x() - cur_pos.x();
-    const double dy = target.y() - cur_pos.y();
-    const double dz = target.z() - cur_pos.z();
-
-    const double xy_err = std::sqrt(dx * dx + dy * dy);
-    const double z_err = std::abs(dz);
-
-    // 如果这个点已经被“飞过去”了，并且横向/高度误差也还在可接受范围内，就跳过
-    return (dx < -behind_x_tol && xy_err <= xy_tol && z_err <= z_tol);
->>>>>>> 450398c3926e198130100425feb98308593ed86d
-}
-} // namespace
 
 // bool shouldSkipWaypoint(const Eigen::Vector3d& cur_pos,
 //                         const Eigen::Vector3d& target,
@@ -289,10 +256,7 @@ int main(int argc, char** argv)
     pn.param("max_cmd_vz", s_max_cmd_vz, kMaxCmdVz);
     pn.param("yaw_rate_p", s_yaw_rate_p, kYawRateP);
     pn.param("yaw_rate_max", s_yaw_rate_max, kYawRateMax);
-<<<<<<< HEAD
     pn.param("x_speed_boost", s_x_speed_boost, kXSpeedBoost);
-=======
->>>>>>> 450398c3926e198130100425feb98308593ed86d
 
     g_takeoff_client = n.serviceClient<airsim_ros::Takeoff>("/airsim_node/drone_1/takeoff");
     g_vel_publisher  = n.advertise<airsim_ros::VelCmd>("/airsim_node/drone_1/vel_body_cmd", 1);
@@ -311,11 +275,8 @@ int main(int argc, char** argv)
     ROS_INFO("waypoint tolerance: xy=%.2f z=%.2f | skip: behind_x=%.2f xy=%.2f z=%.2f",
              s_waypoint_reach_xy, s_waypoint_reach_z,
              s_waypoint_skip_behind_x, s_waypoint_skip_xy, s_waypoint_skip_z);
-<<<<<<< HEAD
     ROS_INFO("speed params: cruise=%.2f max_vx=%.2f vel_gain=%.2f x_speed_boost=%.2f",
              s_cruise_speed, s_max_cmd_vx, s_vel_gain, s_x_speed_boost);
-=======
->>>>>>> 450398c3926e198130100425feb98308593ed86d
 
     ros::Rate loop_rate(200);
     while (ros::ok())
@@ -527,20 +488,11 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
     Eigen::Vector3d target = spline_path[current_wp_idx];
     Eigen::Vector3d err = target - cur_pos;
 
-<<<<<<< HEAD
     double dx = err.x();
     double dy = err.y();
     double dz = err.z();
     double xy_err = std::sqrt(dx * dx + dy * dy);
     double dist = err.norm();
-=======
-    const double dx = err.x();
-    const double dy = err.y();
-    const double dz = err.z();
-
-    const double xy_err = std::sqrt(dx * dx + dy * dy);
-    const double dist = err.norm();
->>>>>>> 450398c3926e198130100425feb98308593ed86d
 
     // 最后一层保险：到范围内就停/切
     if (isWaypointReached(cur_pos, target, s_waypoint_reach_xy, s_waypoint_reach_z))
@@ -560,13 +512,13 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         }
     }
 
-<<<<<<< HEAD
     // 切换 waypoint 后立即刷新误差，避免偶发一拍零速导致“停住”
     dx = err.x();
     dy = err.y();
     dz = err.z();
     xy_err = std::sqrt(dx * dx + dy * dy);
     dist = err.norm();
+
     if (dist > 1e-6)
     {
         // 当前无人机到目标点的方向角
@@ -577,17 +529,18 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         const double yaw_abs = std::abs(yaw_err);
 
         // =====================================================
-        // 1. yawRate 对齐目标点方向
+        // 1. yawRate：强制机头对齐目标方向
         // =====================================================
-        // 目标：让无人机机头 psi 尽快对齐 desired_yaw
         // 你已确认方向没有反，所以保留负号
-        const double yaw_align_gain = 6.0;
-        const double yaw_rate_limit = std::max(s_yaw_rate_max, 4.0);
+        const double yaw_align_gain = 7.5;
+
+        // 不建议无限放大 yawRate，太大会抖或者过冲
+        const double yaw_rate_limit = std::min(std::max(s_yaw_rate_max, 4.0), 8.0);
 
         double yaw_rate_cmd = -yaw_align_gain * yaw_err;
 
-        // 小误差时不要一直抖动
-        const double yaw_deadzone = 0.03;
+        // 小角度死区，避免已经对齐后还左右抖
+        const double yaw_deadzone = 0.025;
 
         if (yaw_abs < yaw_deadzone)
         {
@@ -595,7 +548,7 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         }
         else
         {
-            // 只要还没对齐，就给一个最低转向速度，避免 yawRate 太软
+            // 没对齐时给最低转速，避免 yawRate 太软
             const double yaw_min_rate = 0.8;
 
             if (std::abs(yaw_rate_cmd) < yaw_min_rate)
@@ -609,7 +562,7 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
                                     yaw_rate_limit);
 
         // =====================================================
-        // 2. vx 继续前进，不因为转弯大幅降速
+        // 2. vx：严格根据 yaw 对齐程度决定能不能前进
         // =====================================================
         const double speed_boost_x = std::max(1.0, s_x_speed_boost);
         const double cruise_speed_x = std::max(0.6, s_cruise_speed * speed_boost_x);
@@ -620,19 +573,58 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
                                             s_min_speed,
                                             cruise_speed_x);
 
-        const bool far_from_wp = xy_err > (s_waypoint_reach_xy * 1.5);
-        const double anti_stall_speed = far_from_wp ? kAntiStallSpeed : 0.15;
+        double forward_speed = 0.0;
 
-        const double forward_speed = std::max(anti_stall_speed, base_speed);
+        // 严格对齐逻辑：
+        // yaw 偏差很大：只转向，不前进
+        // yaw 偏差中等：低速前进
+        // yaw 基本对齐：正常前进
+        const double yaw_stop_th = 0.45;   // 约 25.8 度
+        const double yaw_slow_th = 0.15;   // 约 8.6 度
+
+        if (yaw_abs > yaw_stop_th)
+        {
+            // 机头偏太多，先原地/低速转向
+            forward_speed = 0.0;
+        }
+        else if (yaw_abs > yaw_slow_th)
+        {
+            // 正在接近对齐，只允许慢速前进
+            const double t = (yaw_stop_th - yaw_abs) / (yaw_stop_th - yaw_slow_th);
+            const double slow_speed = 1.0;
+
+            forward_speed = clampValue(base_speed * t,
+                                    0.3,
+                                    slow_speed);
+        }
+        else
+        {
+            // 已经基本对齐，才允许正常速度
+            forward_speed = base_speed;
+        }
+
+        // 接近 waypoint 时也要降速，避免冲过头
+        const double near_wp_dist = 4.0;
+
+        if (xy_err < near_wp_dist)
+        {
+            const double dist_scale = clampValue(xy_err / near_wp_dist,
+                                                0.25,
+                                                1.0);
+
+            forward_speed *= dist_scale;
+        }
 
         // =====================================================
-        // 3. vy 只做很小的横向修正
+        // 3. vy：严格对齐模式下，尽量不要横移
         // =====================================================
+        // 如果你希望“机头对着目标飞”，vy 应该尽量小。
+        // 否则无人机虽然 yaw 对齐了，但身体还在侧滑。
         const double y_abs = std::abs(dy);
 
-        const double vy_deadzone = 0.25;
-        const double vy_gain = 0.08;
-        const double vy_hard_limit = 0.08;
+        const double vy_deadzone = 0.30;
+        const double vy_gain = 0.05;
+        const double vy_hard_limit = 0.05;
 
         const double vy_limit = std::min(std::max(0.0, s_max_cmd_vy),
                                         vy_hard_limit);
@@ -648,14 +640,13 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
                                     vy_limit);
         }
 
-        // yaw 没对齐时，减少横移干扰，让 yawRate 专心对齐目标点
-        const double vy_yaw_scale = clampValue(std::exp(-4.0 * yaw_abs),
-                                            0.02,
-                                            1.0);
+        // yaw 没对齐时，彻底压低横移
+        if (yaw_abs > yaw_slow_th)
+        {
+            target_vy = 0.0;
+        }
 
-        target_vy *= vy_yaw_scale;
-
-        const double vy_slew_rate = 0.15;
+        const double vy_slew_rate = 0.10;
         const double max_vy_step = vy_slew_rate * dt;
 
         const double delta_vy = clampValue(target_vy - s_prev_vy_cmd,
@@ -667,7 +658,19 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
                                     vy_limit);
 
         // =====================================================
-        // 4. 输出速度命令
+        // 4. vz：高度正常跟随，但也可以稍微柔和一点
+        // =====================================================
+        double vz_cmd = dz * 0.6;
+
+        // yaw 偏差很大时，不建议同时大幅爬升/下降
+        // 否则姿态控制压力会更大
+        if (yaw_abs > yaw_stop_th)
+        {
+            vz_cmd *= 0.5;
+        }
+
+        // =====================================================
+        // 5. 输出速度命令
         // =====================================================
         vel_cmd.vx = clampValue(forward_speed,
                                 0.0,
@@ -675,41 +678,10 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
 
         vel_cmd.vy = s_prev_vy_cmd;
 
-        vel_cmd.vz = clampValue(dz * 0.6,
+        vel_cmd.vz = clampValue(vz_cmd,
                                 -s_max_cmd_vz,
                                 s_max_cmd_vz);
     }
-=======
-    if (dist > 1e-6)
-    {
-        const double desired_yaw = std::atan2(err.y(), err.x());
-        const double yaw_err = wrapToPi(desired_yaw - psi);
-
-        // yaw 控制
-        vel_cmd.yawRate = clampValue(-s_yaw_rate_p * yaw_err,
-                                     -s_yaw_rate_max,
-                                     s_yaw_rate_max);
-
-        // 偏航误差大时降速，但不让它完全停死
-        const double base_speed = clampValue(s_vel_gain * dist, s_min_speed, s_cruise_speed);
-        double heading_scale = std::max(kHeadingSlowCosFloor, std::cos(std::abs(yaw_err)));
-
-        if (std::abs(yaw_err) > 0.6)
-            heading_scale *= 0.5;
-        if (std::abs(yaw_err) > 1.0)
-            heading_scale *= 0.5;
-
-        const double forward_speed = std::max(0.18, base_speed * heading_scale);
-
-        // 以前完全禁用 vy 会卡在点旁边；这里给一点点小的横向修正，但限制很小
-        const double small_vy = clampValue(-0.20 * dy, -0.25, 0.25);
-
-        vel_cmd.vx = clampValue(forward_speed, 0.0, s_max_cmd_vx);
-        vel_cmd.vy = (std::abs(dy) > s_waypoint_reach_xy * 0.6) ? small_vy : 0.0;
-        vel_cmd.vz = clampValue(dz * 0.6, -s_max_cmd_vz, s_max_cmd_vz);
-    }
-
->>>>>>> 450398c3926e198130100425feb98308593ed86d
     g_vel_publisher.publish(vel_cmd);
 
     ROS_INFO_THROTTLE(

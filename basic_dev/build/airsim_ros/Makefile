@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/src
+CMAKE_SOURCE_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/build
+CMAKE_BINARY_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,14 +137,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/CMakeFiles /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/airsim_ros/CMakeFiles/progress.marks
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/CMakeFiles 0
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/CMakeFiles /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/airsim_ros/CMakeFiles/progress.marks
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/clean
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/preinstall
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/preinstall
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/airsim_ros_genpy.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_genpy.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_genpy.dir/rule
 .PHONY : airsim_ros/CMakeFiles/airsim_ros_genpy.dir/rule
 
 # Convenience name for target.
@@ -179,12 +179,12 @@ airsim_ros_genpy: airsim_ros/CMakeFiles/airsim_ros_genpy.dir/rule
 
 # fast build rule for target.
 airsim_ros_genpy/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_genpy.dir/build.make airsim_ros/CMakeFiles/airsim_ros_genpy.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_genpy.dir/build.make airsim_ros/CMakeFiles/airsim_ros_genpy.dir/build
 .PHONY : airsim_ros_genpy/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/airsim_ros_generate_messages_py.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_generate_messages_py.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_generate_messages_py.dir/rule
 .PHONY : airsim_ros/CMakeFiles/airsim_ros_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -194,12 +194,12 @@ airsim_ros_generate_messages_py: airsim_ros/CMakeFiles/airsim_ros_generate_messa
 
 # fast build rule for target.
 airsim_ros_generate_messages_py/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/airsim_ros_generate_messages_py.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/airsim_ros_generate_messages_py.dir/build
 .PHONY : airsim_ros_generate_messages_py/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/airsim_ros_generate_messages_nodejs.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_generate_messages_nodejs.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_generate_messages_nodejs.dir/rule
 .PHONY : airsim_ros/CMakeFiles/airsim_ros_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -209,12 +209,12 @@ airsim_ros_generate_messages_nodejs: airsim_ros/CMakeFiles/airsim_ros_generate_m
 
 # fast build rule for target.
 airsim_ros_generate_messages_nodejs/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/airsim_ros_generate_messages_nodejs.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/airsim_ros_generate_messages_nodejs.dir/build
 .PHONY : airsim_ros_generate_messages_nodejs/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/airsim_ros_gencpp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_gencpp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_gencpp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/airsim_ros_gencpp.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ airsim_ros_gencpp: airsim_ros/CMakeFiles/airsim_ros_gencpp.dir/rule
 
 # fast build rule for target.
 airsim_ros_gencpp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_gencpp.dir/build.make airsim_ros/CMakeFiles/airsim_ros_gencpp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_gencpp.dir/build.make airsim_ros/CMakeFiles/airsim_ros_gencpp.dir/build
 .PHONY : airsim_ros_gencpp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/airsim_ros_generate_messages_eus.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_generate_messages_eus.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_generate_messages_eus.dir/rule
 .PHONY : airsim_ros/CMakeFiles/airsim_ros_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -239,12 +239,12 @@ airsim_ros_generate_messages_eus: airsim_ros/CMakeFiles/airsim_ros_generate_mess
 
 # fast build rule for target.
 airsim_ros_generate_messages_eus/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/airsim_ros_generate_messages_eus.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/airsim_ros_generate_messages_eus.dir/build
 .PHONY : airsim_ros_generate_messages_eus/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/airsim_ros_generate_messages_cpp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_generate_messages_cpp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_generate_messages_cpp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/airsim_ros_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -254,12 +254,12 @@ airsim_ros_generate_messages_cpp: airsim_ros/CMakeFiles/airsim_ros_generate_mess
 
 # fast build rule for target.
 airsim_ros_generate_messages_cpp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/airsim_ros_generate_messages_cpp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/airsim_ros_generate_messages_cpp.dir/build
 .PHONY : airsim_ros_generate_messages_cpp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetLocalPosition.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetLocalPosition.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetLocalPosition.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetLocalPosition.dir/rule
 
 # Convenience name for target.
@@ -269,12 +269,12 @@ _airsim_ros_generate_messages_check_deps_SetLocalPosition: airsim_ros/CMakeFiles
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_SetLocalPosition/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetLocalPosition.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetLocalPosition.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetLocalPosition.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetLocalPosition.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_SetLocalPosition/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Reset.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Reset.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Reset.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Reset.dir/rule
 
 # Convenience name for target.
@@ -284,12 +284,12 @@ _airsim_ros_generate_messages_check_deps_Reset: airsim_ros/CMakeFiles/_airsim_ro
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_Reset/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Reset.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Reset.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Reset.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Reset.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_Reset/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_LandGroup.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_LandGroup.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_LandGroup.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_LandGroup.dir/rule
 
 # Convenience name for target.
@@ -299,12 +299,12 @@ _airsim_ros_generate_messages_check_deps_LandGroup: airsim_ros/CMakeFiles/_airsi
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_LandGroup/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_LandGroup.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_LandGroup.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_LandGroup.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_LandGroup.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_LandGroup/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Land.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Land.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Land.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Land.dir/rule
 
 # Convenience name for target.
@@ -314,12 +314,12 @@ _airsim_ros_generate_messages_check_deps_Land: airsim_ros/CMakeFiles/_airsim_ros
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_Land/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Land.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Land.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Land.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Land.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_Land/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TakeoffGroup.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TakeoffGroup.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TakeoffGroup.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TakeoffGroup.dir/rule
 
 # Convenience name for target.
@@ -329,12 +329,12 @@ _airsim_ros_generate_messages_check_deps_TakeoffGroup: airsim_ros/CMakeFiles/_ai
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_TakeoffGroup/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TakeoffGroup.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TakeoffGroup.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TakeoffGroup.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TakeoffGroup.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_TakeoffGroup/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_RotorPWM.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_RotorPWM.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_RotorPWM.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_RotorPWM.dir/rule
 
 # Convenience name for target.
@@ -344,12 +344,12 @@ _airsim_ros_generate_messages_check_deps_RotorPWM: airsim_ros/CMakeFiles/_airsim
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_RotorPWM/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_RotorPWM.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_RotorPWM.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_RotorPWM.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_RotorPWM.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_RotorPWM/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Environment.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Environment.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Environment.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Environment.dir/rule
 
 # Convenience name for target.
@@ -359,12 +359,12 @@ _airsim_ros_generate_messages_check_deps_Environment: airsim_ros/CMakeFiles/_air
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_Environment/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Environment.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Environment.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Environment.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Environment.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_Environment/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_PoseCmd.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_PoseCmd.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_PoseCmd.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_PoseCmd.dir/rule
 
 # Convenience name for target.
@@ -374,12 +374,12 @@ _airsim_ros_generate_messages_check_deps_PoseCmd: airsim_ros/CMakeFiles/_airsim_
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_PoseCmd/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_PoseCmd.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_PoseCmd.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_PoseCmd.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_PoseCmd.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_PoseCmd/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarState.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarState.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarState.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarState.dir/rule
 
 # Convenience name for target.
@@ -389,12 +389,12 @@ _airsim_ros_generate_messages_check_deps_CarState: airsim_ros/CMakeFiles/_airsim
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_CarState/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarState.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarState.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarState.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarState.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_CarState/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleQuatCmd.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleQuatCmd.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleQuatCmd.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleQuatCmd.dir/rule
 
 # Convenience name for target.
@@ -404,12 +404,12 @@ _airsim_ros_generate_messages_check_deps_GimbalAngleQuatCmd: airsim_ros/CMakeFil
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_GimbalAngleQuatCmd/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleQuatCmd.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleQuatCmd.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleQuatCmd.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleQuatCmd.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_GimbalAngleQuatCmd/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/airsim_ros_generate_messages.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_generate_messages.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_generate_messages.dir/rule
 .PHONY : airsim_ros/CMakeFiles/airsim_ros_generate_messages.dir/rule
 
 # Convenience name for target.
@@ -419,12 +419,12 @@ airsim_ros_generate_messages: airsim_ros/CMakeFiles/airsim_ros_generate_messages
 
 # fast build rule for target.
 airsim_ros_generate_messages/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_generate_messages.dir/build.make airsim_ros/CMakeFiles/airsim_ros_generate_messages.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_generate_messages.dir/build.make airsim_ros/CMakeFiles/airsim_ros_generate_messages.dir/build
 .PHONY : airsim_ros_generate_messages/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/actionlib_generate_messages_py.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_generate_messages_py.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_generate_messages_py.dir/rule
 .PHONY : airsim_ros/CMakeFiles/actionlib_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -434,12 +434,12 @@ actionlib_generate_messages_py: airsim_ros/CMakeFiles/actionlib_generate_message
 
 # fast build rule for target.
 actionlib_generate_messages_py/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/actionlib_generate_messages_py.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/actionlib_generate_messages_py.dir/build
 .PHONY : actionlib_generate_messages_py/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
 .PHONY : airsim_ros/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -449,12 +449,12 @@ actionlib_generate_messages_nodejs: airsim_ros/CMakeFiles/actionlib_generate_mes
 
 # fast build rule for target.
 actionlib_generate_messages_nodejs/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
 .PHONY : actionlib_generate_messages_nodejs/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/roscpp_generate_messages_py.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/roscpp_generate_messages_py.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/roscpp_generate_messages_py.dir/rule
 .PHONY : airsim_ros/CMakeFiles/roscpp_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -464,12 +464,12 @@ roscpp_generate_messages_py: airsim_ros/CMakeFiles/roscpp_generate_messages_py.d
 
 # fast build rule for target.
 roscpp_generate_messages_py/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/roscpp_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/roscpp_generate_messages_py.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/roscpp_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/roscpp_generate_messages_py.dir/build
 .PHONY : roscpp_generate_messages_py/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GPSYaw.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GPSYaw.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GPSYaw.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GPSYaw.dir/rule
 
 # Convenience name for target.
@@ -479,12 +479,12 @@ _airsim_ros_generate_messages_check_deps_GPSYaw: airsim_ros/CMakeFiles/_airsim_r
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_GPSYaw/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GPSYaw.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GPSYaw.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GPSYaw.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GPSYaw.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_GPSYaw/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
 .PHONY : airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -494,12 +494,12 @@ actionlib_msgs_generate_messages_py: airsim_ros/CMakeFiles/actionlib_msgs_genera
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_py/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
 .PHONY : actionlib_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/airsim_ros_geneus.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_geneus.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_geneus.dir/rule
 .PHONY : airsim_ros/CMakeFiles/airsim_ros_geneus.dir/rule
 
 # Convenience name for target.
@@ -509,12 +509,12 @@ airsim_ros_geneus: airsim_ros/CMakeFiles/airsim_ros_geneus.dir/rule
 
 # fast build rule for target.
 airsim_ros_geneus/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_geneus.dir/build.make airsim_ros/CMakeFiles/airsim_ros_geneus.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_geneus.dir/build.make airsim_ros/CMakeFiles/airsim_ros_geneus.dir/build
 .PHONY : airsim_ros_geneus/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Altimeter.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Altimeter.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Altimeter.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Altimeter.dir/rule
 
 # Convenience name for target.
@@ -524,12 +524,12 @@ _airsim_ros_generate_messages_check_deps_Altimeter: airsim_ros/CMakeFiles/_airsi
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_Altimeter/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Altimeter.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Altimeter.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Altimeter.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Altimeter.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_Altimeter/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -539,12 +539,12 @@ actionlib_generate_messages_cpp: airsim_ros/CMakeFiles/actionlib_generate_messag
 
 # fast build rule for target.
 actionlib_generate_messages_cpp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/build
 .PHONY : actionlib_generate_messages_cpp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -554,12 +554,12 @@ rosgraph_msgs_generate_messages_lisp: airsim_ros/CMakeFiles/rosgraph_msgs_genera
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_lisp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
 .PHONY : airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -569,12 +569,12 @@ actionlib_msgs_generate_messages_eus: airsim_ros/CMakeFiles/actionlib_msgs_gener
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_eus/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
 .PHONY : actionlib_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
 .PHONY : airsim_ros/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -584,12 +584,12 @@ nav_msgs_generate_messages_eus: airsim_ros/CMakeFiles/nav_msgs_generate_messages
 
 # fast build rule for target.
 nav_msgs_generate_messages_eus/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
 .PHONY : nav_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 .PHONY : airsim_ros/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -599,12 +599,12 @@ std_msgs_generate_messages_py: airsim_ros/CMakeFiles/std_msgs_generate_messages_
 
 # fast build rule for target.
 std_msgs_generate_messages_py/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/std_msgs_generate_messages_py.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -614,12 +614,12 @@ nav_msgs_generate_messages_cpp: airsim_ros/CMakeFiles/nav_msgs_generate_messages
 
 # fast build rule for target.
 nav_msgs_generate_messages_cpp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build
 .PHONY : nav_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_catkin_empty_exported_target.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_catkin_empty_exported_target.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_catkin_empty_exported_target.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_catkin_empty_exported_target.dir/rule
 
 # Convenience name for target.
@@ -629,12 +629,12 @@ _catkin_empty_exported_target: airsim_ros/CMakeFiles/_catkin_empty_exported_targ
 
 # fast build rule for target.
 _catkin_empty_exported_target/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_catkin_empty_exported_target.dir/build.make airsim_ros/CMakeFiles/_catkin_empty_exported_target.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_catkin_empty_exported_target.dir/build.make airsim_ros/CMakeFiles/_catkin_empty_exported_target.dir/build
 .PHONY : _catkin_empty_exported_target/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -644,12 +644,12 @@ roscpp_generate_messages_lisp: airsim_ros/CMakeFiles/roscpp_generate_messages_li
 
 # fast build rule for target.
 roscpp_generate_messages_lisp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/roscpp_generate_messages_lisp.dir/build
 .PHONY : roscpp_generate_messages_lisp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetGPSPosition.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetGPSPosition.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetGPSPosition.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetGPSPosition.dir/rule
 
 # Convenience name for target.
@@ -659,12 +659,12 @@ _airsim_ros_generate_messages_check_deps_SetGPSPosition: airsim_ros/CMakeFiles/_
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_SetGPSPosition/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetGPSPosition.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetGPSPosition.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetGPSPosition.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_SetGPSPosition.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_SetGPSPosition/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/actionlib_generate_messages_lisp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -674,12 +674,12 @@ actionlib_generate_messages_lisp: airsim_ros/CMakeFiles/actionlib_generate_messa
 
 # fast build rule for target.
 actionlib_generate_messages_lisp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/actionlib_generate_messages_lisp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/actionlib_generate_messages_lisp.dir/build
 .PHONY : actionlib_generate_messages_lisp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/airsim_ros_generate_messages_lisp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_generate_messages_lisp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_generate_messages_lisp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/airsim_ros_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -689,12 +689,12 @@ airsim_ros_generate_messages_lisp: airsim_ros/CMakeFiles/airsim_ros_generate_mes
 
 # fast build rule for target.
 airsim_ros_generate_messages_lisp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/airsim_ros_generate_messages_lisp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/airsim_ros_generate_messages_lisp.dir/build
 .PHONY : airsim_ros_generate_messages_lisp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TriggerPort.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TriggerPort.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TriggerPort.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TriggerPort.dir/rule
 
 # Convenience name for target.
@@ -704,12 +704,12 @@ _airsim_ros_generate_messages_check_deps_TriggerPort: airsim_ros/CMakeFiles/_air
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_TriggerPort/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TriggerPort.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TriggerPort.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TriggerPort.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_TriggerPort.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_TriggerPort/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmdGroup.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmdGroup.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmdGroup.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmdGroup.dir/rule
 
 # Convenience name for target.
@@ -719,12 +719,12 @@ _airsim_ros_generate_messages_check_deps_VelCmdGroup: airsim_ros/CMakeFiles/_air
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_VelCmdGroup/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmdGroup.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmdGroup.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmdGroup.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmdGroup.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_VelCmdGroup/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -734,12 +734,12 @@ actionlib_msgs_generate_messages_cpp: airsim_ros/CMakeFiles/actionlib_msgs_gener
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_cpp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
 .PHONY : actionlib_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -749,12 +749,12 @@ std_msgs_generate_messages_lisp: airsim_ros/CMakeFiles/std_msgs_generate_message
 
 # fast build rule for target.
 std_msgs_generate_messages_lisp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
 .PHONY : std_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/nav_msgs_generate_messages_py.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
 .PHONY : airsim_ros/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -764,12 +764,12 @@ nav_msgs_generate_messages_py: airsim_ros/CMakeFiles/nav_msgs_generate_messages_
 
 # fast build rule for target.
 nav_msgs_generate_messages_py/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/nav_msgs_generate_messages_py.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/nav_msgs_generate_messages_py.dir/build
 .PHONY : nav_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
 .PHONY : airsim_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -779,12 +779,12 @@ geometry_msgs_generate_messages_py: airsim_ros/CMakeFiles/geometry_msgs_generate
 
 # fast build rule for target.
 geometry_msgs_generate_messages_py/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
 .PHONY : geometry_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
 .PHONY : airsim_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -794,12 +794,12 @@ tf2_msgs_generate_messages_eus: airsim_ros/CMakeFiles/tf2_msgs_generate_messages
 
 # fast build rule for target.
 tf2_msgs_generate_messages_eus/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build
 .PHONY : tf2_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
 .PHONY : airsim_ros/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -809,12 +809,12 @@ sensor_msgs_generate_messages_py: airsim_ros/CMakeFiles/sensor_msgs_generate_mes
 
 # fast build rule for target.
 sensor_msgs_generate_messages_py/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
 .PHONY : sensor_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 .PHONY : airsim_ros/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -824,12 +824,12 @@ std_msgs_generate_messages_nodejs: airsim_ros/CMakeFiles/std_msgs_generate_messa
 
 # fast build rule for target.
 std_msgs_generate_messages_nodejs/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
 .PHONY : std_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
 .PHONY : airsim_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -839,12 +839,12 @@ geometry_msgs_generate_messages_eus: airsim_ros/CMakeFiles/geometry_msgs_generat
 
 # fast build rule for target.
 geometry_msgs_generate_messages_eus/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
 .PHONY : geometry_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -854,12 +854,12 @@ roscpp_generate_messages_cpp: airsim_ros/CMakeFiles/roscpp_generate_messages_cpp
 
 # fast build rule for target.
 roscpp_generate_messages_cpp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/roscpp_generate_messages_cpp.dir/build
 .PHONY : roscpp_generate_messages_cpp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -869,12 +869,12 @@ nav_msgs_generate_messages_lisp: airsim_ros/CMakeFiles/nav_msgs_generate_message
 
 # fast build rule for target.
 nav_msgs_generate_messages_lisp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
 .PHONY : nav_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -884,12 +884,12 @@ geometry_msgs_generate_messages_cpp: airsim_ros/CMakeFiles/geometry_msgs_generat
 
 # fast build rule for target.
 geometry_msgs_generate_messages_cpp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
 .PHONY : geometry_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
 .PHONY : airsim_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -899,12 +899,12 @@ tf2_msgs_generate_messages_py: airsim_ros/CMakeFiles/tf2_msgs_generate_messages_
 
 # fast build rule for target.
 tf2_msgs_generate_messages_py/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
 .PHONY : tf2_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
 .PHONY : airsim_ros/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -914,12 +914,12 @@ geometry_msgs_generate_messages_nodejs: airsim_ros/CMakeFiles/geometry_msgs_gene
 
 # fast build rule for target.
 geometry_msgs_generate_messages_nodejs/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
 .PHONY : geometry_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleEulerCmd.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleEulerCmd.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleEulerCmd.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleEulerCmd.dir/rule
 
 # Convenience name for target.
@@ -929,12 +929,12 @@ _airsim_ros_generate_messages_check_deps_GimbalAngleEulerCmd: airsim_ros/CMakeFi
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_GimbalAngleEulerCmd/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleEulerCmd.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleEulerCmd.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleEulerCmd.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_GimbalAngleEulerCmd.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_GimbalAngleEulerCmd/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -944,12 +944,12 @@ std_msgs_generate_messages_cpp: airsim_ros/CMakeFiles/std_msgs_generate_messages
 
 # fast build rule for target.
 std_msgs_generate_messages_cpp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
 .PHONY : std_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/airsim_ros_gennodejs.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_gennodejs.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_gennodejs.dir/rule
 .PHONY : airsim_ros/CMakeFiles/airsim_ros_gennodejs.dir/rule
 
 # Convenience name for target.
@@ -959,12 +959,12 @@ airsim_ros_gennodejs: airsim_ros/CMakeFiles/airsim_ros_gennodejs.dir/rule
 
 # fast build rule for target.
 airsim_ros_gennodejs/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_gennodejs.dir/build.make airsim_ros/CMakeFiles/airsim_ros_gennodejs.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_gennodejs.dir/build.make airsim_ros/CMakeFiles/airsim_ros_gennodejs.dir/build
 .PHONY : airsim_ros_gennodejs/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarControls.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarControls.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarControls.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarControls.dir/rule
 
 # Convenience name for target.
@@ -974,12 +974,12 @@ _airsim_ros_generate_messages_check_deps_CarControls: airsim_ros/CMakeFiles/_air
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_CarControls/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarControls.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarControls.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarControls.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_CarControls.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_CarControls/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -989,12 +989,12 @@ std_srvs_generate_messages_cpp: airsim_ros/CMakeFiles/std_srvs_generate_messages
 
 # fast build rule for target.
 std_srvs_generate_messages_cpp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_srvs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/std_srvs_generate_messages_cpp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_srvs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/std_srvs_generate_messages_cpp.dir/build
 .PHONY : std_srvs_generate_messages_cpp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -1004,12 +1004,12 @@ tf2_msgs_generate_messages_cpp: airsim_ros/CMakeFiles/tf2_msgs_generate_messages
 
 # fast build rule for target.
 tf2_msgs_generate_messages_cpp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build
 .PHONY : tf2_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/airsim_ros_genlisp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_genlisp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/airsim_ros_genlisp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/airsim_ros_genlisp.dir/rule
 
 # Convenience name for target.
@@ -1019,12 +1019,12 @@ airsim_ros_genlisp: airsim_ros/CMakeFiles/airsim_ros_genlisp.dir/rule
 
 # fast build rule for target.
 airsim_ros_genlisp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_genlisp.dir/build.make airsim_ros/CMakeFiles/airsim_ros_genlisp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/airsim_ros_genlisp.dir/build.make airsim_ros/CMakeFiles/airsim_ros_genlisp.dir/build
 .PHONY : airsim_ros_genlisp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/actionlib_generate_messages_eus.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_generate_messages_eus.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_generate_messages_eus.dir/rule
 .PHONY : airsim_ros/CMakeFiles/actionlib_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -1034,12 +1034,12 @@ actionlib_generate_messages_eus: airsim_ros/CMakeFiles/actionlib_generate_messag
 
 # fast build rule for target.
 actionlib_generate_messages_eus/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/actionlib_generate_messages_eus.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/actionlib_generate_messages_eus.dir/build
 .PHONY : actionlib_generate_messages_eus/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -1049,12 +1049,12 @@ rosgraph_msgs_generate_messages_cpp: airsim_ros/CMakeFiles/rosgraph_msgs_generat
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_cpp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1064,12 +1064,12 @@ uuid_msgs_generate_messages_lisp: airsim_ros/CMakeFiles/uuid_msgs_generate_messa
 
 # fast build rule for target.
 uuid_msgs_generate_messages_lisp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/build
 .PHONY : uuid_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
 .PHONY : airsim_ros/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1079,12 +1079,12 @@ roscpp_generate_messages_nodejs: airsim_ros/CMakeFiles/roscpp_generate_messages_
 
 # fast build rule for target.
 roscpp_generate_messages_nodejs/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
 .PHONY : roscpp_generate_messages_nodejs/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1094,12 +1094,12 @@ geometry_msgs_generate_messages_lisp: airsim_ros/CMakeFiles/geometry_msgs_genera
 
 # fast build rule for target.
 geometry_msgs_generate_messages_lisp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
 .PHONY : geometry_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
 .PHONY : airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1109,12 +1109,12 @@ actionlib_msgs_generate_messages_nodejs: airsim_ros/CMakeFiles/actionlib_msgs_ge
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_nodejs/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
 .PHONY : actionlib_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1124,12 +1124,12 @@ actionlib_msgs_generate_messages_lisp: airsim_ros/CMakeFiles/actionlib_msgs_gene
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_lisp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
 .PHONY : actionlib_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
 .PHONY : airsim_ros/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -1139,12 +1139,12 @@ std_msgs_generate_messages_eus: airsim_ros/CMakeFiles/std_msgs_generate_messages
 
 # fast build rule for target.
 std_msgs_generate_messages_eus/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/std_msgs_generate_messages_eus.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/std_msgs_generate_messages_eus.dir/build
 .PHONY : std_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 .PHONY : airsim_ros/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -1154,12 +1154,12 @@ roscpp_generate_messages_eus: airsim_ros/CMakeFiles/roscpp_generate_messages_eus
 
 # fast build rule for target.
 roscpp_generate_messages_eus/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/roscpp_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/roscpp_generate_messages_eus.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/roscpp_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/roscpp_generate_messages_eus.dir/build
 .PHONY : roscpp_generate_messages_eus/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -1169,12 +1169,12 @@ uuid_msgs_generate_messages_cpp: airsim_ros/CMakeFiles/uuid_msgs_generate_messag
 
 # fast build rule for target.
 uuid_msgs_generate_messages_cpp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/build
 .PHONY : uuid_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_eus.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_eus.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_eus.dir/rule
 .PHONY : airsim_ros/CMakeFiles/uuid_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -1184,12 +1184,12 @@ uuid_msgs_generate_messages_eus: airsim_ros/CMakeFiles/uuid_msgs_generate_messag
 
 # fast build rule for target.
 uuid_msgs_generate_messages_eus/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/uuid_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/uuid_msgs_generate_messages_eus.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/uuid_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/uuid_msgs_generate_messages_eus.dir/build
 .PHONY : uuid_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
 .PHONY : airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -1199,12 +1199,12 @@ rosgraph_msgs_generate_messages_py: airsim_ros/CMakeFiles/rosgraph_msgs_generate
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_py/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
 .PHONY : airsim_ros/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1214,12 +1214,12 @@ nav_msgs_generate_messages_nodejs: airsim_ros/CMakeFiles/nav_msgs_generate_messa
 
 # fast build rule for target.
 nav_msgs_generate_messages_nodejs/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
 .PHONY : nav_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -1229,12 +1229,12 @@ sensor_msgs_generate_messages_cpp: airsim_ros/CMakeFiles/sensor_msgs_generate_me
 
 # fast build rule for target.
 sensor_msgs_generate_messages_cpp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
 .PHONY : sensor_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Takeoff.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Takeoff.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Takeoff.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Takeoff.dir/rule
 
 # Convenience name for target.
@@ -1244,12 +1244,12 @@ _airsim_ros_generate_messages_check_deps_Takeoff: airsim_ros/CMakeFiles/_airsim_
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_Takeoff/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Takeoff.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Takeoff.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Takeoff.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_Takeoff.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_Takeoff/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
 .PHONY : airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -1259,12 +1259,12 @@ rosgraph_msgs_generate_messages_eus: airsim_ros/CMakeFiles/rosgraph_msgs_generat
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_eus/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
 .PHONY : rosgraph_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/std_srvs_generate_messages_py.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_srvs_generate_messages_py.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_srvs_generate_messages_py.dir/rule
 .PHONY : airsim_ros/CMakeFiles/std_srvs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -1274,12 +1274,12 @@ std_srvs_generate_messages_py: airsim_ros/CMakeFiles/std_srvs_generate_messages_
 
 # fast build rule for target.
 std_srvs_generate_messages_py/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_srvs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/std_srvs_generate_messages_py.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_srvs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/std_srvs_generate_messages_py.dir/build
 .PHONY : std_srvs_generate_messages_py/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1289,12 +1289,12 @@ geographic_msgs_generate_messages_lisp: airsim_ros/CMakeFiles/geographic_msgs_ge
 
 # fast build rule for target.
 geographic_msgs_generate_messages_lisp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/build
 .PHONY : geographic_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
 .PHONY : airsim_ros/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -1304,12 +1304,12 @@ sensor_msgs_generate_messages_eus: airsim_ros/CMakeFiles/sensor_msgs_generate_me
 
 # fast build rule for target.
 sensor_msgs_generate_messages_eus/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
 .PHONY : sensor_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1319,12 +1319,12 @@ sensor_msgs_generate_messages_lisp: airsim_ros/CMakeFiles/sensor_msgs_generate_m
 
 # fast build rule for target.
 sensor_msgs_generate_messages_lisp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
 .PHONY : sensor_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_py.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_py.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_py.dir/rule
 .PHONY : airsim_ros/CMakeFiles/geographic_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -1334,12 +1334,12 @@ geographic_msgs_generate_messages_py: airsim_ros/CMakeFiles/geographic_msgs_gene
 
 # fast build rule for target.
 geographic_msgs_generate_messages_py/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geographic_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/geographic_msgs_generate_messages_py.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geographic_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/geographic_msgs_generate_messages_py.dir/build
 .PHONY : geographic_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/rule
 
 # Convenience name for target.
@@ -1349,12 +1349,12 @@ _airsim_ros_generate_messages_check_deps_VelCmd: airsim_ros/CMakeFiles/_airsim_r
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_VelCmd/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_VelCmd/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
 .PHONY : airsim_ros/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1364,12 +1364,12 @@ sensor_msgs_generate_messages_nodejs: airsim_ros/CMakeFiles/sensor_msgs_generate
 
 # fast build rule for target.
 sensor_msgs_generate_messages_nodejs/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
 .PHONY : sensor_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
 .PHONY : airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1379,12 +1379,12 @@ rosgraph_msgs_generate_messages_nodejs: airsim_ros/CMakeFiles/rosgraph_msgs_gene
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_nodejs/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
 .PHONY : rosgraph_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_cpp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_cpp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_cpp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/geographic_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -1394,12 +1394,12 @@ geographic_msgs_generate_messages_cpp: airsim_ros/CMakeFiles/geographic_msgs_gen
 
 # fast build rule for target.
 geographic_msgs_generate_messages_cpp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geographic_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/geographic_msgs_generate_messages_cpp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geographic_msgs_generate_messages_cpp.dir/build.make airsim_ros/CMakeFiles/geographic_msgs_generate_messages_cpp.dir/build
 .PHONY : geographic_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_eus.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_eus.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_eus.dir/rule
 .PHONY : airsim_ros/CMakeFiles/geographic_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -1409,12 +1409,12 @@ geographic_msgs_generate_messages_eus: airsim_ros/CMakeFiles/geographic_msgs_gen
 
 # fast build rule for target.
 geographic_msgs_generate_messages_eus/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geographic_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/geographic_msgs_generate_messages_eus.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geographic_msgs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/geographic_msgs_generate_messages_eus.dir/build
 .PHONY : geographic_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_nodejs.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/geographic_msgs_generate_messages_nodejs.dir/rule
 .PHONY : airsim_ros/CMakeFiles/geographic_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1424,12 +1424,12 @@ geographic_msgs_generate_messages_nodejs: airsim_ros/CMakeFiles/geographic_msgs_
 
 # fast build rule for target.
 geographic_msgs_generate_messages_nodejs/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geographic_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/geographic_msgs_generate_messages_nodejs.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/geographic_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/geographic_msgs_generate_messages_nodejs.dir/build
 .PHONY : geographic_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1439,12 +1439,12 @@ std_srvs_generate_messages_lisp: airsim_ros/CMakeFiles/std_srvs_generate_message
 
 # fast build rule for target.
 std_srvs_generate_messages_lisp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_srvs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/std_srvs_generate_messages_lisp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_srvs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/std_srvs_generate_messages_lisp.dir/build
 .PHONY : std_srvs_generate_messages_lisp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/rule
 .PHONY : airsim_ros/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1454,12 +1454,12 @@ uuid_msgs_generate_messages_nodejs: airsim_ros/CMakeFiles/uuid_msgs_generate_mes
 
 # fast build rule for target.
 uuid_msgs_generate_messages_nodejs/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/build
 .PHONY : uuid_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_DebugSphere.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_DebugSphere.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_DebugSphere.dir/rule
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_DebugSphere.dir/rule
 
 # Convenience name for target.
@@ -1469,12 +1469,12 @@ _airsim_ros_generate_messages_check_deps_DebugSphere: airsim_ros/CMakeFiles/_air
 
 # fast build rule for target.
 _airsim_ros_generate_messages_check_deps_DebugSphere/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_DebugSphere.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_DebugSphere.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_DebugSphere.dir/build.make airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_DebugSphere.dir/build
 .PHONY : _airsim_ros_generate_messages_check_deps_DebugSphere/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_py.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_py.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/uuid_msgs_generate_messages_py.dir/rule
 .PHONY : airsim_ros/CMakeFiles/uuid_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -1484,12 +1484,12 @@ uuid_msgs_generate_messages_py: airsim_ros/CMakeFiles/uuid_msgs_generate_message
 
 # fast build rule for target.
 uuid_msgs_generate_messages_py/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/uuid_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/uuid_msgs_generate_messages_py.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/uuid_msgs_generate_messages_py.dir/build.make airsim_ros/CMakeFiles/uuid_msgs_generate_messages_py.dir/build
 .PHONY : uuid_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/rule
 .PHONY : airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -1499,12 +1499,12 @@ std_srvs_generate_messages_eus: airsim_ros/CMakeFiles/std_srvs_generate_messages
 
 # fast build rule for target.
 std_srvs_generate_messages_eus/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/build.make airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/build
 .PHONY : std_srvs_generate_messages_eus/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule
 .PHONY : airsim_ros/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1514,12 +1514,12 @@ std_srvs_generate_messages_nodejs: airsim_ros/CMakeFiles/std_srvs_generate_messa
 
 # fast build rule for target.
 std_srvs_generate_messages_nodejs/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_srvs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/std_srvs_generate_messages_nodejs.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/std_srvs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/std_srvs_generate_messages_nodejs.dir/build
 .PHONY : std_srvs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
 .PHONY : airsim_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -1529,12 +1529,12 @@ tf2_msgs_generate_messages_lisp: airsim_ros/CMakeFiles/tf2_msgs_generate_message
 
 # fast build rule for target.
 tf2_msgs_generate_messages_lisp/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make airsim_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build
 .PHONY : tf2_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f CMakeFiles/Makefile2 airsim_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
 .PHONY : airsim_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -1544,7 +1544,7 @@ tf2_msgs_generate_messages_nodejs: airsim_ros/CMakeFiles/tf2_msgs_generate_messa
 
 # fast build rule for target.
 tf2_msgs_generate_messages_nodejs/fast:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(MAKE) -f airsim_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build.make airsim_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build
 .PHONY : tf2_msgs_generate_messages_nodejs/fast
 
 # Help Target
@@ -1663,6 +1663,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

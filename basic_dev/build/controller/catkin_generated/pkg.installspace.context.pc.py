@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "message_runtime;roscpp;std_msgs".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "controller_test"
-PROJECT_SPACE_DIR = "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install"
+PROJECT_SPACE_DIR = "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install"
 PROJECT_VERSION = "0.0.0"

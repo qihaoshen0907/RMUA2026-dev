@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/bai/rmua2026/RMUA2026-dev/basic_dev/devel/lib/imu_gps_odometry/imu_gps_odometry"
-  "/home/bai/rmua2026/RMUA2026-dev/basic_dev/devel/lib/imu_gps_odometry/imu_gps_odometry.pdb"
+  "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/devel/lib/imu_gps_odometry/imu_gps_odometry"
+  "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/devel/lib/imu_gps_odometry/imu_gps_odometry.pdb"
   "CMakeFiles/imu_gps_odometry.dir/src/eskf.cpp.o"
   "CMakeFiles/imu_gps_odometry.dir/src/imu_gps_odometry.cpp.o"
 )

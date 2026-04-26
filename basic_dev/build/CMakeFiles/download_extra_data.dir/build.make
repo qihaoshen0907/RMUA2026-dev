@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/src
+CMAKE_SOURCE_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/build
+CMAKE_BINARY_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build
 
 # Utility rule file for download_extra_data.
 
@@ -67,6 +67,6 @@ CMakeFiles/download_extra_data.dir/clean:
 .PHONY : CMakeFiles/download_extra_data.dir/clean
 
 CMakeFiles/download_extra_data.dir/depend:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/bai/rmua2026/RMUA2026-dev/basic_dev/src /home/bai/rmua2026/RMUA2026-dev/basic_dev/src /home/bai/rmua2026/RMUA2026-dev/basic_dev/build /home/bai/rmua2026/RMUA2026-dev/basic_dev/build /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/CMakeFiles/download_extra_data.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/CMakeFiles/download_extra_data.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/download_extra_data.dir/depend
 

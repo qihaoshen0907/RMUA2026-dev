@@ -15,7 +15,7 @@
 #include <ros/builtin_message_traits.h>
 #include <ros/message_operations.h>
 
-#include <std_msgs/Header.h>
+#include <geometry_msgs/Twist.h>
 
 namespace airsim_ros
 {
@@ -25,47 +25,17 @@ struct VelCmd_
   typedef VelCmd_<ContainerAllocator> Type;
 
   VelCmd_()
-    : header()
-    , vx(0.0)
-    , vy(0.0)
-    , vz(0.0)
-    , yawRate(0.0)
-    , va(0)
-    , stop(0)  {
+    : twist()  {
     }
   VelCmd_(const ContainerAllocator& _alloc)
-    : header(_alloc)
-    , vx(0.0)
-    , vy(0.0)
-    , vz(0.0)
-    , yawRate(0.0)
-    , va(0)
-    , stop(0)  {
+    : twist(_alloc)  {
   (void)_alloc;
     }
 
 
 
-   typedef  ::std_msgs::Header_<ContainerAllocator>  _header_type;
-  _header_type header;
-
-   typedef double _vx_type;
-  _vx_type vx;
-
-   typedef double _vy_type;
-  _vy_type vy;
-
-   typedef double _vz_type;
-  _vz_type vz;
-
-   typedef double _yawRate_type;
-  _yawRate_type yawRate;
-
-   typedef uint8_t _va_type;
-  _va_type va;
-
-   typedef uint8_t _stop_type;
-  _stop_type stop;
+   typedef  ::geometry_msgs::Twist_<ContainerAllocator>  _twist_type;
+  _twist_type twist;
 
 
 
@@ -96,13 +66,7 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::airsim_ros::VelCmd_<ContainerAllocator1> & lhs, const ::airsim_ros::VelCmd_<ContainerAllocator2> & rhs)
 {
-  return lhs.header == rhs.header &&
-    lhs.vx == rhs.vx &&
-    lhs.vy == rhs.vy &&
-    lhs.vz == rhs.vz &&
-    lhs.yawRate == rhs.yawRate &&
-    lhs.va == rhs.va &&
-    lhs.stop == rhs.stop;
+  return lhs.twist == rhs.twist;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -135,22 +99,22 @@ struct IsMessage< ::airsim_ros::VelCmd_<ContainerAllocator> const>
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::airsim_ros::VelCmd_<ContainerAllocator> >
-  : FalseType
+  : TrueType
   { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::airsim_ros::VelCmd_<ContainerAllocator> const>
-  : FalseType
+  : TrueType
   { };
 
 template <class ContainerAllocator>
 struct HasHeader< ::airsim_ros::VelCmd_<ContainerAllocator> >
-  : TrueType
+  : FalseType
   { };
 
 template <class ContainerAllocator>
 struct HasHeader< ::airsim_ros::VelCmd_<ContainerAllocator> const>
-  : TrueType
+  : FalseType
   { };
 
 
@@ -159,12 +123,12 @@ struct MD5Sum< ::airsim_ros::VelCmd_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "1a888a503939ba521aed68feee8eab6d";
+    return "a787b2802160dcc7fe02d089e10afe56";
   }
 
   static const char* value(const ::airsim_ros::VelCmd_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x1a888a503939ba52ULL;
-  static const uint64_t static_value2 = 0x1aed68feee8eab6dULL;
+  static const uint64_t static_value1 = 0xa787b2802160dcc7ULL;
+  static const uint64_t static_value2 = 0xfe02d089e10afe56ULL;
 };
 
 template<class ContainerAllocator>
@@ -183,30 +147,26 @@ struct Definition< ::airsim_ros::VelCmd_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "# Official RMUA simulator definition (see IntelligentUAVChampionshipSimulator/.../VelCmdmsg/VelCmd.msg)\n"
-"std_msgs/Header header\n"
-"float64 vx\n"
-"float64 vy\n"
-"float64 vz\n"
-"float64 yawRate\n"
-"uint8 va\n"
-"uint8 stop\n"
+    return "geometry_msgs/Twist twist\n"
+"# string vehicle_name\n"
+"================================================================================\n"
+"MSG: geometry_msgs/Twist\n"
+"# This expresses velocity in free space broken into its linear and angular parts.\n"
+"Vector3 linear\n"
+"Vector3 angular\n"
 "\n"
 "================================================================================\n"
-"MSG: std_msgs/Header\n"
-"# Standard metadata for higher-level stamped data types.\n"
-"# This is generally used to communicate timestamped data \n"
-"# in a particular coordinate frame.\n"
-"# \n"
-"# sequence ID: consecutively increasing ID \n"
-"uint32 seq\n"
-"#Two-integer timestamp that is expressed as:\n"
-"# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')\n"
-"# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')\n"
-"# time-handling sugar is provided by the client library\n"
-"time stamp\n"
-"#Frame this data is associated with\n"
-"string frame_id\n"
+"MSG: geometry_msgs/Vector3\n"
+"# This represents a vector in free space. \n"
+"# It is only meant to represent a direction. Therefore, it does not\n"
+"# make sense to apply a translation to it (e.g., when applying a \n"
+"# generic rigid transformation to a Vector3, tf2 will only apply the\n"
+"# rotation). If you want your data to be translatable too, use the\n"
+"# geometry_msgs/Point message instead.\n"
+"\n"
+"float64 x\n"
+"float64 y\n"
+"float64 z\n"
 ;
   }
 
@@ -225,13 +185,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.header);
-      stream.next(m.vx);
-      stream.next(m.vy);
-      stream.next(m.vz);
-      stream.next(m.yawRate);
-      stream.next(m.va);
-      stream.next(m.stop);
+      stream.next(m.twist);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -252,32 +206,8 @@ struct Printer< ::airsim_ros::VelCmd_<ContainerAllocator> >
   {
     if (false || !indent.empty())
       s << std::endl;
-    s << indent << "header: ";
-    Printer< ::std_msgs::Header_<ContainerAllocator> >::stream(s, indent + "  ", v.header);
-    if (true || !indent.empty())
-      s << std::endl;
-    s << indent << "vx: ";
-    Printer<double>::stream(s, indent + "  ", v.vx);
-    if (true || !indent.empty())
-      s << std::endl;
-    s << indent << "vy: ";
-    Printer<double>::stream(s, indent + "  ", v.vy);
-    if (true || !indent.empty())
-      s << std::endl;
-    s << indent << "vz: ";
-    Printer<double>::stream(s, indent + "  ", v.vz);
-    if (true || !indent.empty())
-      s << std::endl;
-    s << indent << "yawRate: ";
-    Printer<double>::stream(s, indent + "  ", v.yawRate);
-    if (true || !indent.empty())
-      s << std::endl;
-    s << indent << "va: ";
-    Printer<uint8_t>::stream(s, indent + "  ", v.va);
-    if (true || !indent.empty())
-      s << std::endl;
-    s << indent << "stop: ";
-    Printer<uint8_t>::stream(s, indent + "  ", v.stop);
+    s << indent << "twist: ";
+    Printer< ::geometry_msgs::Twist_<ContainerAllocator> >::stream(s, indent + "  ", v.twist);
   }
 };
 

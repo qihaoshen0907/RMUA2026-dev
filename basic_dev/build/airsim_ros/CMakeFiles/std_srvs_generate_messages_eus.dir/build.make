@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/src
+CMAKE_SOURCE_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/build
+CMAKE_BINARY_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build
 
 # Utility rule file for std_srvs_generate_messages_eus.
 
@@ -63,10 +63,10 @@ airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/build: std_srvs_generat
 .PHONY : airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/build
 
 airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/clean:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/airsim_ros && $(CMAKE_COMMAND) -P CMakeFiles/std_srvs_generate_messages_eus.dir/cmake_clean.cmake
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/airsim_ros && $(CMAKE_COMMAND) -P CMakeFiles/std_srvs_generate_messages_eus.dir/cmake_clean.cmake
 .PHONY : airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/clean
 
 airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/depend:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/bai/rmua2026/RMUA2026-dev/basic_dev/src /home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros /home/bai/rmua2026/RMUA2026-dev/basic_dev/build /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/airsim_ros /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/airsim_ros /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : airsim_ros/CMakeFiles/std_srvs_generate_messages_eus.dir/depend
 

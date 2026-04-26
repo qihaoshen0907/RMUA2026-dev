@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/bai/rmua2026/RMUA2026-dev/basic_dev/install")
+  set(CMAKE_INSTALL_PREFIX "/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/bai/rmua2026/RMUA2026-dev/basic_dev/build/gtest/googlemock/cmake_install.cmake")
+  include("/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/gtest/googlemock/cmake_install.cmake")
 
 endif()
 

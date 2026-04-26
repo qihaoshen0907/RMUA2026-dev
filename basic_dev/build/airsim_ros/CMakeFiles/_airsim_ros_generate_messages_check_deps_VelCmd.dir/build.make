@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/src
+CMAKE_SOURCE_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/build
+CMAKE_BINARY_DIR = /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build
 
 # Utility rule file for _airsim_ros_generate_messages_check_deps_VelCmd.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/bai/rmua2026/RMUA2026-dev/basic_dev/build
 include airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/progress.make
 
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/airsim_ros && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py airsim_ros /home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros/msg/VelCmd.msg std_msgs/Header
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/airsim_ros && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py airsim_ros /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros/msg/VelCmd.msg geometry_msgs/Vector3:geometry_msgs/Twist
 
 _airsim_ros_generate_messages_check_deps_VelCmd: airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd
 _airsim_ros_generate_messages_check_deps_VelCmd: airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/build.make
@@ -67,10 +67,10 @@ airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/build:
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/build
 
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/clean:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/airsim_ros && $(CMAKE_COMMAND) -P CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/cmake_clean.cmake
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/airsim_ros && $(CMAKE_COMMAND) -P CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/cmake_clean.cmake
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/clean
 
 airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/depend:
-	cd /home/bai/rmua2026/RMUA2026-dev/basic_dev/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/bai/rmua2026/RMUA2026-dev/basic_dev/src /home/bai/rmua2026/RMUA2026-dev/basic_dev/src/airsim_ros /home/bai/rmua2026/RMUA2026-dev/basic_dev/build /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/airsim_ros /home/bai/rmua2026/RMUA2026-dev/basic_dev/build/airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/src/airsim_ros /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/airsim_ros /home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/build/airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : airsim_ros/CMakeFiles/_airsim_ros_generate_messages_check_deps_VelCmd.dir/depend
 

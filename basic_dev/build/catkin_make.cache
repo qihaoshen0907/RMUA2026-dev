@@ -1,2 +1,2 @@
 airsim_ros:basic_dev:controller:imu_gps_odometry:odometry
--DCATKIN_DEVEL_PREFIX=/home/bai/rmua2026/RMUA2026-dev/basic_dev/devel -DCMAKE_INSTALL_PREFIX=/home/bai/rmua2026/RMUA2026-dev/basic_dev/install -G Unix Makefiles
+-DCATKIN_WHITELIST_PACKAGES=airsim_ros;controller_test;imu_gps_odometry -DCATKIN_DEVEL_PREFIX=/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/devel -DCMAKE_INSTALL_PREFIX=/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install -G Unix Makefiles
