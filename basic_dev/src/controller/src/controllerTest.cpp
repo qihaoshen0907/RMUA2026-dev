@@ -13,28 +13,114 @@ bool g_path_complete = false;
 
 namespace
 {
-constexpr double kTakeoffHoldSec      = 3.0;
-constexpr double kWaypointReachDist   = 1.0;
-constexpr double kCruiseSpeed         = 1.8;
-constexpr double kMinSpeed            = 0.35;
-constexpr double kVelGain             = 0.6;
-constexpr double kDensifySegLen       = 2.0;
-constexpr double kMaxCmdVx            = 2.5;
-constexpr double kMaxCmdVy            = 2.5;
-constexpr double kMaxCmdVz            = 2.5;
-constexpr double kYawRateCmd          = 0.0;
+constexpr double kTakeoffHoldSec       = 3.0;
+
+// 原来的单一距离阈值保留成兼容参数
+constexpr double kWaypointReachDist    = 0.8;
+
+// 新增：分开控制 waypoint 到达容差
+constexpr double kWaypointReachXY      = 1.0;   // 平面内 1m 内算到
+constexpr double kWaypointReachZ       = 0.35;  // 高度误差 0.35m 内算到
+constexpr double kWaypointSkipBehindX  = 0.25;  // 若 x 已经飞过这个点 0.25m，也允许跳点
+constexpr double kWaypointSkipXY       = 1.2;   // 跳点时的平面容差
+constexpr double kWaypointSkipZ        = 0.5;   // 跳点时的高度容差
+
+constexpr double kCruiseSpeed          = 2.0;
+constexpr double kMinSpeed             = 0.30;
+constexpr double kVelGain              = 0.8;
+constexpr double kDensifySegLen        = 2.0;
+constexpr double kMaxCmdVx             = 2.0;
+constexpr double kMaxCmdVy             = 0.35;  // 开启小幅横向速度，配合平滑控制减小过冲
+constexpr double kMaxCmdVz             = 1.0;
+constexpr double kYawRateP             = 1.5;
+constexpr double kYawRateMax           = 10.0;
+constexpr double kHeadingSlowCosFloor  = 0.15;
+constexpr double kXSpeedBoost          = 3.0;   // x 方向默认提速倍率
+constexpr double kAntiStallSpeed       = 0.55;  // 防停住最小前进速度
+constexpr double kSharpTurnMinSpeed    = 0.25;  // 大角度转弯时允许更慢
 
 int s_vel_cmd_va = 1;
+double s_waypoint_reach_dist = kWaypointReachDist;
+
+// 新增参数：允许通过 rosparam 调
+double s_waypoint_reach_xy = kWaypointReachXY;
+double s_waypoint_reach_z = kWaypointReachZ;
+double s_waypoint_skip_behind_x = kWaypointSkipBehindX;
+double s_waypoint_skip_xy = kWaypointSkipXY;
+double s_waypoint_skip_z = kWaypointSkipZ;
+
+double s_cruise_speed = kCruiseSpeed;
+double s_min_speed = kMinSpeed;
+double s_vel_gain = kVelGain;
+double s_max_cmd_vx = kMaxCmdVx;
+double s_max_cmd_vy = kMaxCmdVy;
+double s_max_cmd_vz = kMaxCmdVz;
+double s_yaw_rate_p = kYawRateP;
+double s_yaw_rate_max = kYawRateMax;
+double s_x_speed_boost = kXSpeedBoost;
+
+// y 向控制平滑参数：降低扰动与过冲
+double s_prev_vy_cmd = 0.0;
+ros::Time s_prev_ctrl_stamp;
 
 template <typename T>
 T clampValue(T v, T lo, T hi)
 {
     return std::max(lo, std::min(hi, v));
 }
+
+double wrapToPi(double angle)
+{
+    while (angle > M_PI) angle -= 2.0 * M_PI;
+    while (angle < -M_PI) angle += 2.0 * M_PI;
+    return angle;
 }
+
+bool isWaypointReached(const Eigen::Vector3d& cur_pos,
+                       const Eigen::Vector3d& target,
+                       double xy_tol,
+                       double z_tol)
+{
+    const Eigen::Vector2d dxy = (target - cur_pos).head<2>();
+    const double xy_err = dxy.norm();
+    const double z_err = std::abs(target.z() - cur_pos.z());
+    return (xy_err <= xy_tol && z_err <= z_tol);
+}
+
+// bool shouldSkipWaypoint(const Eigen::Vector3d& cur_pos,
+//                         const Eigen::Vector3d& target,
+//                         double behind_x_tol,
+//                         double xy_tol,
+//                         double z_tol)
+// {
+//     // 适合当前这类“主要沿 x 正方向往前飞”的 spline
+//     const double dx = target.x() - cur_pos.x();
+//     const double dy = target.y() - cur_pos.y();
+//     const double dz = target.z() - cur_pos.z();
+
+//     const double xy_err = std::sqrt(dx * dx + dy * dy);
+//     const double z_err = std::abs(dz);
+
+//     // 如果这个点已经被“飞过去”了，并且横向/高度误差也还在可接受范围内，就跳过
+//     return (dx < -behind_x_tol && xy_err <= xy_tol && z_err <= z_tol);
+// }
+
+bool shouldSkipWaypoint(const Eigen::Vector3d& cur_pos,
+                        const Eigen::Vector3d& target,
+                        double behind_x_tol,
+                        double xy_tol,
+                        double z_tol)
+{
+    // 只看 x 方向：如果 target.x 已经在无人机后方超过 behind_x_tol，就跳过
+    const double dx = target.x() - cur_pos.x();
+
+    return dx < -behind_x_tol;
+}
+} // namespace
 
 std::vector<Eigen::Vector3d> densifyPath(const std::vector<Eigen::Vector3d>& path, double max_seg_len)
 {
+    return path;
     std::vector<Eigen::Vector3d> refined_path;
 
     if (path.empty()) return refined_path;
@@ -90,27 +176,20 @@ void loadSpline(const std::string& file_path)
         return;
     }
 
-    // 和 odom_cb 里保持一致：NED -> FLU
     Eigen::Matrix4d TWfluWned;
     TWfluWned << 1, 0, 0, 0,
                  0,-1, 0, 0,
                  0, 0,-1, 0,
                  0, 0, 0, 1;
 
-    // 起点在 world FLU 中的位姿
     Eigen::Matrix4d TWflu0 = TWfluWned * Tw0 * TWfluWned.inverse();
 
     double x, y, z;
     int raw_idx = 0;
     while (file >> x >> y >> z)
     {
-        // 这些点来自 /debug/pose_gt，按 world/NED 点处理
         Eigen::Vector4d p_world_ned(x, y, z, 1.0);
-
-        // 先转到 world FLU
         Eigen::Vector4d p_world_flu = TWfluWned * p_world_ned;
-
-        // 再转到“起点局部 FLU”
         Eigen::Vector4d p_local_flu = TWflu0.inverse() * p_world_flu;
 
         spline_path.emplace_back(p_local_flu.x(), p_local_flu.y(), p_local_flu.z());
@@ -155,8 +234,29 @@ int main(int argc, char** argv)
 
     const std::string default_spline =
         "src/controller/src/baseline.txt";
+
     pn.param<std::string>("spline_path", g_spline_file_path, default_spline);
     pn.param("vel_cmd_va", s_vel_cmd_va, 1);
+
+    // 旧参数兼容
+    pn.param("waypoint_reach_dist", s_waypoint_reach_dist, kWaypointReachDist);
+
+    // 新参数
+    pn.param("waypoint_reach_xy", s_waypoint_reach_xy, kWaypointReachXY);
+    pn.param("waypoint_reach_z", s_waypoint_reach_z, kWaypointReachZ);
+    pn.param("waypoint_skip_behind_x", s_waypoint_skip_behind_x, kWaypointSkipBehindX);
+    pn.param("waypoint_skip_xy", s_waypoint_skip_xy, kWaypointSkipXY);
+    pn.param("waypoint_skip_z", s_waypoint_skip_z, kWaypointSkipZ);
+
+    pn.param("cruise_speed", s_cruise_speed, kCruiseSpeed);
+    pn.param("min_speed", s_min_speed, kMinSpeed);
+    pn.param("vel_gain", s_vel_gain, kVelGain);
+    pn.param("max_cmd_vx", s_max_cmd_vx, kMaxCmdVx);
+    pn.param("max_cmd_vy", s_max_cmd_vy, kMaxCmdVy);
+    pn.param("max_cmd_vz", s_max_cmd_vz, kMaxCmdVz);
+    pn.param("yaw_rate_p", s_yaw_rate_p, kYawRateP);
+    pn.param("yaw_rate_max", s_yaw_rate_max, kYawRateMax);
+    pn.param("x_speed_boost", s_x_speed_boost, kXSpeedBoost);
 
     g_takeoff_client = n.serviceClient<airsim_ros::Takeoff>("/airsim_node/drone_1/takeoff");
     g_vel_publisher  = n.advertise<airsim_ros::VelCmd>("/airsim_node/drone_1/vel_body_cmd", 1);
@@ -170,8 +270,13 @@ int main(int argc, char** argv)
 
     ROS_INFO("controller_test started.");
     ROS_INFO("spline_path = %s", g_spline_file_path.c_str());
-    ROS_INFO("mode = takeoff -> hold %.1f s -> load global spline -> convert to local -> direct velocity tracking",
+    ROS_INFO("mode = takeoff -> hold %.1f s -> load global spline -> convert to local -> forward+yaw tracking",
              kTakeoffHoldSec);
+    ROS_INFO("waypoint tolerance: xy=%.2f z=%.2f | skip: behind_x=%.2f xy=%.2f z=%.2f",
+             s_waypoint_reach_xy, s_waypoint_reach_z,
+             s_waypoint_skip_behind_x, s_waypoint_skip_xy, s_waypoint_skip_z);
+    ROS_INFO("speed params: cruise=%.2f max_vx=%.2f vel_gain=%.2f x_speed_boost=%.2f",
+             s_cruise_speed, s_max_cmd_vx, s_vel_gain, s_x_speed_boost);
 
     ros::Rate loop_rate(200);
     while (ros::ok())
@@ -318,6 +423,14 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         }
     }
 
+    double dt = 0.005;  // 200Hz 名义周期
+    if (!s_prev_ctrl_stamp.isZero())
+    {
+        dt = (msg->header.stamp - s_prev_ctrl_stamp).toSec();
+        dt = clampValue(dt, 0.001, 0.05);
+    }
+    s_prev_ctrl_stamp = msg->header.stamp;
+
     airsim_ros::VelCmd vel_cmd;
     vel_cmd.header.stamp = msg->header.stamp;
     vel_cmd.vx = 0.0;
@@ -329,31 +442,66 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
 
     if (!spline_loaded || spline_path.empty() || g_path_complete)
     {
+        s_prev_vy_cmd = 0.0;
         g_vel_publisher.publish(vel_cmd);
         return;
     }
 
-    // 现在 cur_pos 和 target 都在“起点局部 FLU”里
     Eigen::Vector3d cur_pos(X_real[0], X_real[1], X_real[2]);
+
+    // 连续跳点：只要当前点已经“足够接近”或者“已经飞过去且误差可接受”，就跳下一个
+    while (current_wp_idx < static_cast<int>(spline_path.size()) - 1)
+    {
+        const Eigen::Vector3d& wp = spline_path[current_wp_idx];
+
+        const bool reached = isWaypointReached(cur_pos, wp,
+                                               s_waypoint_reach_xy,
+                                               s_waypoint_reach_z);
+
+        const bool skipped = shouldSkipWaypoint(cur_pos, wp,
+                                                s_waypoint_skip_behind_x,
+                                                s_waypoint_skip_xy,
+                                                s_waypoint_skip_z);
+
+        if (reached || skipped)
+        {
+            ROS_INFO("Advance waypoint %d -> %d (%s)",
+                     current_wp_idx,
+                     current_wp_idx + 1,
+                     reached ? "reached" : "skipped");
+            current_wp_idx++;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    if (current_wp_idx >= static_cast<int>(spline_path.size()))
+    {
+        g_path_complete = true;
+        ROS_INFO("Finished all waypoints.");
+        g_vel_publisher.publish(vel_cmd);
+        return;
+    }
+
     Eigen::Vector3d target = spline_path[current_wp_idx];
-
     Eigen::Vector3d err = target - cur_pos;
-    double dist = std::abs(err.x());
-    // double dist = err.norm();
 
-    if (dist < kWaypointReachDist)
+    double dx = err.x();
+    double dy = err.y();
+    double dz = err.z();
+    double xy_err = std::sqrt(dx * dx + dy * dy);
+    double dist = err.norm();
+
+    // 最后一层保险：到范围内就停/切
+    if (isWaypointReached(cur_pos, target, s_waypoint_reach_xy, s_waypoint_reach_z))
     {
         if (current_wp_idx < static_cast<int>(spline_path.size()) - 1)
         {
             current_wp_idx++;
             target = spline_path[current_wp_idx];
             err = target - cur_pos;
-            dist = err.norm();
-
-            ROS_INFO("Switch to waypoint %d / %zu: %.3f %.3f %.3f",
-                     current_wp_idx,
-                     spline_path.size() - 1,
-                     target.x(), target.y(), target.z());
         }
         else
         {
@@ -364,343 +512,136 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         }
     }
 
-    // if (dist > 1e-6)
-    // {
-    //     double total_speed = 10.0;
-
-    //     double ax = std::abs(err.x());
-    //     double ay = std::abs(err.y());
-    //     double az = std::abs(err.z());
-    //     double sum = ax + ay + az;
-
-    //     if (sum > 1e-6)
-    //     {
-    //         vel_cmd.vx = total_speed * err.x() / sum;
-    //         vel_cmd.vy = - total_speed * err.y() / sum;   // 如果 y 轴需要反号，就保留这个负号
-    //         vel_cmd.vz = total_speed * err.z() / sum;
-    //     }
-    //     else
-    //     {
-    //         vel_cmd.vx = 0.0;
-    //         vel_cmd.vy = 0.0;
-    //         vel_cmd.vz = 0.0;
-    //     }
-
-    //     vel_cmd.yawRate = kYawRateCmd;
-    // }
-
+    // 切换 waypoint 后立即刷新误差，避免偶发一拍零速导致“停住”
+    dx = err.x();
+    dy = err.y();
+    dz = err.z();
+    xy_err = std::sqrt(dx * dx + dy * dy);
+    dist = err.norm();
     if (dist > 1e-6)
     {
-        double T = 1;   // 希望 5 秒到目标点
-        Eigen::Vector3d v_local = err / T;
+        // 当前无人机到目标点的方向角
+        const double desired_yaw = std::atan2(err.y(), err.x());
 
-        
+        // 当前机头 psi 与目标方向 desired_yaw 的差
+        const double yaw_err = wrapToPi(desired_yaw - psi);
+        const double yaw_abs = std::abs(yaw_err);
 
-        vel_cmd.vx = clampValue(v_local.x(), -kMaxCmdVx, kMaxCmdVx);
-        vel_cmd.vy = clampValue(v_local.y(), -kMaxCmdVy, kMaxCmdVy);
-        vel_cmd.vy = - vel_cmd.vy;
-        vel_cmd.vz = clampValue(v_local.z(), -kMaxCmdVz, kMaxCmdVz);
-        vel_cmd.yawRate = kYawRateCmd;
+        // =====================================================
+        // 1. yawRate 对齐目标点方向
+        // =====================================================
+        // 目标：让无人机机头 psi 尽快对齐 desired_yaw
+        // 你已确认方向没有反，所以保留负号
+        const double yaw_align_gain = 6.0;
+        const double yaw_rate_limit = std::max(s_yaw_rate_max, 4.0);
+
+        double yaw_rate_cmd = -yaw_align_gain * yaw_err;
+
+        // 小误差时不要一直抖动
+        const double yaw_deadzone = 0.03;
+
+        if (yaw_abs < yaw_deadzone)
+        {
+            yaw_rate_cmd = 0.0;
+        }
+        else
+        {
+            // 只要还没对齐，就给一个最低转向速度，避免 yawRate 太软
+            const double yaw_min_rate = 0.8;
+
+            if (std::abs(yaw_rate_cmd) < yaw_min_rate)
+            {
+                yaw_rate_cmd = (yaw_rate_cmd >= 0.0) ? yaw_min_rate : -yaw_min_rate;
+            }
+        }
+
+        vel_cmd.yawRate = clampValue(yaw_rate_cmd,
+                                    -yaw_rate_limit,
+                                    yaw_rate_limit);
+
+        // =====================================================
+        // 2. vx 继续前进，不因为转弯大幅降速
+        // =====================================================
+        const double speed_boost_x = std::max(1.0, s_x_speed_boost);
+        const double cruise_speed_x = std::max(0.6, s_cruise_speed * speed_boost_x);
+        const double max_cmd_vx_x = std::max(0.6, s_max_cmd_vx * speed_boost_x);
+        const double vel_gain_x = std::max(0.1, s_vel_gain * speed_boost_x);
+
+        const double base_speed = clampValue(vel_gain_x * dist,
+                                            s_min_speed,
+                                            cruise_speed_x);
+
+        const bool far_from_wp = xy_err > (s_waypoint_reach_xy * 1.5);
+        const double anti_stall_speed = far_from_wp ? kAntiStallSpeed : 0.15;
+
+        const double forward_speed = std::max(anti_stall_speed, base_speed);
+
+        // =====================================================
+        // 3. vy 只做很小的横向修正
+        // =====================================================
+        const double y_abs = std::abs(dy);
+
+        const double vy_deadzone = 0.25;
+        const double vy_gain = 0.08;
+        const double vy_hard_limit = 0.08;
+
+        const double vy_limit = std::min(std::max(0.0, s_max_cmd_vy),
+                                        vy_hard_limit);
+
+        double target_vy = 0.0;
+
+        if (vy_limit > 1e-3 && y_abs > vy_deadzone)
+        {
+            const double dy_eff = dy - std::copysign(vy_deadzone, dy);
+
+            target_vy = clampValue(-vy_gain * dy_eff,
+                                -vy_limit,
+                                    vy_limit);
+        }
+
+        // yaw 没对齐时，减少横移干扰，让 yawRate 专心对齐目标点
+        const double vy_yaw_scale = clampValue(std::exp(-4.0 * yaw_abs),
+                                            0.02,
+                                            1.0);
+
+        target_vy *= vy_yaw_scale;
+
+        const double vy_slew_rate = 0.15;
+        const double max_vy_step = vy_slew_rate * dt;
+
+        const double delta_vy = clampValue(target_vy - s_prev_vy_cmd,
+                                        -max_vy_step,
+                                            max_vy_step);
+
+        s_prev_vy_cmd = clampValue(s_prev_vy_cmd + delta_vy,
+                                -vy_limit,
+                                    vy_limit);
+
+        // =====================================================
+        // 4. 输出速度命令
+        // =====================================================
+        vel_cmd.vx = clampValue(forward_speed,
+                                0.0,
+                                max_cmd_vx_x);
+
+        vel_cmd.vy = s_prev_vy_cmd;
+
+        vel_cmd.vz = clampValue(dz * 0.6,
+                                -s_max_cmd_vz,
+                                s_max_cmd_vz);
     }
-
-    // if (dist > 1e-6)
-    // {
-    //     Eigen::Vector3d dir = err.normalized();
-    //     double speed = clampValue(kVelGain * dist, kMinSpeed, kCruiseSpeed);
-    //     Eigen::Vector3d v_local = dir * speed;
-
-    //     // 先直接发布 local 速度，不再做额外 body 旋转
-    //     vel_cmd.vx = clampValue(v_local.x(), -kMaxCmdVx, kMaxCmdVx);
-    //     vel_cmd.vy = clampValue(v_local.y(), -kMaxCmdVy, kMaxCmdVy);
-    //     vel_cmd.vz = clampValue(v_local.z(), -kMaxCmdVz, kMaxCmdVz);
-    //     vel_cmd.yawRate = kYawRateCmd;
-    // }
-
     g_vel_publisher.publish(vel_cmd);
 
     ROS_INFO_THROTTLE(
         0.5,
-        "wp=%d/%zu cur=(%.2f %.2f %.2f) tgt=(%.2f %.2f %.2f) err=(%.2f %.2f %.2f) cmd=(%.2f %.2f %.2f) psi=%.2f",
+        "wp=%d/%zu cur=(%.2f %.2f %.2f) tgt=(%.2f %.2f %.2f) err=(%.2f %.2f %.2f) xy_err=%.2f cmd=(%.2f %.2f %.2f) yawRate=%.2f psi=%.2f",
         current_wp_idx,
         spline_path.size() - 1,
         cur_pos.x(), cur_pos.y(), cur_pos.z(),
         target.x(), target.y(), target.z(),
         err.x(), err.y(), err.z(),
+        xy_err,
         vel_cmd.vx, vel_cmd.vy, vel_cmd.vz,
+        vel_cmd.yawRate,
         psi);
 }
-
-
-
-
-
-
-// #include "controllerTest.hpp"
-// #include <fstream>
-// #include <vector>
-// #include <string>
-
-// std::vector<Eigen::Vector3d> spline_path;
-// int current_wp_idx = 0;
-// bool spline_loaded = false;
-
-
-// std::vector<Eigen::Vector3d> densifyPath(const std::vector<Eigen::Vector3d>& path, double max_seg_len)
-// {
-//     std::vector<Eigen::Vector3d> refined_path;
-
-//     if (path.empty()) return refined_path;
-//     if (path.size() == 1)
-//     {
-//         refined_path.push_back(path[0]);
-//         return refined_path;
-//     }
-
-//     for (int i = 0; i < (int)path.size() - 1; i++)
-//     {
-//         Eigen::Vector3d p0 = path[i];
-//         Eigen::Vector3d p1 = path[i + 1];
-
-//         refined_path.push_back(p0);
-
-//         Eigen::Vector3d diff = p1 - p0;
-//         double dist = diff.norm();
-
-//         if (dist > max_seg_len)
-//         {
-//             int num_segments = static_cast<int>(std::ceil(dist / max_seg_len));
-
-//             for (int k = 1; k < num_segments; k++)
-//             {
-//                 double alpha = static_cast<double>(k) / num_segments;
-//                 Eigen::Vector3d mid = p0 + alpha * diff;
-//                 refined_path.push_back(mid);
-//             }
-//         }
-//     }
-
-//     refined_path.push_back(path.back());
-//     return refined_path;
-// }
-
-
-// void loadSpline(const std::string& file_path)
-// {
-//     spline_path.clear();
-
-//     std::ifstream file(file_path);
-//     if (!file.is_open())
-//     {
-//         std::cout << "Failed to open spline file: " << file_path << std::endl;
-//         return;
-//     }
-
-//     double x, y, z;
-//     while (file >> x >> y >> z)
-//     {
-//         spline_path.emplace_back(x, y, z);
-//     }
-
-//     file.close();
-
-//     std::cout << "Loaded spline points: " << spline_path.size() << std::endl;
-
-//     for (size_t i = 0; i < spline_path.size() && i < 10; ++i)
-//     {
-//         std::cout << "Spline[" << i << "]: "
-//                   << spline_path[i].transpose() << std::endl;
-//     }
-
-//     spline_loaded = !spline_path.empty();
-//     if (spline_loaded && !spline_path.empty()){
-//         spline_path = densifyPath(spline_path, 5.0);
-//     }
-
-// }
-
-// int main(int argc, char** argv)
-// {
-//     ros::init(argc, argv, "controller_test");
-//     ros::NodeHandle n;
-
-//     g_takeoff_client = n.serviceClient<airsim_ros::Takeoff>("/airsim_node/drone_1/takeoff");
-//     g_pwm_publisher = n.advertise<airsim_ros::RotorPWM>("/airsim_node/drone_1/rotor_pwm_cmd", 1);
-//     ros::Subscriber odom_suber = n.subscribe<nav_msgs::Odometry>("/eskf_odom", 1, odom_cb);
-//     ros::Subscriber init_pose_suber = n.subscribe<geometry_msgs::PoseStamped>("/airsim_node/initial_pose", 1, init_pose_cb);
-//     ros::Subscriber end_pose_suber = n.subscribe<geometry_msgs::PoseStamped>("/airsim_node/end_goal", 1, end_position_cb);
-
-//     loadSpline("src/controller/src/baseline.txt");
-//     airsim_ros::Takeoff tf_cmd;
-//     tf_cmd.request.waitOnLastTask = 1;
-
-//     ros::Rate loop_rate(200);
-//     while(ros::ok()){
-//         ros::spinOnce();
-//         loop_rate.sleep();
-//     }
-//     return 0;
-// }
-
-
-// // int main(int argc, char** argv)
-// // {
-// //     ros::init(argc, argv, "controller_test"); // 初始化ros 节点，命名为 basic
-// //     ros::NodeHandle n; // 创建node控制句柄
-// //     //无人机信息通过如下命令订阅，当收到消息时自动回调对应的函数
-// //     g_takeoff_client = n.serviceClient<airsim_ros::Takeoff>("/airsim_node/drone_1/takeoff");
-// //     g_pwm_publisher = n.advertise<airsim_ros::RotorPWM>("/airsim_node/drone_1/rotor_pwm_cmd", 1);
-// //     ros::Subscriber odom_suber = n.subscribe<nav_msgs::Odometry>("/eskf_odom", 1, odom_cb);
-// //     // ros::Subscriber gt_suber = n.subscribe<geometry_msgs::PoseStamped>("/airsim_node/drone_1/debug/pose_gt", 1, gt_cb);
-// //     ros::Subscriber init_pose_suber = n.subscribe<geometry_msgs::PoseStamped>("/airsim_node/initial_pose", 1, init_pose_cb);
-// //     ros::Subscriber end_pose_suber = n.subscribe<geometry_msgs::PoseStamped>("/airsim_node/end_goal", 1, end_position_cb);
-// //     airsim_ros::Takeoff  tf_cmd;
-// //     tf_cmd.request.waitOnLastTask = 1;
-// //     g_takeoff_client.call(tf_cmd);
-    
-    
-// //     ros::Rate loop_rate(200);
-// //     while(ros::ok()){
-// //         ros::spinOnce();
-// //         loop_rate.sleep();
-// //     }
-// //     return 0;
-// // }
-
-// void init_pose_cb(const geometry_msgs::PoseStamped::ConstPtr& msg)
-// {
-//     Eigen::Quaternion Q(msg->pose.orientation.w, msg->pose.orientation.x, msg->pose.orientation.y, msg->pose.orientation.z);
-//     Eigen::Matrix3d rotationM = Q.normalized().toRotationMatrix();
-//     // std::cout<<"initial pose: \n"<<rotationM<<std::endl;
-//     Eigen::Vector3d pos(msg->pose.position.x, msg->pose.position.y, msg->pose.position.z);
-//     // std::cout<<"initial pos: "<<pos.transpose()<<std::endl;
-//     Tw0 = Eigen::Matrix4d::Identity();
-//     Tw0.block(0, 0, 3, 3)=rotationM;
-//     Tw0.block(0, 3, 3 ,1) = pos;
-//     Twb_last = Tw0;
-//     // std::cout<<"Tw0:\n"<<Tw0<<std::endl;
-//     get_init_pose = true;
-// }
-
-// void end_position_cb(const geometry_msgs::PoseStamped::ConstPtr& msg)
-// {
-//     Pwend = Eigen::Vector3d(msg->pose.position.x, msg->pose.position.y, msg->pose.position.z);
-//     // std::cout<<"end pos: "<<Pwend.transpose()<<std::endl;
-//     if(get_init_pose && !get_end_goal)
-//     {
-//         for(auto ps: globalPaths)
-//         {
-//             if((ps[0]-Tw0.block(0, 3, 3, 1)).norm() < 10)
-//             {
-//                 for(int i = 0; i < ps.size(); i++)
-//                 {
-//                     globalPath.emplace_back(ps[i]);
-//                 }
-//                 break;
-//             }
-//         }
-//         for(auto ps: globalPaths)
-//         {
-//             if((ps[0]-Pwend).norm() < 10)
-//             {
-//                 for(int i = 0; i < ps.size(); i++)
-//                 {
-//                     globalPath.emplace_back(ps[ps.size()-i]);
-//                 }
-//                 break;
-//             }
-//         }
-//         get_end_goal = true;
-//     }
-// }
-
-// void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
-// {
-//     cb_cnt ++;
-//     if(! get_init_pose)return;
-//     Eigen::Quaternion Q(msg->pose.pose.orientation.w, msg->pose.pose.orientation.x, msg->pose.pose.orientation.y, msg->pose.pose.orientation.z);
-//     Eigen::Matrix4d Twb = Eigen::Matrix4d::Identity();
-//     Twb.block(0, 0, 3 ,3) = Q.normalized().toRotationMatrix();
-//     Twb(0, 3) = msg->pose.pose.position.x;
-//     Twb(1, 3) = msg->pose.pose.position.y;
-//     Twb(2, 3) = msg->pose.pose.position.z;
-//     // std::cout<<"Twb rt:\n"<<Twb<<std::endl;
-//     // std::cout<<phi<<" "<<theta<<" "<<psi<<std::endl;
-//     Eigen::VectorXf X_des, X_real;
-//     X_des.resize(12);
-//     X_real.resize(12);
-//     // Twb_last = Twb;
-//     // std::cout<<"Tw0:\n"<<Tw0<<std::endl;
-//     Eigen::Matrix4d TWfluWned;
-//     TWfluWned << 1, 0, 0, 0, 
-//                 0, -1, 0, 0,
-//                 0, 0, -1, 0, 
-//                 0, 0, 0, 1;
-    
-//     Eigen::Matrix4d TWflu0 = TWfluWned * Tw0 * TWfluWned.inverse();
-//     Eigen::Matrix4d TWflub = TWfluWned * Twb * TWfluWned.inverse();
-//     Eigen::Matrix4d T0flub = TWflu0.inverse() * TWflub;
-//     Eigen::Vector3d VWned(msg->twist.twist.linear.x, msg->twist.twist.linear.y, msg->twist.twist.linear.z);
-//     Eigen::Vector3d VBned = Twb.block(0, 0, 3 ,3).inverse() * VWned;
-//     Eigen::Vector3d VBflu = TWfluWned.block<3, 3>(0, 0) * VBned;
-//     Eigen::Vector3d Wned(msg->twist.twist.angular.x, msg->twist.twist.angular.y, msg->twist.twist.angular.z);
-//     Eigen::Vector3d Wflu = TWfluWned.block<3, 3>(0, 0) * Wned;
-//     const float phi = std::asin(T0flub(2, 1)); 
-//     const float theta = std::atan2(-T0flub(2, 0)/std::cos(phi), T0flub(2, 2)/std::cos(phi));
-//     const float psi = std::atan2(-T0flub(0, 1)/std::cos(phi), T0flub(1, 1)/std::cos(phi));
-    
-//     X_real<<T0flub(0, 3), T0flub(1, 3), T0flub(2, 3), 
-//         VBflu.x(), VBflu.y(), VBflu.z(), 
-//         phi, theta, psi, Wflu.x(), Wflu.y(), Wflu.z();
-
-//     // X_des << 7.74,-0.08,2.58,
-//     //             0.0, 0.0, 0.0,
-//     //             0.0, 0.0, 0.0,
-//     //             0.0, 0.0, 0.0;
-    
-//     if (spline_loaded && !spline_path.empty())
-//     {
-//         Eigen::Vector3d cur_pos(X_real[0], X_real[1], X_real[2]);
-//         Eigen::Vector3d target = spline_path[current_wp_idx];
-//         target.y() = -target.y();
-//         target.z() = -target.z();
-
-
-//         double dist = (cur_pos - target).norm();
-
-//         // 到达当前航点后切换到下一个
-//         if (dist < 2 && current_wp_idx < (int)spline_path.size() - 1)
-//         {
-//             current_wp_idx++;
-//             target = spline_path[current_wp_idx];
-            
-//             std::cout << "Switch to waypoint " << current_wp_idx
-//                     << ": " << target.transpose() << std::endl;
-        
-//         }
-
-//         X_des << target.x(), target.y(), target.z(),
-//                 0.0, 0.0, 0.0,
-//                 0.0, 0.0, 0.0,
-//                 0.0, 0.0, 0.0;
-
-//         std::cout << "Tracking waypoint " << current_wp_idx
-//                 << ", target = " << target.transpose()
-//                 << ", dist = " << dist << std::endl;
-//     }
-
-
-//     else
-//     {
-//         X_des << X_real;
-//     }
-//     Eigen::Vector4f output = g_PDcontroller.execute(X_des, X_real);
-//     airsim_ros::RotorPWM pwm_cmd;
-//     pwm_cmd.rotorPWM0 = output[0];
-//     pwm_cmd.rotorPWM1 = output[1];
-//     pwm_cmd.rotorPWM2 = output[2];
-//     pwm_cmd.rotorPWM3 = output[3];
-
-//     g_pwm_publisher.publish(pwm_cmd);
-//     std::cout<<pwm_cmd.rotorPWM0<<" "<<pwm_cmd.rotorPWM1<<" "<<pwm_cmd.rotorPWM2<<" "<<pwm_cmd.rotorPWM3<<" "<<std::endl;
-
-// }
