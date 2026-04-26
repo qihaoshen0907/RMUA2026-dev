@@ -529,17 +529,23 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         const double yaw_abs = std::abs(yaw_err);
 
         // =====================================================
+        // 0. yaw 阈值：这里只用于降速/压横移，不再用于停车
+        // =====================================================
+        const double yaw_slow_th = 0.25;   // 约 14 度，超过后开始明显限制横移
+        const double yaw_large_th = 0.80;  // 约 46 度，超过后认为偏航较大
+
+        // =====================================================
         // 1. yawRate：强制机头对齐目标方向
         // =====================================================
         // 你已确认方向没有反，所以保留负号
         const double yaw_align_gain = 7.5;
 
-        // 不建议无限放大 yawRate，太大会抖或者过冲
+        // yawRate 不建议太大，太大会抖或过冲
         const double yaw_rate_limit = std::min(std::max(s_yaw_rate_max, 4.0), 8.0);
 
         double yaw_rate_cmd = -yaw_align_gain * yaw_err;
 
-        // 小角度死区，避免已经对齐后还左右抖
+        // 小角度死区，避免对齐后左右抖
         const double yaw_deadzone = 0.025;
 
         if (yaw_abs < yaw_deadzone)
@@ -548,7 +554,7 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         }
         else
         {
-            // 没对齐时给最低转速，避免 yawRate 太软
+            // 没对齐时给最低转向速度，避免 yawRate 太软
             const double yaw_min_rate = 0.8;
 
             if (std::abs(yaw_rate_cmd) < yaw_min_rate)
@@ -562,7 +568,7 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
                                     yaw_rate_limit);
 
         // =====================================================
-        // 2. vx：严格根据 yaw 对齐程度决定能不能前进
+        // 2. vx：边飞边调整角度，不完全停下来
         // =====================================================
         const double speed_boost_x = std::max(1.0, s_x_speed_boost);
         const double cruise_speed_x = std::max(0.6, s_cruise_speed * speed_boost_x);
@@ -573,37 +579,40 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
                                             s_min_speed,
                                             cruise_speed_x);
 
-        double forward_speed = 0.0;
+        // yaw 偏差越大，前进速度越小，但不直接停死
+        double yaw_speed_scale = std::cos(yaw_abs);
 
-        // 严格对齐逻辑：
-        // yaw 偏差很大：只转向，不前进
-        // yaw 偏差中等：低速前进
-        // yaw 基本对齐：正常前进
-        const double yaw_stop_th = 0.45;   // 约 25.8 度
-        const double yaw_slow_th = 0.15;   // 约 8.6 度
+        // cos 超过 90 度会变负，所以限制最低速度比例
+        yaw_speed_scale = clampValue(yaw_speed_scale,
+                                    0.22,
+                                    1.0);
 
-        if (yaw_abs > yaw_stop_th)
+        // 偏航很大时再稍微压一点速度，但仍然保持前进
+        if (yaw_abs > 0.8)
         {
-            // 机头偏太多，先原地/低速转向
-            forward_speed = 0.0;
-        }
-        else if (yaw_abs > yaw_slow_th)
-        {
-            // 正在接近对齐，只允许慢速前进
-            const double t = (yaw_stop_th - yaw_abs) / (yaw_stop_th - yaw_slow_th);
-            const double slow_speed = 1.0;
-
-            forward_speed = clampValue(base_speed * t,
-                                    0.3,
-                                    slow_speed);
-        }
-        else
-        {
-            // 已经基本对齐，才允许正常速度
-            forward_speed = base_speed;
+            yaw_speed_scale *= 0.75;
         }
 
-        // 接近 waypoint 时也要降速，避免冲过头
+        if (yaw_abs > 1.2)
+        {
+            yaw_speed_scale *= 0.65;
+        }
+
+        double forward_speed = base_speed * yaw_speed_scale;
+
+        // 保底速度：让它边走边转，不要停死
+        // 如果你觉得还是慢，可以把 1.5 改成 2.0
+        const double min_forward_when_turning = 1.5;
+
+        // 很接近 waypoint 时不要强行保底，否则容易冲过点
+        const bool near_wp = xy_err < 3.0;
+
+        if (!near_wp)
+        {
+            forward_speed = std::max(forward_speed, min_forward_when_turning);
+        }
+
+        // 接近 waypoint 时降速，避免冲过头
         const double near_wp_dist = 4.0;
 
         if (xy_err < near_wp_dist)
@@ -616,15 +625,15 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
         }
 
         // =====================================================
-        // 3. vy：严格对齐模式下，尽量不要横移
+        // 3. vy：保留一点横向修正，但不要太大
         // =====================================================
-        // 如果你希望“机头对着目标飞”，vy 应该尽量小。
-        // 否则无人机虽然 yaw 对齐了，但身体还在侧滑。
+        // 这里不要完全禁止 vy，否则 y 偏差会越积越大。
+        // 但 vy 也不能太大，否则无人机会侧滑，机头虽然对准但轨迹不顺。
         const double y_abs = std::abs(dy);
 
         const double vy_deadzone = 0.30;
-        const double vy_gain = 0.05;
-        const double vy_hard_limit = 0.05;
+        const double vy_gain = 0.08;
+        const double vy_hard_limit = 0.15;
 
         const double vy_limit = std::min(std::max(0.0, s_max_cmd_vy),
                                         vy_hard_limit);
@@ -640,13 +649,16 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
                                     vy_limit);
         }
 
-        // yaw 没对齐时，彻底压低横移
-        if (yaw_abs > yaw_slow_th)
-        {
-            target_vy = 0.0;
-        }
+        // yaw 偏差越大，横移越小，但不要完全归零
+        // 这样可以避免 y 误差一直堆积
+        double vy_yaw_scale = std::exp(-2.5 * yaw_abs);
+        vy_yaw_scale = clampValue(vy_yaw_scale,
+                                0.15,
+                                1.0);
 
-        const double vy_slew_rate = 0.10;
+        target_vy *= vy_yaw_scale;
+
+        const double vy_slew_rate = 0.25;
         const double max_vy_step = vy_slew_rate * dt;
 
         const double delta_vy = clampValue(target_vy - s_prev_vy_cmd,
@@ -658,15 +670,14 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg)
                                     vy_limit);
 
         // =====================================================
-        // 4. vz：高度正常跟随，但也可以稍微柔和一点
+        // 4. vz：高度跟随
         // =====================================================
         double vz_cmd = dz * 0.6;
 
-        // yaw 偏差很大时，不建议同时大幅爬升/下降
-        // 否则姿态控制压力会更大
-        if (yaw_abs > yaw_stop_th)
+        // 偏航很大时稍微压低垂直速度，但不要压太狠
+        if (yaw_abs > yaw_large_th)
         {
-            vz_cmd *= 0.5;
+            vz_cmd *= 0.75;
         }
 
         // =====================================================
