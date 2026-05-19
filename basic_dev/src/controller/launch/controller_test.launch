@@ -1,16 +1,59 @@
 <launch>
     <node pkg="imu_gps_odometry" type="imu_gps_odometry" name="imu_gps_odometry"/>
     <node pkg="controller_test" type="controller_test" name="controller_test" output="screen">
-        <param name="vel_cmd_va" value="1"/>
         <param name="waypoint_reach_dist" value="0.8"/>
-        <param name="cruise_speed" value="3.0"/>
-        <param name="min_speed" value="0.6"/>
-        <param name="vel_gain" value="1.0"/>
-        <param name="max_cmd_vx" value="3.5"/>
-        <param name="max_cmd_vy" value="2.0"/>
-        <param name="max_cmd_vz" value="2.5"/>
-        <param name="yaw_rate_p" value="1.8"/>
-        <param name="yaw_rate_max" value="1.2"/>
-        <param name="x_speed_boost" value="3.0"/>
+        <param name="waypoint_reach_xy" value="1.0"/>
+        <param name="waypoint_reach_z" value="0.35"/>
+        <param name="cruise_speed" value="2.5"/>
+
+        <!-- Quadrotor physical parameters -->
+        <param name="mass" value="0.9"/>
+        <param name="gravity" value="9.8"/>
+        <param name="arm_length" value="0.18"/>
+        <param name="Ixx" value="0.0046890742"/>
+        <param name="Iyy" value="0.0069312"/>
+        <param name="Izz" value="0.010421166"/>
+        <param name="Ct" value="0.00036771704516278653"/>
+        <param name="Cq" value="4.888486266072161e-06"/>
+        <param name="Fmax" value="12.538338804"/>
+
+        <!-- MPC realtime settings -->
+        <param name="mpc_dt" value="0.01"/>
+        <param name="mpc_horizon" value="20"/>
+        <param name="mpc_max_iterations" value="10"/>
+        <param name="mpc_gradient_step" value="0.03"/>
+
+        <!-- Cost weights -->
+        <param name="q_x" value="12.0"/>
+        <param name="q_y" value="12.0"/>
+        <param name="q_z" value="18.0"/>
+        <param name="q_vx" value="2.0"/>
+        <param name="q_vy" value="2.0"/>
+        <param name="q_vz" value="4.0"/>
+        <param name="q_roll" value="6.0"/>
+        <param name="q_pitch" value="6.0"/>
+        <param name="q_yaw" value="4.0"/>
+        <param name="q_wz" value="1.5"/>
+
+        <!-- Input effort penalties -->
+        <param name="r_thrust" value="0.05"/>
+        <param name="r_tx" value="4.0"/>
+        <param name="r_ty" value="4.0"/>
+        <param name="r_tz" value="2.5"/>
+
+        <!-- Constraints -->
+        <param name="max_roll_pitch" value="0.35"/>
+        <param name="max_yaw_rate" value="1.2"/>
+        <param name="max_vel_xy" value="5.0"/>
+        <param name="max_vel_z" value="2.0"/>
+        <param name="max_acc_xy" value="4.0"/>
+        <param name="max_acc_z" value="5.0"/>
+        <param name="min_total_thrust" value="0.0"/>
+        <param name="max_total_thrust" value="50.153355216"/>
+        <param name="max_torque_x" value="2.0"/>
+        <param name="max_torque_y" value="2.0"/>
+        <param name="max_torque_z" value="0.8"/>
+        <param name="max_thrust_rate" value="60.0"/>
+        <param name="max_torque_rate" value="12.0"/>
     </node>
 </launch>
