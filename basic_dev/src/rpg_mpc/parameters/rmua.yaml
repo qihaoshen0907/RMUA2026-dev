@@ -1,0 +1,31 @@
+# RMUA2026 conservative parameters for rpg_mpc
+
+Q_pos_xy: 25.0
+Q_pos_z: 35.0
+Q_attitude: 12.0
+Q_velocity: 4.0
+
+# Disable perception-aware/camera cost.
+Q_perception: 0.0
+
+R_thrust: 18.0
+R_pitchroll: 10.0
+R_yaw: 10.0
+
+state_cost_exponential: 0.0
+input_cost_exponential: 0.0
+
+# rpg_mpc collective_thrust is treated as collective acceleration here;
+# hover is near 9.8.
+min_thrust: 5.0
+max_thrust: 10.0
+
+max_bodyrate_xy: 0.25
+max_bodyrate_z: 0.20
+
+# Keep these only to satisfy old parameter loading.
+# Q_perception = 0, so camera cost is inactive.
+p_B_C: [0.0, 0.0, 0.0]
+q_B_C: [1.0, 0.0, 0.0, 0.0]
+
+print_info: true
