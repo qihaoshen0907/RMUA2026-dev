@@ -1,0 +1,11 @@
+<launch>
+  <node pkg="controller_test"
+        type="controller_test"
+        name="controller_test"
+        output="screen">
+    <param name="trajectory_file"
+           value="/home/bai/RUMA_mpc111/smoothed_63.txt" />
+    <rosparam command="load"
+              file="$(find rpg_mpc)/parameters/rmua.yaml" />
+  </node>
+</launch>

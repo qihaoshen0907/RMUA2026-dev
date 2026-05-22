@@ -1,16 +1,61 @@
 <launch>
     <node pkg="imu_gps_odometry" type="imu_gps_odometry" name="imu_gps_odometry"/>
     <node pkg="controller_test" type="controller_test" name="controller_test" output="screen">
-        <param name="vel_cmd_va" value="1"/>
-        <param name="waypoint_reach_dist" value="0.8"/>
-        <param name="cruise_speed" value="3.0"/>
-        <param name="min_speed" value="0.6"/>
-        <param name="vel_gain" value="1.0"/>
-        <param name="max_cmd_vx" value="3.5"/>
-        <param name="max_cmd_vy" value="2.0"/>
-        <param name="max_cmd_vz" value="2.5"/>
-        <param name="yaw_rate_p" value="1.8"/>
-        <param name="yaw_rate_max" value="1.2"/>
-        <param name="x_speed_boost" value="3.0"/>
+        <!-- Trajectory -->
+        <param name="trajectory_file" value="/home/bai/RUMA_mpc/trajectory_for_mpc.txt"/>
+        <param name="trajectory_dt" value="0.1"/>
+        <param name="cruise_speed" value="1.2"/>
+        <param name="trajectory_smooth_window" value="5"/>
+        <param name="align_trajectory_to_start" value="true"/>
+        <param name="waypoint_stride" value="1"/>
+        <param name="reference_lookahead_points" value="2"/>
+        <param name="nearest_search_back" value="60"/>
+        <param name="nearest_search_ahead" value="200"/>
+        <param name="max_speed" value="2.0"/>
+        <param name="max_accel" value="1.5"/>
+
+        <!-- Takeoff state machine -->
+        <param name="auto_takeoff" value="true"/>
+        <param name="takeoff_wait_sec" value="3.0"/>
+        <param name="takeoff_min_height" value="1.0"/>
+        <param name="hover_hold_sec" value="2.0"/>
+        <param name="ramp_up_sec" value="6.0"/>
+
+        <!-- Logging -->
+        <param name="enable_runtime_log" value="true"/>
+        <param name="runtime_log_period" value="0.2"/>
+
+        <!-- Vehicle (matches IntelligentUAVChampionshipBase README) -->
+        <param name="mass" value="0.9"/>
+        <param name="arm_length" value="0.18"/>
+        <param name="Ixx" value="0.0046890742"/>
+        <param name="Iyy" value="0.0069312"/>
+        <param name="Izz" value="0.010421166"/>
+        <param name="Ct" value="0.00036771704516278653"/>
+        <param name="Cq" value="4.888486266072161e-06"/>
+        <param name="Fmax_per_rotor" value="12.538338804"/>
+
+        <!-- Inner rate-loop and PWM mapping -->
+        <param name="rate_kp_x" value="4.0"/>
+        <param name="rate_kp_y" value="4.0"/>
+        <param name="rate_kp_z" value="2.0"/>
+        <param name="min_pwm" value="0.05"/>
+        <param name="max_pwm" value="1.0"/>
+
+        <!-- MPC weights -->
+        <param name="Q_pos_xy" value="200.0"/>
+        <param name="Q_pos_z" value="800.0"/>
+        <param name="Q_attitude" value="50.0"/>
+        <param name="Q_velocity" value="10.0"/>
+        <param name="Q_perception" value="0.0"/>
+        <param name="R_thrust" value="1.0"/>
+        <param name="R_pitchroll" value="1.0"/>
+        <param name="R_yaw" value="1.0"/>
+
+        <!-- MPC limits (min_thrust must be >= g = 9.81) -->
+        <param name="min_thrust" value="9.81"/>
+        <param name="max_thrust" value="20.0"/>
+        <param name="max_bodyrate_xy" value="0.6"/>
+        <param name="max_bodyrate_z" value="0.4"/>
     </node>
 </launch>
