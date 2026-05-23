@@ -128,7 +128,7 @@ MPC 状态向量 (`kStateSize=10`) 对应:
 下面是当前建议并已写入 `controller_test.launch` 的参数（用于你当前轨迹与仿真环境）：
 
 - 轨迹相关
-  - `trajectory_file=/home/bai/RUMA_mpc/trajectory_for_mpc.txt`
+  - `trajectory_file=//home/bai/RUMA_mpc1/trajectory_for_mpc.txt`
   - `trajectory_dt=0.2`
   - `waypoint_stride=1`
   - `trajectory_smooth_window=3`
