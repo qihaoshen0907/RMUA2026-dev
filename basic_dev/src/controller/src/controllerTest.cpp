@@ -43,29 +43,21 @@ ros::Time g_control_start_time;
 std::vector<Eigen::Vector3d> g_path_offsets;
 std::size_t g_target_waypoint_idx = 0;
 
-// RMUA AirSim RotorPWM is treated as a normalized motor command here.
-// These values are intentionally low until the hover PWM is identified.
-constexpr double kHoverPwm = 0.185;
-constexpr double kAltPwmGain = 0.010;
-constexpr double kAltVelPwmGain = 0.018;
-constexpr double kMinPwm = 0.13;
-constexpr double kMaxPwm = 0.26;
-constexpr double kForwardPitchTargetGain = 0.030;
-constexpr double kMaxForwardPitchTarget = 0.080;
-constexpr double kPitchAnglePwmGain = 0.010;
-constexpr double kPitchRatePwmGain = 0.008;
-constexpr double kMaxPitchPwm = 0.018;
-constexpr double kLateralRollTargetGain = 0.025;
-constexpr double kMaxLateralRollTarget = 0.080;
-constexpr double kRollAnglePwmGain = 0.010;
-constexpr double kRollRatePwmGain = 0.008;
-constexpr double kMaxRollPwm = 0.018;
-constexpr double kYawAnglePwmGain = 0.0;
-constexpr double kYawRatePwmGain = 0.0;
-constexpr double kMaxYawPwm = 0.0;
-constexpr double kForwardPitchDelaySec = 0.5;
-constexpr double kForwardPitchRampSec = 2.0;
-constexpr double kSingleMotorMaxThrust = 12.538338804;
+double g_mass = 0.9;
+double g_arm_length = 0.18;
+double g_Ixx = 0.0046890742;
+double g_Iyy = 0.0069312;
+double g_Izz = 0.010421166;
+double g_Ct = 0.00036771704516278653;
+double g_Cq = 4.888486266072161e-06;
+double g_Fmax_per_rotor = 12.538338804;
+double g_rate_kp_x = 4.0;
+double g_rate_kp_y = 4.0;
+double g_rate_kp_z = 2.0;
+double g_min_pwm = 0.05;
+double g_max_pwm = 1.0;
+double g_min_thrust_acc = 9.81;
+double g_max_thrust_acc = 20.0;
 
 // Reference settings.
 constexpr double kTakeoffSettleSec = 3.0;
@@ -80,19 +72,6 @@ constexpr double kPi = 3.14159265358979323846;
 double clamp(double x, double lo, double hi)
 {
   return std::max(lo, std::min(x, hi));
-}
-
-double wrapAngle(double angle)
-{
-  while (angle > kPi)
-  {
-    angle -= 2.0 * kPi;
-  }
-  while (angle < -kPi)
-  {
-    angle += 2.0 * kPi;
-  }
-  return angle;
 }
 
 Eigen::Vector3d quaternionToRpy(const Eigen::Quaterniond& q)
@@ -245,125 +224,77 @@ quadrotor_common::Trajectory makeForwardReference(
   return traj;
 }
 
-airsim_ros::RotorPWM commandToPwm(
+airsim_ros::RotorPWM mpcCommandToPwm(
     const quadrotor_common::QuadStateEstimate& state,
-    const Eigen::Vector3d& target_pos,
-    const ros::Duration& elapsed_since_control,
-    double* base_pwm_out,
-    double* target_roll_out,
-    double* target_pitch_out,
-    double* target_yaw_out,
-    double* roll_pwm_out,
-    double* pitch_pwm_out,
-    double* yaw_pwm_out,
+    const quadrotor_common::ControlCommand& cmd,
+    double* total_thrust_out,
+    Eigen::Vector3d* desired_bodyrates_out,
+    Eigen::Vector3d* bodyrate_error_out,
+    Eigen::Vector3d* desired_torque_out,
     Eigen::Vector4d* motor_force_out)
 {
-  // In the current odometry frame, falling after takeoff makes z increase.
-  // Increase PWM when current z is larger than the hold target z.
-  const double z_error_down = state.position.z() - target_pos.z();
-  const double z_velocity_down = state.velocity.z();
-  const double base_pwm = clamp(
-      kHoverPwm + kAltPwmGain * z_error_down + kAltVelPwmGain * z_velocity_down,
-      kMinPwm,
-      kMaxPwm);
-  if (base_pwm_out != nullptr)
+  const double total_thrust = g_mass *
+      clamp(cmd.collective_thrust, g_min_thrust_acc, g_max_thrust_acc);
+  if (total_thrust_out != nullptr)
   {
-    *base_pwm_out = base_pwm;
+    *total_thrust_out = total_thrust;
   }
 
-  const double pitch_ramp = clamp(
-      (elapsed_since_control.toSec() - kForwardPitchDelaySec) /
-          kForwardPitchRampSec,
-      0.0,
-      1.0);
-  const Eigen::Vector3d rpy = quaternionToRpy(state.orientation);
-
-  const double x_error = std::max(0.0, target_pos.x() - state.position.x());
-  const double target_pitch = -pitch_ramp * clamp(
-      kForwardPitchTargetGain * x_error,
-      -kMaxForwardPitchTarget,
-      kMaxForwardPitchTarget);
-  if (target_pitch_out != nullptr)
+  const Eigen::Vector3d desired_bodyrates = cmd.bodyrates;
+  if (desired_bodyrates_out != nullptr)
   {
-    *target_pitch_out = target_pitch;
+    *desired_bodyrates_out = desired_bodyrates;
   }
 
-  const double y_error = target_pos.y() - state.position.y();
-  const double target_roll = pitch_ramp * clamp(
-      kLateralRollTargetGain * y_error,
-      -kMaxLateralRollTarget,
-      kMaxLateralRollTarget);
-  if (target_roll_out != nullptr)
+  const Eigen::Vector3d bodyrate_error = desired_bodyrates - state.bodyrates;
+  if (bodyrate_error_out != nullptr)
   {
-    *target_roll_out = target_roll;
+    *bodyrate_error_out = bodyrate_error;
   }
 
-  const double target_yaw = std::atan2(
-      target_pos.y() - state.position.y(),
-      std::max(0.1, target_pos.x() - state.position.x()));
-  if (target_yaw_out != nullptr)
+  const Eigen::Vector3d inertia(g_Ixx, g_Iyy, g_Izz);
+  const Eigen::Vector3d kp(g_rate_kp_x, g_rate_kp_y, g_rate_kp_z);
+  const Eigen::Vector3d desired_torque = inertia.cwiseProduct(
+      kp.cwiseProduct(bodyrate_error));
+  if (desired_torque_out != nullptr)
   {
-    *target_yaw_out = target_yaw;
-  }
-
-  const double roll_error = target_roll - rpy.x();
-  const double roll_pwm = clamp(
-      kRollAnglePwmGain * roll_error - kRollRatePwmGain * state.bodyrates.x(),
-      -kMaxRollPwm,
-      kMaxRollPwm);
-  if (roll_pwm_out != nullptr)
-  {
-    *roll_pwm_out = roll_pwm;
-  }
-
-  const double pitch_error = target_pitch - rpy.y();
-  const double pitch_pwm = clamp(
-      -kPitchAnglePwmGain * pitch_error +
-          kPitchRatePwmGain * state.bodyrates.y(),
-      -kMaxPitchPwm,
-      kMaxPitchPwm);
-  if (pitch_pwm_out != nullptr)
-  {
-    *pitch_pwm_out = pitch_pwm;
-  }
-
-  const double yaw_error = wrapAngle(target_yaw - rpy.z());
-  const double yaw_pwm = clamp(
-      kYawAnglePwmGain * yaw_error - kYawRatePwmGain * state.bodyrates.z(),
-      -kMaxYawPwm,
-      kMaxYawPwm);
-  if (yaw_pwm_out != nullptr)
-  {
-    *yaw_pwm_out = yaw_pwm;
+    *desired_torque_out = desired_torque;
   }
 
   airsim_ros::RotorPWM pwm;
   pwm.header.stamp = ros::Time::now();
 
-  Eigen::Vector4d pwm_vec;
-  pwm_vec[0] = clamp(
-      base_pwm - pitch_pwm - roll_pwm - yaw_pwm,
-      kMinPwm,
-      kMaxPwm);
-  pwm_vec[1] = clamp(
-      base_pwm + pitch_pwm + roll_pwm - yaw_pwm,
-      kMinPwm,
-      kMaxPwm);
-  pwm_vec[2] = clamp(
-      base_pwm - pitch_pwm + roll_pwm + yaw_pwm,
-      kMinPwm,
-      kMaxPwm);
-  pwm_vec[3] = clamp(
-      base_pwm + pitch_pwm - roll_pwm + yaw_pwm,
-      kMinPwm,
-      kMaxPwm);
+  const double half_diag = g_arm_length / std::sqrt(2.0);
+  const double yaw_coeff = std::max(1e-9, std::abs(g_Cq / g_Ct));
+
+  Eigen::Matrix4d A;
+  A << 1.0, 1.0, 1.0, 1.0,
+      -half_diag, half_diag, half_diag, -half_diag,
+      -half_diag, half_diag, -half_diag, half_diag,
+      -yaw_coeff, -yaw_coeff, yaw_coeff, yaw_coeff;
+
+  const Eigen::Vector4d wrench(
+      total_thrust,
+      desired_torque.x(),
+      desired_torque.y(),
+      desired_torque.z());
+  Eigen::Vector4d motor_force =
+      A.fullPivLu().solve(wrench);
+  for (int i = 0; i < 4; ++i)
+  {
+    motor_force[i] = clamp(motor_force[i], 0.0, g_Fmax_per_rotor);
+  }
 
   if (motor_force_out != nullptr)
   {
-    for (int i = 0; i < 4; ++i)
-    {
-      (*motor_force_out)[i] = pwm_vec[i] * pwm_vec[i] * kSingleMotorMaxThrust;
-    }
+    *motor_force_out = motor_force;
+  }
+
+  Eigen::Vector4d pwm_vec;
+  for (int i = 0; i < 4; ++i)
+  {
+    const double normalized = motor_force[i] / g_Fmax_per_rotor;
+    pwm_vec[i] = clamp(normalized, g_min_pwm, g_max_pwm);
   }
 
   // RMUA motor index:
@@ -452,8 +383,6 @@ void controlTimerCallback(const ros::TimerEvent&)
           g_ref_origin_pos,
           state.position,
           ros::Time::now() - g_control_start_time);
-  const ros::Duration elapsed_since_control =
-      ros::Time::now() - g_control_start_time;
   const Eigen::Vector3d target_pos = reference.points.front().position;
   const Eigen::Vector3d pos_error = target_pos - state.position;
   const Eigen::Vector3d rpy = quaternionToRpy(state.orientation);
@@ -461,26 +390,19 @@ void controlTimerCallback(const ros::TimerEvent&)
   quadrotor_common::ControlCommand cmd =
       g_mpc->run(state, reference, g_mpc_params);
 
-  double base_pwm = 0.0;
-  double target_roll = 0.0;
-  double target_pitch = 0.0;
-  double target_yaw = 0.0;
-  double roll_pwm = 0.0;
-  double pitch_pwm = 0.0;
-  double yaw_pwm = 0.0;
+  double total_thrust = 0.0;
+  Eigen::Vector3d desired_bodyrates = Eigen::Vector3d::Zero();
+  Eigen::Vector3d bodyrate_error = Eigen::Vector3d::Zero();
+  Eigen::Vector3d desired_torque = Eigen::Vector3d::Zero();
   Eigen::Vector4d motor_force = Eigen::Vector4d::Zero();
   airsim_ros::RotorPWM pwm =
-      commandToPwm(
+      mpcCommandToPwm(
           state,
-          target_pos,
-          elapsed_since_control,
-          &base_pwm,
-          &target_roll,
-          &target_pitch,
-          &target_yaw,
-          &roll_pwm,
-          &pitch_pwm,
-          &yaw_pwm,
+          cmd,
+          &total_thrust,
+          &desired_bodyrates,
+          &bodyrate_error,
+          &desired_torque,
           &motor_force);
   g_pwm_pub.publish(pwm);
 
@@ -489,8 +411,8 @@ void controlTimerCallback(const ros::TimerEvent&)
       "MPC cmd: thrust=%.2f, rates=[%.2f %.2f %.2f], "
       "wp=%zu/%zu, pos=[%.2f %.2f %.2f], target=[%.2f %.2f %.2f], "
       "rpy=[%.2f %.2f %.2f], bodyrates=[%.2f %.2f %.2f], "
-      "err=[%.2f %.2f %.2f], base_pwm=%.2f, "
-      "target_rpy=[%.3f %.3f %.3f], mix_pwm=[%.3f %.3f %.3f], "
+      "err=[%.2f %.2f %.2f], "
+      "T=%.2f, rate_err=[%.3f %.3f %.3f], tau=[%.3f %.3f %.3f], "
       "pwm=[%.2f %.2f %.2f %.2f], "
       "force=[%.3f %.3f %.3f %.3f]",
       cmd.collective_thrust,
@@ -514,13 +436,13 @@ void controlTimerCallback(const ros::TimerEvent&)
       pos_error.x(),
       pos_error.y(),
       pos_error.z(),
-      base_pwm,
-      target_roll,
-      target_pitch,
-      target_yaw,
-      roll_pwm,
-      pitch_pwm,
-      yaw_pwm,
+      total_thrust,
+      bodyrate_error.x(),
+      bodyrate_error.y(),
+      bodyrate_error.z(),
+      desired_torque.x(),
+      desired_torque.y(),
+      desired_torque.z(),
       pwm.rotorPWM0,
       pwm.rotorPWM1,
       pwm.rotorPWM2,
@@ -562,35 +484,42 @@ int main(int argc, char** argv)
     return 1;
   }
 
+  pnh.param("mass", g_mass, g_mass);
+  pnh.param("arm_length", g_arm_length, g_arm_length);
+  pnh.param("Ixx", g_Ixx, g_Ixx);
+  pnh.param("Iyy", g_Iyy, g_Iyy);
+  pnh.param("Izz", g_Izz, g_Izz);
+  pnh.param("Ct", g_Ct, g_Ct);
+  pnh.param("Cq", g_Cq, g_Cq);
+  pnh.param("Fmax_per_rotor", g_Fmax_per_rotor, g_Fmax_per_rotor);
+  pnh.param("rate_kp_x", g_rate_kp_x, g_rate_kp_x);
+  pnh.param("rate_kp_y", g_rate_kp_y, g_rate_kp_y);
+  pnh.param("rate_kp_z", g_rate_kp_z, g_rate_kp_z);
+  pnh.param("min_pwm", g_min_pwm, g_min_pwm);
+  pnh.param("max_pwm", g_max_pwm, g_max_pwm);
+  pnh.param("min_thrust", g_min_thrust_acc, g_min_thrust_acc);
+  pnh.param("max_thrust", g_max_thrust_acc, g_max_thrust_acc);
+
   ROS_INFO(
-      "controller_test RMUA debug build: hover_pwm=%.3f, alt_gain=%.3f, "
-      "alt_vel_gain=%.3f, pwm_limit=[%.3f %.3f], "
-      "pitch_target_gain=%.3f, max_target_pitch=%.3f, "
-      "pitch_angle_gain=%.3f, pitch_rate_gain=%.3f, max_pitch_pwm=%.3f, "
-      "roll_target_gain=%.3f, max_target_roll=%.3f, "
-      "roll_angle_gain=%.3f, roll_rate_gain=%.3f, max_roll_pwm=%.3f, "
-      "yaw_angle_gain=%.3f, yaw_rate_gain=%.3f, max_yaw_pwm=%.3f, "
-      "pitch_delay=%.1f, pitch_ramp=%.1f, takeoff_settle=%.1f",
-      kHoverPwm,
-      kAltPwmGain,
-      kAltVelPwmGain,
-      kMinPwm,
-      kMaxPwm,
-      kForwardPitchTargetGain,
-      kMaxForwardPitchTarget,
-      kPitchAnglePwmGain,
-      kPitchRatePwmGain,
-      kMaxPitchPwm,
-      kLateralRollTargetGain,
-      kMaxLateralRollTarget,
-      kRollAnglePwmGain,
-      kRollRatePwmGain,
-      kMaxRollPwm,
-      kYawAnglePwmGain,
-      kYawRatePwmGain,
-      kMaxYawPwm,
-      kForwardPitchDelaySec,
-      kForwardPitchRampSec,
+      "controller_test MPC->PWM build: mass=%.3f, arm=%.3f, "
+      "I=[%.6f %.6f %.6f], Ct=%.9f, Cq=%.9f, Fmax=%.3f, "
+      "rate_kp=[%.2f %.2f %.2f], thrust_acc=[%.2f %.2f], "
+      "pwm_limit=[%.3f %.3f], takeoff_settle=%.1f",
+      g_mass,
+      g_arm_length,
+      g_Ixx,
+      g_Iyy,
+      g_Izz,
+      g_Ct,
+      g_Cq,
+      g_Fmax_per_rotor,
+      g_rate_kp_x,
+      g_rate_kp_y,
+      g_rate_kp_z,
+      g_min_thrust_acc,
+      g_max_thrust_acc,
+      g_min_pwm,
+      g_max_pwm,
       kTakeoffSettleSec);
 
   g_mpc.reset(new rpg_mpc::MpcController<double>(
