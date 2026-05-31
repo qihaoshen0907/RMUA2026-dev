@@ -48,6 +48,9 @@ include_directories(include ${catkin_INCLUDE_DIRS}  ${OpenCV_INCLUDE_DIRS})
 add_executable(basic_dev src/basic_dev.cpp )
 target_link_libraries(basic_dev ${catkin_LIBRARIES} ${OpenCV_LIBS})
 
+add_executable(sim_sensor_adapter src/sim_sensor_adapter.cpp )
+target_link_libraries(sim_sensor_adapter ${catkin_LIBRARIES})
+
 catkin_install_python(PROGRAMS scripts/keyboard_teleop.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
