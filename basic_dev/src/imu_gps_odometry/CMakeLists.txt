@@ -35,5 +35,9 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${UTILS_PATH})
 
 
 add_executable(imu_gps_odometry src/imu_gps_odometry.cpp src/eskf.cpp)
+add_dependencies(imu_gps_odometry
+  ${catkin_EXPORTED_TARGETS}
+  ${airsim_ros_EXPORTED_TARGETS}
+)
 target_link_libraries(imu_gps_odometry
   ${catkin_LIBRARIES})

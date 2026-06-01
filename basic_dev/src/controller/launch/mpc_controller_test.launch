@@ -1,0 +1,16 @@
+<launch>
+  <node pkg="controller_test"
+        type="controller_test"
+        name="controller_test"
+        output="screen">
+    <param name="trajectory_file"
+           value="$(find controller_test)/../../../trajectory_for_mpc.txt" />
+    <param name="control_output" value="velocity"/>
+    <param name="vel_cmd_topic" value="/airsim_node/drone_1/vel_body_cmd"/>
+    <param name="odom_ned_to_enu" value="true"/>
+    <param name="align_path_yaw_to_body" value="false"/>
+    <param name="vel_yaw_rate_in_deg" value="false"/>
+    <rosparam command="load"
+              file="$(find rpg_mpc)/parameters/rmua.yaml" />
+  </node>
+</launch>

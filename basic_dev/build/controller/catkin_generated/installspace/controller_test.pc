@@ -1,8 +1,0 @@
-prefix=/home/anthea/RMUA/IntelligentUAVChampionshipBase/basic_dev/install
-
-Name: controller_test
-Description: Description of controller_test
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: message_runtime roscpp std_msgs

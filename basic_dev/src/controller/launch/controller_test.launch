@@ -1,16 +1,80 @@
 <launch>
     <node pkg="imu_gps_odometry" type="imu_gps_odometry" name="imu_gps_odometry"/>
     <node pkg="controller_test" type="controller_test" name="controller_test" output="screen">
-        <param name="vel_cmd_va" value="1"/>
-        <param name="waypoint_reach_dist" value="0.8"/>
-        <param name="cruise_speed" value="3.0"/>
-        <param name="min_speed" value="0.6"/>
-        <param name="vel_gain" value="1.0"/>
-        <param name="max_cmd_vx" value="3.5"/>
-        <param name="max_cmd_vy" value="2.0"/>
-        <param name="max_cmd_vz" value="2.5"/>
-        <param name="yaw_rate_p" value="1.8"/>
-        <param name="yaw_rate_max" value="1.2"/>
-        <param name="x_speed_boost" value="3.0"/>
+        <!-- Trajectory -->
+        <param name="trajectory_file" value="$(find controller_test)/../../../trajectory_for_mpc.txt"/>
+        <param name="trajectory_dt" value="0.1"/>
+        <param name="cruise_speed" value="4.0"/>
+        <param name="trajectory_smooth_window" value="3"/>
+        <param name="align_trajectory_to_start" value="true"/>
+        <param name="waypoint_stride" value="1"/>
+        <param name="waypoint_max_segment_m" value="5.0"/>
+        <param name="reference_lookahead_points" value="1"/>
+        <param name="path_lookahead_m" value="0.5"/>
+        <param name="max_progress_ahead_m" value="3.0"/>
+        <param name="odom_ned_to_enu" value="true"/>
+        <param name="spline_reference_vel_topic" value="/mpc/spline_reference_vel"/>
+        <param name="nearest_search_back" value="60"/>
+        <param name="nearest_search_ahead" value="200"/>
+        <param name="max_speed" value="4.0"/>
+        <param name="max_accel" value="2.5"/>
+        <param name="align_path_yaw_to_body" value="true"/>
+        <param name="cross_slowdown_m" value="0.8"/>
+        <param name="cross_progress_hold_m" value="1.2"/>
+        <param name="along_lag_lookahead_scale" value="0.5"/>
+
+        <!-- velocity: MPC world velocity -> MpcBodyCmdAdapter -> vel_body_cmd -->
+        <param name="control_output" value="velocity"/>
+        <param name="vel_cmd_topic" value="/airsim_node/drone_1/vel_body_cmd"/>
+        <param name="vel_mpc_node_index" value="1"/>
+        <param name="mpc_body_kp_pos_xy" value="0.8"/>
+        <param name="mpc_body_kp_pos_z" value="0.6"/>
+        <param name="mpc_body_kd_vel" value="0.15"/>
+        <param name="mpc_body_kp_yaw" value="1.8"/>
+        <param name="body_cmd_max_vx" value="10.0"/>
+        <param name="body_cmd_max_vy" value="4.0"/>
+        <param name="body_cmd_max_vz" value="2.0"/>
+        <param name="body_cmd_max_yaw_rate" value="1.5"/>
+        <param name="body_cmd_max_acc_step" value="1.0"/>
+        <param name="vel_cmd_flip_body_y" value="true"/>
+        <param name="max_cross_track_m" value="3.0"/>
+        <param name="vel_cmd_va" value="3"/>
+        <param name="vel_yaw_rate_in_deg" value="false"/>
+
+        <!-- Takeoff -->
+        <param name="auto_takeoff" value="true"/>
+        <param name="takeoff_wait_sec" value="3.0"/>
+        <param name="takeoff_min_height" value="1.0"/>
+        <param name="hover_hold_sec" value="2.0"/>
+        <param name="ramp_up_sec" value="6.0"/>
+
+        <!-- Vehicle -->
+        <param name="mass" value="0.9"/>
+        <param name="arm_length" value="0.18"/>
+        <param name="Ixx" value="0.0046890742"/>
+        <param name="Iyy" value="0.0069312"/>
+        <param name="Izz" value="0.010421166"/>
+        <param name="Ct" value="0.00036771704516278653"/>
+        <param name="Cq" value="4.888486266072161e-06"/>
+        <param name="Fmax_per_rotor" value="12.538338804"/>
+
+        <!-- PWM path (control_output=pwm) -->
+        <param name="rate_kp_x" value="4.0"/>
+        <param name="rate_kp_y" value="4.0"/>
+        <param name="rate_kp_z" value="2.0"/>
+        <param name="min_pwm" value="0.05"/>
+        <param name="max_pwm" value="1.0"/>
+        <param name="Q_pos_xy" value="200.0"/>
+        <param name="Q_pos_z" value="300.0"/>
+        <param name="Q_attitude" value="50.0"/>
+        <param name="Q_velocity" value="10.0"/>
+        <param name="Q_perception" value="0.0"/>
+        <param name="R_thrust" value="1.0"/>
+        <param name="R_pitchroll" value="1.0"/>
+        <param name="R_yaw" value="1.0"/>
+        <param name="min_thrust" value="9.81"/>
+        <param name="max_thrust" value="14.0"/>
+        <param name="max_bodyrate_xy" value="0.6"/>
+        <param name="max_bodyrate_z" value="0.4"/>
     </node>
 </launch>
